@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Dubai Meridian Forum</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Raleway:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: { 50: '#e8e8f0', 100: '#c5c5d9', 200: '#9494b5', 300: '#5e5e88', 400: '#2d2d5e', 500: '#14143a', 600: '#0d0d2b', 700: '#09091f', 800: '#060616', 900: '#03030b' },
+            gold: { 50: '#fdf8ef', 100: '#f9ecd3', 200: '#f0d5a0', 300: '#e5bc6d', 400: '#d4a44e', 500: '#c9a96e', 600: '#a8863a', 700: '#836629', 800: '#5e491d', 900: '#3a2d12' },
+          },
+          fontFamily: {
+            display: ['"Cormorant Garamond"', 'serif'],
+            body: ['"Raleway"', 'sans-serif'],
+            arabic: ['"Amiri"', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: #060616; color: #e8e8f0; font-family: 'Raleway', sans-serif; }
+    .grain::after {
+      content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9999; opacity: 0.5;
+    }
+    .nav-link { position: relative; letter-spacing: 0.15em; }
+    .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: #c9a96e; transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .nav-link:hover::after { width: 100%; }
+    .gold-line { width: 60px; height: 1px; background: linear-gradient(90deg, #c9a96e, transparent); }
+    .fade-section { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .fade-section.visible { opacity: 1; transform: translateY(0); }
+    .feature-card {
+      background: linear-gradient(145deg, rgba(20, 20, 58, 0.6), rgba(9, 9, 31, 0.8));
+      border: 1px solid rgba(201, 169, 110, 0.08);
+      transition: border-color 0.4s ease, transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
+    }
+    .feature-card:hover {
+      border-color: rgba(201, 169, 110, 0.25); transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(201, 169, 110, 0.06), 0 8px 24px rgba(0,0,0,0.3);
+    }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #060616; }
+    ::-webkit-scrollbar-thumb { background: rgba(201,169,110,0.3); border-radius: 3px; }
+    .mobile-menu { transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .mobile-menu.open { transform: translateX(0); }
+    .value-card { position: relative; overflow: hidden; }
+    .value-card::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0;
+      background: linear-gradient(180deg, #c9a96e, transparent);
+      transition: height 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .value-card:hover::before { height: 100%; }
+  </style>
+</head>
+<body class="grain">
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full z-50 transition-all duration-500" id="mainNav">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="flex items-center justify-between h-20">
+        <a href="index.html" class="flex items-center gap-3 group">
+          <img src="brand assets/dmf posts-2/FINAL!!!!.png" alt="DMF Logo" class="h-10 opacity-90 group-hover:opacity-100 transition-opacity duration-300">
+        </a>
+        <div class="hidden lg:flex items-center gap-10">
+          <a href="index.html" class="nav-link text-navy-100 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Home</a>
+          <a href="about.html" class="nav-link text-gold-400 text-xs font-body uppercase tracking-widest">About</a>
+          <a href="team.html" class="nav-link text-navy-100 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Team</a>
+          <a href="tracks.html" class="nav-link text-navy-100 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Tracks</a>
+          <a href="partners.html" class="nav-link text-white/60 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Partners</a>
+          <a href="contact.html" class="nav-link text-navy-100 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Contact</a>
+        </div>
+        <a href="register.html" class="hidden lg:block px-6 py-2.5 border border-gold-500/40 text-gold-400 text-xs uppercase tracking-[0.2em] font-body hover:bg-gold-500/10 hover:border-gold-400 transition-all duration-400 focus-visible:outline-2 focus-visible:outline-gold-400 focus-visible:outline-offset-2">Register</a>
+        <button id="mobileToggle" class="lg:hidden text-navy-100 hover:text-gold-400 transition-colors" aria-label="Menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="mobile-menu fixed inset-0 z-[60] bg-navy-800/98 backdrop-blur-xl flex flex-col items-center justify-center gap-8">
+    <button id="mobileClose" class="absolute top-6 right-6 text-navy-100 hover:text-gold-400 transition-colors" aria-label="Close">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+    <a href="index.html" class="text-navy-100 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Home</a>
+    <a href="about.html" class="text-gold-400 text-sm font-body uppercase tracking-[0.3em]">About</a>
+    <a href="team.html" class="text-navy-100 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Team</a>
+    <a href="tracks.html" class="text-navy-100 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Tracks</a>
+    <a href="partners.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Partners</a>
+    <a href="contact.html" class="text-navy-100 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Contact</a>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       GALLERY HERO — "What Is Dubai Meridian Forum?"
+  ════════════════════════════════════════════════════════════════ -->
+  <section id="gallery-hero" style="position:relative;height:100vh;overflow:hidden;background:#060616;">
+    <canvas id="gallery-canvas" style="position:absolute;inset:0;width:100%;height:100%;display:block;"></canvas>
+
+    <!-- Outer edge vignette -->
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 85% 75% at 50% 50%,transparent 20%,rgba(6,6,22,0.3) 55%,rgba(6,6,22,0.92) 100%);pointer-events:none;z-index:1;"></div>
+
+    <!-- Focused dark shield behind centre text — keeps images away from reading area -->
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 42% 36% at 50% 50%,rgba(6,6,22,0.82) 0%,rgba(6,6,22,0.45) 50%,transparent 100%);pointer-events:none;z-index:1;"></div>
+
+    <!-- Nav fade -->
+    <div style="position:absolute;top:0;left:0;right:0;height:140px;background:linear-gradient(to bottom,#060616 0%,transparent 100%);pointer-events:none;z-index:2;"></div>
+
+    <!-- Centre text -->
+    <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:3;text-align:center;pointer-events:none;padding:1.5rem;">
+      <p style="font-family:'Amiri',serif;color:rgba(201,169,110,0.55);font-size:1.05rem;margin-bottom:18px;letter-spacing:0.04em;" dir="rtl">ما هو منتدى دبي ميريديان؟</p>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,5.8vw,5rem);font-weight:300;color:#ffffff;letter-spacing:-0.03em;line-height:1.08;text-shadow:0 2px 0 rgba(6,6,22,0.9),0 0 60px rgba(6,6,22,0.95),0 0 120px rgba(6,6,22,0.6);">
+        What Is Dubai<br><em style="color:#c9a96e;font-style:italic;">Meridian Forum?</em>
+      </h2>
+      <div style="width:60px;height:1px;background:linear-gradient(90deg,transparent,#c9a96e,transparent);margin:24px auto 0;opacity:0.8;"></div>
+    </div>
+
+    <!-- Bottom fade into page -->
+    <div style="position:absolute;bottom:0;left:0;right:0;height:260px;background:linear-gradient(to top,#060616 0%,transparent 100%);pointer-events:none;z-index:2;"></div>
+
+    <!-- Scroll hint -->
+    <div style="position:absolute;bottom:38px;left:50%;transform:translateX(-50%);z-index:4;text-align:center;">
+      <p style="font-family:'Raleway',sans-serif;font-size:8.5px;letter-spacing:0.32em;text-transform:uppercase;color:rgba(201,169,110,0.38);">Scroll to explore</p>
+      <div style="width:1px;height:30px;background:linear-gradient(to bottom,rgba(201,169,110,0.4),transparent);margin:7px auto 0;"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       LETTER FROM THE FOUNDER
+  ════════════════════════════════════════════════════════════════ -->
+  <section class="relative py-24 md:py-36">
+    <div class="absolute top-0 left-0 w-full h-px" style="background:linear-gradient(90deg,transparent,rgba(201,169,110,0.14),transparent);"></div>
+    <div class="max-w-6xl mx-auto px-6 lg:px-12">
+
+      <!-- Heading -->
+      <div class="fade-section mb-16 lg:mb-20">
+        <div class="flex items-center gap-4 mb-7">
+          <div class="h-px w-10" style="background:linear-gradient(90deg,#c9a96e,transparent);"></div>
+          <p class="text-gold-500/55 text-xs uppercase tracking-[0.36em] font-body">From the Desk of</p>
+        </div>
+        <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-white font-light" style="letter-spacing:-0.03em;line-height:1.06;">
+          A Letter from<br>the <em class="text-gold-400">Founder</em>
+        </h2>
+      </div>
+
+      <!-- Content grid -->
+      <div class="fade-section grid lg:grid-cols-[1fr_290px] gap-14 lg:gap-20 items-start">
+
+        <!-- Letter text -->
+        <div>
+          <!-- Drop-cap paragraph -->
+          <div style="margin-bottom:1.8rem;overflow:hidden;">
+            <span class="font-display float-left mr-3" style="font-size:5.8rem;line-height:0.8;color:rgba(201,169,110,0.18);">D</span>
+            <p class="font-body text-sm leading-[1.92]" style="color:rgba(197,197,217,0.65);">ear Fellow Visionary,<br><br>When I first conceived of the Dubai Meridian Forum, it was not from a desire to create another conference. It was from a fundamental belief that the problems defining our era — climate finance, regulatory technology, sustainable infrastructure — cannot be solved by any one discipline alone.</p>
+          </div>
+
+          <p class="font-body text-sm leading-[1.92] mb-7" style="color:rgba(197,197,217,0.65);">
+            Dubai, the city I call home, taught me that. This is a place built at the convergence of cultures, industries, and ambitions from every corner of the globe — a city that does not ask what is probable, only what is possible. There is no better stage for what we intend to build. No other city so naturally embodies the spirit of refusing the limitations of a single industry, a single language, a single point of view.
+          </p>
+
+          <!-- Pull quote -->
+          <div class="my-9 pl-5" style="border-left:2px solid rgba(201,169,110,0.28);">
+            <p class="font-display text-xl md:text-[1.35rem] italic" style="color:rgba(232,232,240,0.72);line-height:1.5;letter-spacing:-0.01em;">"The next generation of leaders will not be defined by a single credential — but by the breadth of their vision."</p>
+          </div>
+
+          <p class="font-body text-sm leading-[1.92] mb-7" style="color:rgba(197,197,217,0.65);">
+            The Meridian Forum is, at its heart, a challenge. We bring together the sharpest young minds across finance, law, and engineering, and we ask them to do something most institutions never demand of students: work outside their lane, under real pressure, for real stakes. We present live industry problems. We bring in senior judges, executives, and legal officials. We offer prizes totalling USD 35,000, alongside internships, B2B sponsorships, and professional pathways that extend well beyond the days of the event itself.
+          </p>
+
+          <p class="font-body text-sm leading-[1.92] mb-10" style="color:rgba(197,197,217,0.65);">
+            What you see here is the result of a year of work by eleven students who share this belief completely. Each of them gave evenings, weekends, and the comfort of staying within their lane to build something worthy of this city and this moment. I am immensely proud of what they have created. I look forward to welcoming you to Dubai.
+          </p>
+
+          <!-- Signature -->
+          <div class="pt-6" style="border-top:1px solid rgba(201,169,110,0.1);">
+            <p class="font-display text-2xl italic" style="color:rgba(232,232,240,0.88);margin-bottom:4px;">Muheymin Hasanoglu</p>
+            <p class="text-gold-500/50 text-xs uppercase tracking-[0.22em] font-body">Founder &amp; Chief Executive</p>
+            <p class="font-body text-xs mt-1" style="color:rgba(232,232,240,0.2);">Dubai Meridian Forum &middot; 2026</p>
+          </div>
+        </div>
+
+        <!-- Founder photo -->
+        <div class="lg:sticky lg:top-28">
+          <div class="relative">
+            <!-- Corner brackets -->
+            <div class="absolute pointer-events-none" style="top:-10px;left:-10px;width:36px;height:36px;border-top:1px solid rgba(201,169,110,0.45);border-left:1px solid rgba(201,169,110,0.45);"></div>
+            <div class="absolute pointer-events-none" style="bottom:-10px;right:-10px;width:36px;height:36px;border-bottom:1px solid rgba(201,169,110,0.45);border-right:1px solid rgba(201,169,110,0.45);"></div>
+            <!-- Outer glow border -->
+            <div class="absolute pointer-events-none" style="inset:-5px;border:1px solid rgba(201,169,110,0.07);border-radius:2px;"></div>
+            <!-- Photo -->
+            <div class="aspect-[3/4] overflow-hidden rounded-sm" style="background:#0d0d2b;">
+              <img src="https://i.pravatar.cc/400?img=11" alt="Muheymin Hasanoglu"
+                   class="w-full h-full object-cover transition-all duration-700 hover:scale-105"
+                   style="filter:grayscale(0.25) brightness(0.8);">
+            </div>
+          </div>
+          <!-- Caption -->
+          <div class="mt-5">
+            <div class="h-px w-8 mb-3" style="background:linear-gradient(90deg,#c9a96e,transparent);"></div>
+            <p class="font-display text-[1.1rem] text-white" style="margin-bottom:3px;">Muheymin Hasanoglu</p>
+            <p class="text-gold-500/45 text-xs uppercase tracking-[0.2em] font-body">Founder &amp; Chief Executive</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Page Header -->
+  <section class="relative pt-32 pb-20 md:pt-40 md:pb-28">
+    <div class="relative z-10 max-w-6xl mx-auto px-6 lg:px-12">
+      <p class="font-arabic text-gold-500/50 text-base mb-3" dir="rtl">من نحن</p>
+      <p class="text-gold-500/60 text-xs uppercase tracking-[0.3em] font-body mb-4">About the Forum</p>
+      <h1 class="font-display text-5xl md:text-6xl lg:text-7xl text-white font-light" style="letter-spacing: -0.03em; line-height: 1.1;">
+        Our <span class="text-gold-400 italic">Mission</span>
+      </h1>
+    </div>
+  </section>
+
+  <!-- Mission & Vision -->
+  <section class="relative py-24 md:py-36">
+    <div class="max-w-6xl mx-auto px-6 lg:px-12">
+      <div class="fade-section grid lg:grid-cols-2 gap-16 lg:gap-24">
+        <!-- Mission -->
+        <div>
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-8 h-8 flex items-center justify-center border border-gold-500/20 rounded-sm">
+              <svg class="w-4 h-4 text-gold-500/70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+            <p class="text-gold-500/60 text-xs uppercase tracking-[0.3em] font-body">Our Mission</p>
+          </div>
+          <h2 class="font-display text-3xl md:text-4xl text-white font-light mb-6" style="line-height: 1.2;">
+            Bridging the Gap Between <span class="text-gold-400 italic">Disciplines</span>
+          </h2>
+          <div class="gold-line mb-6"></div>
+          <p class="font-body text-navy-200/80 leading-[1.8] text-sm mb-5">
+            The Dubai Meridian Forum exists to dismantle the silos that separate the world's most critical industries. In an era where the greatest challenges — from climate finance to regulatory technology to sustainable infrastructure — demand interdisciplinary solutions, DMF provides the arena where these solutions are born.
+          </p>
+          <p class="font-body text-navy-200/80 leading-[1.8] text-sm">
+            We believe that the next generation of leaders will not be defined by a single expertise, but by their capacity to synthesize knowledge across finance, law, and engineering. DMF is where that synthesis begins.
+          </p>
+        </div>
+
+        <!-- Vision -->
+        <div>
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-8 h-8 flex items-center justify-center border border-gold-500/20 rounded-sm">
+              <svg class="w-4 h-4 text-gold-500/70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+            </div>
+            <p class="text-gold-500/60 text-xs uppercase tracking-[0.3em] font-body">Our Vision</p>
+          </div>
+          <h2 class="font-display text-3xl md:text-4xl text-white font-light mb-6" style="line-height: 1.2;">
+            A World Led by <span class="text-gold-400 italic">Convergence</span>
+          </h2>
+          <div class="gold-line mb-6"></div>
+          <p class="font-body text-navy-200/80 leading-[1.8] text-sm mb-5">
+            We envision a future where the boundaries between finance, law, and engineering are not barriers but bridges. Where a financial engineer can speak the language of regulatory compliance, and a legal strategist can understand the infrastructure they govern.
+          </p>
+          <p class="font-body text-navy-200/80 leading-[1.8] text-sm">
+            Dubai — at the geographic and cultural crossroads of the world — is the natural home for this vision. The Meridian Forum aspires to become the world's foremost platform for interdisciplinary excellence, setting the standard for how diverse expertise can be united to solve humanity's most pressing challenges.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What Awaits You — Feature Carousel -->
+  <section class="relative py-20 md:py-28">
+    <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold-500/20 to-transparent"></div>
+    <div class="max-w-7xl mx-auto px-4 md:px-8 lg:px-12">
+      <div class="fade-section text-center mb-14">
+        <p class="text-gold-500/60 text-xs uppercase tracking-[0.3em] font-body mb-4">The Experience</p>
+        <h2 class="font-display text-4xl md:text-5xl text-white font-light" style="letter-spacing:-0.02em;">
+          What <span class="text-gold-400 italic">Awaits You</span>
+        </h2>
+      </div>
+      <div class="fade-section">
+        <div id="fc-wrap" class="relative overflow-hidden flex flex-col lg:flex-row border border-white/5" style="border-radius:2rem; min-height:580px;">
+          <!-- Left: scrolling chips -->
+          <div id="fc-left" class="w-full lg:w-[38%] relative overflow-hidden flex items-center justify-center" style="min-height:340px; background:linear-gradient(145deg,#0d0d2b 0%,#0a0a22 100%);">
+            <div class="absolute inset-x-0 top-0 h-20 pointer-events-none" style="background:linear-gradient(to bottom,#0d0d2b 0%,transparent 100%);z-index:3;"></div>
+            <div class="absolute inset-x-0 bottom-0 h-20 pointer-events-none" style="background:linear-gradient(to top,#0d0d2b 0%,transparent 100%);z-index:3;"></div>
+            <div id="fc-chips" class="relative w-full flex items-center justify-center" style="height:420px;z-index:2;"></div>
+          </div>
+          <!-- Right: image card -->
+          <div class="flex-1 relative flex items-center justify-center overflow-hidden border-t lg:border-t-0 lg:border-l border-white/5" style="background:#060616; min-height:460px; padding:2rem;">
+            <div id="fc-cards" class="relative flex items-center justify-center" style="width:100%;height:100%;min-height:420px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Values -->
+  <section class="relative py-24 md:py-32">
+    <div class="absolute inset-0 bg-gradient-to-b from-navy-900 via-navy-800/20 to-navy-900"></div>
+    <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold-500/20 to-transparent"></div>
+
+    <div class="relative max-w-6xl mx-auto px-6 lg:px-12">
+      <div class="fade-section text-center mb-16">
+        <p class="text-gold-500/60 text-xs uppercase tracking-[0.3em] font-body mb-4">Our Principles</p>
+        <h2 class="font-display text-4xl md:text-5xl text-white font-light" style="letter-spacing: -0.02em;">
+          The Meridian <span class="text-gold-400 italic">Values</span>
+        </h2>
+      </div>
+
+      <div class="fade-section grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="value-card feature-card p-7 rounded-sm">
+          <span class="font-display text-3xl text-gold-500/15 block mb-3">01</span>
+          <h3 class="font-display text-lg text-white mb-2">Excellence</h3>
+          <p class="font-body text-navy-200/50 text-xs leading-relaxed">We hold every participant, speaker, and judge to the highest standard of academic and professional rigour.</p>
+        </div>
+        <div class="value-card feature-card p-7 rounded-sm">
+          <span class="font-display text-3xl text-gold-500/15 block mb-3">02</span>
+          <h3 class="font-display text-lg text-white mb-2">Collaboration</h3>
+          <p class="font-body text-navy-200/50 text-xs leading-relaxed">True innovation emerges at the intersection of disciplines. We foster environments where diverse minds unite.</p>
+        </div>
+        <div class="value-card feature-card p-7 rounded-sm">
+          <span class="font-display text-3xl text-gold-500/15 block mb-3">03</span>
+          <h3 class="font-display text-lg text-white mb-2">Integrity</h3>
+          <p class="font-body text-navy-200/50 text-xs leading-relaxed">Our judging, partnerships, and processes are transparent, fair, and grounded in ethical practice.</p>
+        </div>
+        <div class="value-card feature-card p-7 rounded-sm">
+          <span class="font-display text-3xl text-gold-500/15 block mb-3">04</span>
+          <h3 class="font-display text-lg text-white mb-2">Impact</h3>
+          <p class="font-body text-navy-200/50 text-xs leading-relaxed">Every challenge, workshop, and presentation is designed to create real-world value beyond the forum.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Leadership Team -->
+  <section class="relative py-24 md:py-36">
+    <div class="max-w-6xl mx-auto px-6 lg:px-12">
+      <div class="fade-section text-center mb-16">
+        <p class="text-gold-500/60 text-xs uppercase tracking-[0.3em] font-body mb-4">Leadership</p>
+        <h2 class="font-display text-4xl md:text-5xl text-white font-light" style="letter-spacing: -0.02em;">
+          The <span class="text-gold-400 italic">Team</span>
+        </h2>
+        <p class="font-body text-navy-200/50 text-sm mt-4 max-w-lg mx-auto">The minds behind the Meridian Forum — united by a shared commitment to interdisciplinary excellence.</p>
+      </div>
+
+      <div class="fade-section grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Team Member 1 -->
+        <div class="feature-card rounded-sm overflow-hidden group">
+          <div class="aspect-[4/3] bg-gradient-to-br from-navy-500/30 to-navy-700/30 relative overflow-hidden">
+            <img src="https://placehold.co/600x450/0d0d2b/c9a96e?text=." alt="" class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500 group-hover:scale-105" style="transition: opacity 0.5s ease, transform 0.8s ease;">
+            <div class="absolute inset-0 bg-gradient-to-t from-navy-800 via-transparent to-transparent"></div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-xl text-white mb-1">Dr. Ahmad Al-Rashidi</h3>
+            <p class="text-gold-500/60 text-xs uppercase tracking-[0.15em] font-body mb-3">Founder &amp; Chairman</p>
+            <p class="font-body text-navy-200/50 text-xs leading-relaxed">Former professor of International Finance at the London School of Economics with over 20 years of experience in cross-border advisory and academic leadership.</p>
+          </div>
+        </div>
+
+        <!-- Team Member 2 -->
+        <div class="feature-card rounded-sm overflow-hidden group">
+          <div class="aspect-[4/3] bg-gradient-to-br from-navy-500/30 to-navy-700/30 relative overflow-hidden">
+            <img src="https://placehold.co/600x450/0d0d2b/c9a96e?text=." alt="" class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500 group-hover:scale-105" style="transition: opacity 0.5s ease, transform 0.8s ease;">
+            <div class="absolute inset-0 bg-gradient-to-t from-navy-800 via-transparent to-transparent"></div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-xl text-white mb-1">Sarah Khoury, Esq.</h3>
+            <p class="text-gold-500/60 text-xs uppercase tracking-[0.15em] font-body mb-3">Director of Operations</p>
+            <p class="font-body text-navy-200/50 text-xs leading-relaxed">International arbitration specialist and former partner at a leading Dubai-based law firm. Oversees all logistical and programmatic elements of the forum.</p>
+          </div>
+        </div>
+
+        <!-- Team Member 3 -->
+        <div class="feature-card rounded-sm overflow-hidden group">
+          <div class="aspect-[4/3] bg-gradient-to-br from-navy-500/30 to-navy-700/30 relative overflow-hidden">
+            <img src="https://placehold.co/600x450/0d0d2b/c9a96e?text=." alt="" class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500 group-hover:scale-105" style="transition: opacity 0.5s ease, transform 0.8s ease;">
+            <div class="absolute inset-0 bg-gradient-to-t from-navy-800 via-transparent to-transparent"></div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-xl text-white mb-1">Prof. Yuki Tanaka</h3>
+            <p class="text-gold-500/60 text-xs uppercase tracking-[0.15em] font-body mb-3">Academic Director</p>
+            <p class="font-body text-navy-200/50 text-xs leading-relaxed">Chair of Systems Engineering at MIT, specializing in sustainable infrastructure. Designs the Meridian Challenge's problem sets and evaluation frameworks.</p>
+          </div>
+        </div>
+
+        <!-- Team Member 4 -->
+        <div class="feature-card rounded-sm overflow-hidden group">
+          <div class="aspect-[4/3] bg-gradient-to-br from-navy-500/30 to-navy-700/30 relative overflow-hidden">
+            <img src="https://placehold.co/600x450/0d0d2b/c9a96e?text=." alt="" class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500 group-hover:scale-105" style="transition: opacity 0.5s ease, transform 0.8s ease;">
+            <div class="absolute inset-0 bg-gradient-to-t from-navy-800 via-transparent to-transparent"></div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-xl text-white mb-1">Omar Farouk, CFA</h3>
+            <p class="text-gold-500/60 text-xs uppercase tracking-[0.15em] font-body mb-3">Finance Track Lead</p>
+            <p class="font-body text-navy-200/50 text-xs leading-relaxed">Managing Director of a sovereign wealth advisory based in Abu Dhabi. Brings deep expertise in capital markets, risk management, and fintech innovation.</p>
+          </div>
+        </div>
+
+        <!-- Team Member 5 -->
+        <div class="feature-card rounded-sm overflow-hidden group">
+          <div class="aspect-[4/3] bg-gradient-to-br from-navy-500/30 to-navy-700/30 relative overflow-hidden">
+            <img src="https://placehold.co/600x450/0d0d2b/c9a96e?text=." alt="" class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500 group-hover:scale-105" style="transition: opacity 0.5s ease, transform 0.8s ease;">
+            <div class="absolute inset-0 bg-gradient-to-t from-navy-800 via-transparent to-transparent"></div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-xl text-white mb-1">Eng. Fatima Al-Mansoori</h3>
+            <p class="text-gold-500/60 text-xs uppercase tracking-[0.15em] font-body mb-3">Engineering Track Lead</p>
+            <p class="font-body text-navy-200/50 text-xs leading-relaxed">Principal engineer at a leading Gulf infrastructure firm. Specializes in smart city development and sustainable design across the MENA region.</p>
+          </div>
+        </div>
+
+        <!-- Team Member 6 -->
+        <div class="feature-card rounded-sm overflow-hidden group">
+          <div class="aspect-[4/3] bg-gradient-to-br from-navy-500/30 to-navy-700/30 relative overflow-hidden">
+            <img src="https://placehold.co/600x450/0d0d2b/c9a96e?text=." alt="" class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500 group-hover:scale-105" style="transition: opacity 0.5s ease, transform 0.8s ease;">
+            <div class="absolute inset-0 bg-gradient-to-t from-navy-800 via-transparent to-transparent"></div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-display text-xl text-white mb-1">James Whitfield, LLM</h3>
+            <p class="text-gold-500/60 text-xs uppercase tracking-[0.15em] font-body mb-3">Law Track Lead</p>
+            <p class="font-body text-navy-200/50 text-xs leading-relaxed">Former associate at the International Court of Justice. Expert in commercial law, regulatory compliance, and intellectual property within emerging markets.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="relative py-16 border-t border-gold-500/10">
+    <div class="max-w-6xl mx-auto px-6 lg:px-12">
+      <div class="grid md:grid-cols-3 gap-12">
+        <div>
+          <img src="brand assets/dmf posts-2/FINAL!!!!.png" alt="DMF" class="h-8 opacity-70 mb-4">
+          <p class="font-body text-navy-200/40 text-xs leading-relaxed">Dubai Meridian Forum &copy; 2026.<br>All rights reserved.</p>
+          <p class="font-arabic text-gold-500/30 text-sm mt-3" dir="rtl">منتدى دبي ميريديان</p>
+        </div>
+        <div>
+          <p class="text-gold-500/60 text-xs uppercase tracking-[0.2em] font-body mb-4">Navigate</p>
+          <div class="flex flex-col gap-2">
+            <a href="index.html" class="text-navy-200/50 text-sm font-body hover:text-gold-400 transition-colors duration-300">Home</a>
+            <a href="team.html" class="text-navy-200/50 text-sm font-body hover:text-gold-400 transition-colors duration-300">Team</a>
+            <a href="tracks.html" class="text-navy-200/50 text-sm font-body hover:text-gold-400 transition-colors duration-300">Tracks</a>
+            <a href="partners.html" class="text-navy-200/50 text-sm font-body hover:text-gold-400 transition-colors duration-300">Partners</a>
+            <a href="media.html" class="text-navy-200/50 text-sm font-body hover:text-gold-400 transition-colors duration-300">Media</a>
+            <a href="register.html" class="text-navy-200/50 text-sm font-body hover:text-gold-400 transition-colors duration-300">Register</a>
+            <a href="contact.html" class="text-navy-200/50 text-sm font-body hover:text-gold-400 transition-colors duration-300">Contact</a>
+          </div>
+        </div>
+        <div>
+          <p class="text-gold-500/60 text-xs uppercase tracking-[0.2em] font-body mb-4">Contact</p>
+          <p class="text-navy-200/50 text-sm font-body leading-relaxed">Aspect Tower, Office No. 2206<br>Zone B, Bay Avenue<br>Business Bay, Dubai</p>
+          <a href="mailto:info@dubaimeridianforum.com" class="text-gold-500/50 text-sm font-body mt-3 inline-block hover:text-gold-400 transition-colors duration-300">info@dubaimeridianforum.com</a>
+        </div>
+      </div>
+      <div class="mt-12 pt-8 border-t border-gold-500/5 text-center">
+        <p class="text-navy-200/30 text-xs font-body tracking-wide">Dubai Meridian Forum &middot; Business Bay, Dubai, UAE</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Three.js gallery -->
+  <script type="module">
+    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js';
+
+    const section = document.getElementById('gallery-hero');
+    const canvas  = document.getElementById('gallery-canvas');
+    if (!section || !canvas) throw new Error('gallery elements missing');
+
+    const IMAGES = [
+      'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=900', // Dubai skyline
+      'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=900', // Dubai luxury
+      'https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=900', // gala event
+      'https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=900', // business meeting
+      'https://images.unsplash.com/photo-1553440569-bcc63803a83d?q=80&w=900', // conference
+      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=900', // portrait
+      'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=900', // executive
+      'https://images.unsplash.com/photo-1569025690938-a00729c9e1f9?q=80&w=900', // Dubai aerial
+      'https://images.unsplash.com/photo-1551288049-bbda38a10ad5?q=80&w=900', // data/analytics
+      'https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=900', // teamwork
+      'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?q=80&w=900', // finance
+      'https://images.unsplash.com/photo-1515187029135-18ee286d815b?q=80&w=900', // stage/presentation
+    ];
+
+    const VISIBLE = 10;
+    const DEPTH   = 50;
+    const HALF    = DEPTH / 2;
+
+    // ── Renderer ──────────────────────────────────────────────────────────────────
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0x060616, 0);
+
+    const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 200);
+    camera.position.set(0, 0, 0);
+
+    const scene = new THREE.Scene();
+
+    function resize() {
+      const w = section.offsetWidth, h = section.offsetHeight;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    // ── Spatial positions — offset phase so sin(ha) is never 0, enforcing non-zero x ──
+    const spatialPos = Array.from({ length: VISIBLE }, (_, i) => {
+      // Phase offset (+0.6) prevents ha=0 at i=0 which would give x=0
+      const ha = (i * 2.618 + 0.6) % (Math.PI * 2);
+      const va = (i * 1.618 + Math.PI / 3) % (Math.PI * 2);
+      // Min radius 1 on both axes so nothing passes straight through center
+      const hRad = (i % 3 + 1) * 2.8;
+      const vRad = (i % 4 + 1) * 1.1;
+      return { x: Math.sin(ha) * hRad, y: Math.cos(va) * vRad };
+    });
+
+    // Per-plane scale multiplier for depth variety (0.85 → 1.55)
+    const scaleVar = Array.from({ length: VISIBLE }, (_, i) => 0.85 + (i / (VISIBLE - 1)) * 0.7);
+
+    // ── Shaders ───────────────────────────────────────────────────────────────────
+    const vertexShader = `
+      uniform float scrollForce;
+      uniform float time;
+      uniform float isHovered;
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        vec3 pos = position;
+        float ci    = scrollForce * 0.3;
+        float curve = length(pos.xy) * length(pos.xy) * ci;
+        float cloth = (sin(pos.x*2.0 + scrollForce*3.0)*0.02 + sin(pos.y*2.5 + scrollForce*2.0)*0.015) * abs(ci) * 2.0;
+        float flag  = 0.0;
+        if (isHovered > 0.5) {
+          float damp = smoothstep(-0.5, 0.5, pos.x);
+          flag = sin(pos.x*3.0 + time*8.0)*0.1*damp + sin(pos.x*5.0 + time*12.0)*0.03*damp;
+        }
+        pos.z -= (curve + cloth + flag);
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+      }`;
+
+    const fragmentShader = `
+      uniform sampler2D map;
+      uniform float opacity;
+      uniform float blurAmount;
+      uniform float scrollForce;
+      varying vec2 vUv;
+      void main() {
+        vec4 color;
+        if (blurAmount > 0.01) {
+          vec2 ts = vec2(0.0013) * blurAmount;
+          vec4 b = vec4(0.0); float tot = 0.0;
+          for (float x = -2.0; x <= 2.0; x += 1.0)
+            for (float y = -2.0; y <= 2.0; y += 1.0) {
+              float w = 1.0 / (1.0 + length(vec2(x,y)));
+              b += texture2D(map, vUv + vec2(x,y)*ts) * w; tot += w;
+            }
+          color = b / tot;
+        } else { color = texture2D(map, vUv); }
+        color.rgb += vec3(abs(scrollForce) * 0.005);
+        gl_FragColor = vec4(color.rgb, color.a * opacity);
+      }`;
+
+    // ── Materials ─────────────────────────────────────────────────────────────────
+    const mats = Array.from({ length: VISIBLE }, () => new THREE.ShaderMaterial({
+      transparent: true,
+      uniforms: {
+        map:         { value: null },
+        opacity:     { value: 0.0 },
+        blurAmount:  { value: 8.0 },
+        scrollForce: { value: 0.0 },
+        time:        { value: 0.0 },
+        isHovered:   { value: 0.0 },
+      },
+      vertexShader,
+      fragmentShader,
+    }));
+
+    // ── Planes ────────────────────────────────────────────────────────────────────
+    const geo = new THREE.PlaneGeometry(1, 1, 32, 32);
+
+    const planeData = Array.from({ length: VISIBLE }, (_, i) => ({
+      i, z: (DEPTH / VISIBLE) * i, img: i % IMAGES.length,
+      x: spatialPos[i].x, y: spatialPos[i].y,
+    }));
+
+    const meshes = planeData.map((p, i) => {
+      const m = new THREE.Mesh(geo, mats[i]);
+      m.scale.set(2.5, 2.5, 1);
+      m.position.set(p.x, p.y, p.z - HALF);
+      m.userData.idx = i;
+      scene.add(m);
+      return m;
+    });
+
+    // ── Textures ──────────────────────────────────────────────────────────────────
+    const loader   = new THREE.TextureLoader();
+    const textures = new Array(IMAGES.length).fill(null);
+    IMAGES.forEach((src, i) => loader.load(src, t => {
+      t.minFilter = THREE.LinearFilter;
+      textures[i] = t;
+    }));
+
+    // ── Hover via raycaster ───────────────────────────────────────────────────────
+    const ray = new THREE.Raycaster();
+    const mouse = new THREE.Vector2(-9999, -9999);
+    canvas.addEventListener('mousemove', e => {
+      const r = canvas.getBoundingClientRect();
+      mouse.x =  ((e.clientX - r.left) / r.width)  * 2 - 1;
+      mouse.y = -((e.clientY - r.top)  / r.height) * 2 + 1;
+    });
+    canvas.addEventListener('mouseleave', () => mouse.set(-9999, -9999));
+
+    // ── Animation ─────────────────────────────────────────────────────────────────
+    let hovIdx = -1, scrollVel = 0, lastT = performance.now();
+    const imgAdv = VISIBLE % IMAGES.length || IMAGES.length;
+
+    const FI = { s: 0.05, e: 0.22 }, FO = { s: 0.34, e: 0.38 }; // fade out earlier = planes never get huge
+    const BI = { s: 0.00, e: 0.10 }, BO = { s: 0.32, e: 0.37 };
+    const MB = 9.0;
+
+    const lerp01 = (n, a, b) => Math.max(0, Math.min(1, (n - a) / (b - a)));
+
+    function tick() {
+      requestAnimationFrame(tick);
+      const now = performance.now();
+      const dt  = Math.min((now - lastT) / 1000, 0.05);
+      lastT = now;
+
+      // Organic auto-scroll with gentle sine breathing
+      const breathe = Math.sin(now / 4200) * 0.07;
+      scrollVel += (0.20 + breathe) * dt;
+      scrollVel *= 0.93;
+
+      // Slow camera drift — creates parallax feel
+      camera.position.x = Math.sin(now / 9000) * 0.7;
+      camera.position.y = Math.cos(now / 13000) * 0.35;
+
+      // Hover
+      ray.setFromCamera(mouse, camera);
+      const hits = ray.intersectObjects(meshes);
+      const nh   = hits.length ? hits[0].object.userData.idx : -1;
+      if (nh !== hovIdx) {
+        if (hovIdx >= 0) mats[hovIdx].uniforms.isHovered.value = 0;
+        hovIdx = nh;
+        if (hovIdx >= 0) mats[hovIdx].uniforms.isHovered.value = 1;
+      }
+
+      planeData.forEach((p, i) => {
+        let nz = p.z + scrollVel * dt * 10;
+        let fw = 0, bw = 0;
+        if (nz >= DEPTH) { fw = Math.floor(nz / DEPTH); nz -= DEPTH * fw; }
+        else if (nz < 0) { bw = Math.ceil(-nz / DEPTH); nz += DEPTH * bw; }
+        if (fw) p.img = (p.img + fw * imgAdv) % IMAGES.length;
+        if (bw) { const s = p.img - bw * imgAdv; p.img = ((s % IMAGES.length) + IMAGES.length) % IMAGES.length; }
+        p.z = ((nz % DEPTH) + DEPTH) % DEPTH;
+
+        const norm = p.z / DEPTH;
+        let op = 1;
+        if      (norm < FI.s) op = 0;
+        else if (norm < FI.e) op = lerp01(norm, FI.s, FI.e);
+        else if (norm > FO.e) op = 0;
+        else if (norm > FO.s) op = 1 - lerp01(norm, FO.s, FO.e);
+
+        let bl = 0;
+        if      (norm < BI.s) bl = MB;
+        else if (norm < BI.e) bl = MB * (1 - lerp01(norm, BI.s, BI.e));
+        else if (norm > BO.e) bl = MB;
+        else if (norm > BO.s) bl = MB * lerp01(norm, BO.s, BO.e);
+
+        meshes[i].position.set(p.x, p.y, p.z - HALF);
+
+        const tex = textures[p.img];
+        const mat = mats[i];
+        if (tex && mat.uniforms.map.value !== tex) {
+          mat.uniforms.map.value = tex;
+          const a = (tex.image?.width ?? 1) / (tex.image?.height ?? 1);
+          const sv = scaleVar[i]; // per-plane scale variety
+          meshes[i].scale.set(
+            (a > 1 ? 2.8 * a : 2.8) * sv,
+            (a > 1 ? 2.8 : 2.8 / a) * sv,
+            1
+          );
+        }
+
+        mat.uniforms.opacity.value     = op;
+        mat.uniforms.blurAmount.value  = bl;
+        mat.uniforms.scrollForce.value = scrollVel;
+        mat.uniforms.time.value        = now / 1000;
+      });
+
+      renderer.render(scene, camera);
+    }
+    tick();
+  </script>
+
+  <script>
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) { nav.style.background = 'rgba(6,6,22,0.95)'; nav.style.backdropFilter = 'blur(20px)'; nav.style.borderBottom = '1px solid rgba(201,169,110,0.08)'; }
+      else { nav.style.background = 'transparent'; nav.style.backdropFilter = 'none'; nav.style.borderBottom = 'none'; }
+    });
+    document.getElementById('mobileToggle').addEventListener('click', () => document.getElementById('mobileMenu').classList.add('open'));
+    document.getElementById('mobileClose').addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open'));
+    const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.15 });
+    document.querySelectorAll('.fade-section').forEach(el => observer.observe(el));
+
+    // ─── Feature Carousel ────────────────────────────────────────────────────────
+    (function () {
+      const ITEM_H  = 66;
+      const DELAY   = 3400;
+
+      const features = [
+        { id:'dubai',        label:'Dubai, UAE',
+          img:'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=1200',
+          desc:'Set in the heart of one of the most ambitious cities on earth — a multicultural, Arabic-rooted global hub where prestige and possibility converge.' },
+        { id:'prizes',       label:'$35,000 in Prizes',
+          img:'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?q=80&w=1200',
+          desc:'Over USD 35,000 in total prize value distributed across the three competing tracks — awarded to the teams that truly rise to the challenge.' },
+        { id:'tracks',       label:'Finance · Law · Engineering',
+          img:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1200',
+          desc:'Three industry tracks. Cross-disciplinary teams pitch real ventures — a company, product, or business — against live problems set by industry judges.' },
+        { id:'international',label:'International Community',
+          img:'https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=1200',
+          desc:'A genuinely global gathering drawing participants from across the Middle East, South Asia, Europe, and beyond — united by ambition.' },
+        { id:'internships',  label:'25 Professional Internships',
+          img:'https://images.unsplash.com/photo-1556761175-b413da4baf72?q=80&w=1200',
+          desc:'25 confirmed professional internship placements offered to standout participants through our network of corporate and institutional partners.' },
+        { id:'b2b',          label:'10 B2B Sponsorships',
+          img:'https://images.unsplash.com/photo-1551135049-8a33b5883817?q=80&w=1200',
+          desc:'Ten live B2B project sponsorships connecting winning teams directly to real business mandates from partner organisations.' },
+        { id:'gala',         label:'Galas & Networking',
+          img:'https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=1200',
+          desc:'Multi-day programme spanning gala dinners, networking evenings, hotel accommodations, curated activities, and exclusive industry receptions.' },
+        { id:'judges',       label:'Industry Officials',
+          img:'https://images.unsplash.com/photo-1515187029135-18ee286d815b?q=80&w=1200',
+          desc:'Judged and attended by senior executives, legal officials, and financial professionals drawn from the region\'s most influential institutions.' },
+        { id:'certificate',  label:'Event Certificates',
+          img:'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1200',
+          desc:'Every participant receives a verified certificate of participation — a recognised mark of distinction for any professional or academic application.' },
+        { id:'future',       label:'Future Forum Access',
+          img:'https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1200',
+          desc:'Guaranteed spots at all future Meridian Forums, plus legal umbrella trial periods with select partner organisations for qualifying teams.' },
+      ];
+
+      const N = features.length;
+      const chipsEl = document.getElementById('fc-chips');
+      const cardsEl = document.getElementById('fc-cards');
+      if (!chipsEl || !cardsEl) return;
+
+      let step = 0, paused = false, timer;
+
+      const ci = () => ((step % N) + N) % N;
+      const wrapDist = d => { let r = ((d % N) + N) % N; if (r > N/2) r -= N; return r; };
+
+      // ── Build chips ────────────────────────────────────────────────────────────
+      const chipEls = features.map((f, i) => {
+        const btn = document.createElement('button');
+        btn.style.cssText = [
+          'position:absolute;left:50%;',
+          'display:flex;align-items:center;gap:10px;',
+          'padding:11px 26px;border-radius:999px;',
+          'font-family:\'Raleway\',sans-serif;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;',
+          'white-space:nowrap;cursor:pointer;',
+          'border:1px solid transparent;',
+          'transition:transform 0.52s cubic-bezier(0.34,1.4,0.64,1),opacity 0.4s ease,background 0.35s,color 0.35s,border-color 0.35s;',
+        ].join('');
+        btn.textContent = f.label;
+        btn.addEventListener('click', () => {
+          const diff = (i - ci() + N) % N;
+          if (diff) { step += diff; render(); resetTimer(); }
+        });
+        btn.addEventListener('mouseenter', () => paused = true);
+        btn.addEventListener('mouseleave', () => paused = false);
+        chipsEl.appendChild(btn);
+        return btn;
+      });
+
+      // ── Build cards ────────────────────────────────────────────────────────────
+      const cardEls = features.map((f, i) => {
+        const card = document.createElement('div');
+        card.style.cssText = [
+          'position:absolute;width:min(320px,88%);aspect-ratio:4/5;',
+          'border-radius:1.6rem;overflow:hidden;',
+          'border:5px solid #060616;background:#0d0d2b;',
+          'transform-origin:center;',
+          'transition:transform 0.55s cubic-bezier(0.34,1.3,0.64,1),opacity 0.45s ease;',
+        ].join('');
+
+        const img = document.createElement('img');
+        img.src = f.img; img.alt = f.label;
+        img.style.cssText = 'width:100%;height:100%;object-fit:cover;transition:filter 0.55s ease;display:block;';
+
+        const badge = document.createElement('div');
+        badge.style.cssText = [
+          'position:absolute;top:1.4rem;left:1.4rem;',
+          'display:flex;align-items:center;gap:8px;',
+          'padding:4px 14px;border-radius:999px;',
+          'background:#060616;border:1px solid rgba(201,169,110,0.25);',
+          'font-family:\'Raleway\',sans-serif;font-size:9px;font-weight:500;',
+          'letter-spacing:0.28em;text-transform:uppercase;color:rgba(201,169,110,0.85);',
+          'transition:opacity 0.4s ease;',
+        ].join('');
+        badge.innerHTML = `<span style="width:6px;height:6px;border-radius:50%;background:#c9a96e;box-shadow:0 0 8px #c9a96e;display:inline-block;"></span> ${String(i+1).padStart(2,'0')} &middot; Live`;
+
+        const overlay = document.createElement('div');
+        overlay.style.cssText = [
+          'position:absolute;inset-x:0;bottom:0;',
+          'padding:3rem 1.6rem 1.8rem;',
+          'background:linear-gradient(to top,rgba(0,0,0,0.93) 0%,rgba(0,0,0,0.45) 55%,transparent 100%);',
+          'transition:opacity 0.4s ease;',
+        ].join('');
+        const chip = document.createElement('div');
+        chip.style.cssText = [
+          'display:inline-block;padding:3px 12px;border-radius:999px;margin-bottom:10px;',
+          'background:#060616;border:1px solid rgba(201,169,110,0.2);',
+          'font-family:\'Raleway\',sans-serif;font-size:8.5px;font-weight:500;',
+          'letter-spacing:0.25em;text-transform:uppercase;color:rgba(201,169,110,0.8);',
+        ].join('');
+        chip.textContent = f.label;
+        const desc = document.createElement('p');
+        desc.style.cssText = 'font-family:\'Cormorant Garamond\',serif;font-size:1.15rem;font-weight:400;color:#fff;line-height:1.45;';
+        desc.textContent = f.desc;
+        overlay.appendChild(chip);
+        overlay.appendChild(desc);
+
+        card.appendChild(img);
+        card.appendChild(badge);
+        card.appendChild(overlay);
+        cardsEl.appendChild(card);
+        return { card, img, badge, overlay };
+      });
+
+      // ── Render ─────────────────────────────────────────────────────────────────
+      function render() {
+        const now = ci();
+
+        chipEls.forEach((btn, i) => {
+          const d   = wrapDist(i - now);
+          const abs = Math.abs(d);
+          const active = d === 0;
+          btn.style.transform    = `translateX(-50%) translateY(${d * ITEM_H}px)`;
+          btn.style.opacity      = String(Math.max(0, 1 - abs * 0.27));
+          btn.style.zIndex       = active ? '10' : '1';
+          btn.style.background   = active ? '#c9a96e' : 'transparent';
+          btn.style.color        = active ? '#060616' : 'rgba(232,232,240,0.5)';
+          btn.style.borderColor  = active ? '#c9a96e' : 'rgba(201,169,110,0.18)';
+          btn.style.fontWeight   = active ? '600' : '400';
+          btn.style.pointerEvents= abs > 3 ? 'none' : 'auto';
+        });
+
+        cardEls.forEach(({ card, img, badge, overlay }, i) => {
+          const d      = wrapDist(i - now);
+          const active = d === 0;
+          const prev   = d === -1;
+          const next   = d === 1;
+          const vis    = active || prev || next;
+
+          let tx = 0, sc = 1, rot = 0;
+          if (prev)        { tx = -115; sc = 0.83; rot = -4; }
+          else if (next)   { tx =  115; sc = 0.83; rot =  4; }
+          else if (!active){ tx = d > 0 ? 150 : -150; sc = 0.7; }
+
+          card.style.transform    = `translateX(${tx}px) scale(${sc}) rotate(${rot}deg)`;
+          card.style.opacity      = active ? '1' : vis ? '0.32' : '0';
+          card.style.zIndex       = active ? '20' : vis ? '10' : '0';
+          card.style.pointerEvents= active ? 'auto' : 'none';
+          img.style.filter        = active ? 'grayscale(0) brightness(1)' : 'grayscale(1) brightness(0.55)';
+          badge.style.opacity     = active ? '1' : '0';
+          overlay.style.opacity   = active ? '1' : '0';
+        });
+      }
+
+      function resetTimer() {
+        clearInterval(timer);
+        timer = setInterval(() => { if (!paused) { step++; render(); } }, DELAY);
+      }
+
+      render();
+      resetTimer();
+    })();
+  </script>
+</body>
+</html>

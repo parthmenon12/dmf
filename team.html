@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team — Dubai Meridian Forum</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Raleway:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: { 50:'#e8e8f0',100:'#c5c5d9',200:'#9494b5',300:'#5e5e88',400:'#2d2d5e',500:'#14143a',600:'#0d0d2b',700:'#09091f',800:'#060616',900:'#03030b' },
+            gold: { 400:'#d4a44e',500:'#c9a96e' },
+          },
+          fontFamily: {
+            display:['"Cormorant Garamond"','serif'],
+            body:['"Raleway"','sans-serif'],
+            arabic:['"Amiri"','serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{background:#060616;color:#e8e8f0;font-family:'Raleway',sans-serif;overflow-x:hidden;}
+
+    .grain::after{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:0.5;}
+
+    .nav-link{position:relative;letter-spacing:0.15em;}
+    .nav-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:#c9a96e;transition:width 0.4s cubic-bezier(0.25,0.46,0.45,0.94);}
+    .nav-link:hover::after{width:100%;}
+
+    .gold-line{width:60px;height:1px;background:linear-gradient(90deg,#c9a96e,transparent);}
+
+    .fade-up{opacity:0;transform:translateY(40px);transition:opacity 0.8s ease,transform 0.8s ease;}
+    .fade-up.visible{opacity:1;transform:translateY(0);}
+
+    ::-webkit-scrollbar{width:6px;}
+    ::-webkit-scrollbar-track{background:#060616;}
+    ::-webkit-scrollbar-thumb{background:rgba(201,169,110,0.3);border-radius:3px;}
+
+    .mobile-menu{transform:translateX(100%);transition:transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);}
+    .mobile-menu.open{transform:translateX(0);}
+
+    /* Glow card */
+    .glow-card{
+      position:relative;overflow:hidden;
+      background:linear-gradient(145deg,rgba(20,20,58,0.6),rgba(9,9,31,0.8));
+      border:1px solid rgba(201,169,110,0.08);
+      transition:border-color 0.4s ease,transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94),box-shadow 0.4s ease;
+    }
+    .glow-card::before{
+      content:'';position:absolute;inset:0;
+      background:radial-gradient(600px circle at var(--x,50%) var(--y,50%),rgba(201,169,110,0.1) 0%,transparent 60%);
+      opacity:0;transition:opacity 0.5s ease;pointer-events:none;z-index:0;
+    }
+    .glow-card:hover::before{opacity:1;}
+    .glow-card:hover{
+      border-color:rgba(201,169,110,0.35);
+      transform:translateY(-4px);
+      box-shadow:0 20px 60px rgba(201,169,110,0.08),0 8px 24px rgba(0,0,0,0.4);
+    }
+    .glow-card.tier-1{border-color:rgba(201,169,110,0.18);}
+    .glow-card.tier-1:hover{border-color:rgba(201,169,110,0.5);box-shadow:0 24px 80px rgba(201,169,110,0.12),0 8px 24px rgba(0,0,0,0.4);}
+    .glow-card>*{position:relative;z-index:1;}
+
+    /* Avatar */
+    .avatar{
+      width:64px;height:64px;border-radius:50%;
+      background:linear-gradient(135deg,rgba(201,169,110,0.15),rgba(201,169,110,0.05));
+      border:1px solid rgba(201,169,110,0.3);
+      display:flex;align-items:center;justify-content:center;
+      font-family:'Cormorant Garamond',serif;font-size:1.25rem;color:#c9a96e;font-weight:400;
+      flex-shrink:0;
+    }
+    .avatar-lg{width:80px;height:80px;font-size:1.5rem;}
+
+    /* Tier divider */
+    .tier-divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(201,169,110,0.25),transparent);}
+    .tier-label{
+      display:inline-block;
+      color:rgba(201,169,110,0.5);font-family:'Raleway',sans-serif;font-size:10px;
+      font-weight:500;letter-spacing:0.3em;text-transform:uppercase;
+    }
+
+    /* Team Showcase */
+    .team-showcase{display:flex;flex-direction:column;align-items:flex-start;gap:36px;width:100%;user-select:none;}
+    @media(min-width:900px){.team-showcase{flex-direction:row;gap:0;align-items:flex-start;}}
+
+    /* Left bio panel */
+    .team-bio-panel{flex-shrink:0;width:100%;}
+    @media(min-width:900px){.team-bio-panel{width:240px;position:sticky;top:110px;margin-right:36px;}}
+    .team-bio-inner{transition:opacity 0.35s ease,transform 0.35s ease;}
+    .team-bio-inner.fading{opacity:0;transform:translateY(8px);}
+    .team-bio-label{font-family:'Raleway',sans-serif;font-size:9px;font-weight:500;letter-spacing:0.3em;text-transform:uppercase;color:rgba(201,169,110,0.5);margin-bottom:12px;}
+    .team-bio-name{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;color:#e8e8f0;line-height:1.1;letter-spacing:-0.02em;margin-bottom:8px;}
+    .team-bio-role{font-family:'Raleway',sans-serif;font-size:8.5px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:rgba(201,169,110,0.55);margin-bottom:16px;}
+    .team-bio-line{width:40px;height:1px;background:linear-gradient(90deg,#c9a96e,transparent);margin-bottom:16px;}
+    .team-bio-text{font-family:'Raleway',sans-serif;font-size:13.5px;font-weight:400;line-height:1.85;color:rgba(232,232,240,0.5);}
+
+    /* Photo grid */
+    .team-photo-grid{display:flex;gap:10px;flex-shrink:0;}
+    .team-photo-col{display:flex;flex-direction:column;gap:10px;}
+    .team-photo-card{position:relative;overflow:hidden;cursor:pointer;border-radius:2px;flex-shrink:0;}
+    .team-photo-card img{width:100%;height:100%;object-fit:cover;transition:filter 0.5s ease;filter:grayscale(1) brightness(0.65);}
+
+    /* Name list */
+    .team-member-list{display:flex;flex-direction:column;gap:2px;width:100%;padding-top:4px;flex-shrink:0;}
+    @media(min-width:900px){.team-member-list{width:auto;margin-left:auto;padding-left:48px;}}
+    .team-tier-label{color:rgba(201,169,110,0.45);font-family:'Raleway',sans-serif;font-size:9px;font-weight:500;letter-spacing:0.3em;text-transform:uppercase;}
+    .team-tier-line{width:100%;height:1px;background:linear-gradient(90deg,rgba(201,169,110,0.18),transparent);margin-top:5px;}
+    .team-member-row{cursor:pointer;padding:6px 0;transition:opacity 0.3s ease;}
+    .team-indicator{display:inline-block;width:16px;height:10px;border-radius:4px;background:rgba(201,169,110,0.18);flex-shrink:0;transition:all 0.3s ease;}
+    .team-name{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:500;color:rgba(232,232,240,0.72);letter-spacing:-0.01em;transition:color 0.3s ease;white-space:nowrap;}
+    .team-role{margin-top:3px;padding-left:26px;font-family:'Raleway',sans-serif;font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:0.22em;color:rgba(201,169,110,0.38);white-space:nowrap;}
+  </style>
+</head>
+<body class="grain">
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full z-50 transition-all duration-500" id="mainNav">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="flex items-center justify-between h-20">
+        <a href="index.html" class="flex items-center group">
+          <img src="5.png" alt="DMF" class="h-10 opacity-90 group-hover:opacity-100 transition-opacity duration-300" style="mix-blend-mode:screen;filter:brightness(1.6) saturate(0.8)">
+        </a>
+        <div class="hidden lg:flex items-center gap-10">
+          <a href="index.html" class="nav-link text-navy-100 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Home</a>
+          <a href="about.html" class="nav-link text-navy-100 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">About</a>
+          <a href="team.html" class="nav-link text-gold-400 text-xs font-body uppercase tracking-widest">Team</a>
+          <a href="tracks.html" class="nav-link text-navy-100 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Tracks</a>
+          <a href="partners.html" class="nav-link text-white/60 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Partners</a>
+          <a href="contact.html" class="nav-link text-navy-100 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Contact</a>
+        </div>
+        <a href="register.html" class="hidden lg:block px-6 py-2.5 border border-gold-500/40 text-gold-400 text-xs uppercase tracking-[0.2em] font-body hover:bg-gold-500/10 hover:border-gold-400 transition-all duration-300">Register</a>
+        <button id="mobileToggle" class="lg:hidden text-navy-100 hover:text-gold-400 transition-colors" aria-label="Menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="mobile-menu fixed inset-0 z-[60] bg-black/98 backdrop-blur-xl flex flex-col items-center justify-center gap-8">
+    <button id="mobileClose" class="absolute top-6 right-6 text-white/60 hover:text-gold-400 transition-colors" aria-label="Close">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+    <a href="index.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Home</a>
+    <a href="about.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">About</a>
+    <a href="team.html" class="text-gold-400 text-sm font-body uppercase tracking-[0.3em]">Team</a>
+    <a href="tracks.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Tracks</a>
+    <a href="partners.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Partners</a>
+    <a href="contact.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Contact</a>
+    <a href="register.html" class="text-gold-400 text-sm font-body uppercase tracking-[0.3em] border border-gold-500/30 px-6 py-2">Register</a>
+  </div>
+
+  <!-- Page Header -->
+  <section class="relative pt-32 pb-20 md:pt-40 md:pb-28">
+    <div class="relative z-10 max-w-6xl mx-auto px-6 lg:px-12">
+      <p class="font-arabic text-gold-500/50 text-base mb-3" dir="rtl">فريق القيادة</p>
+      <p class="scramble-text text-gold-500/60 text-xs uppercase tracking-[0.3em] font-body mb-4">Leadership</p>
+      <h1 class="font-display text-5xl md:text-6xl lg:text-7xl text-white font-light" style="letter-spacing:-0.03em;line-height:1.1;">
+        The People Behind<br><span class="text-gold-400 italic">The Forum</span>
+      </h1>
+    </div>
+  </section>
+
+  <!-- Team Showcase -->
+  <section class="py-10 md:py-20">
+    <div class="max-w-6xl mx-auto px-6 lg:px-12">
+      <div id="teamShowcase" class="fade-up team-showcase"></div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="w-full h-px bg-gradient-to-r from-transparent via-gold-500/20 to-transparent"></div>
+
+  <!-- Join the Team CTA -->
+  <section class="py-20 md:py-28">
+    <div class="max-w-3xl mx-auto px-6 lg:px-12 fade-up">
+      <div class="glow-card rounded-sm p-10 md:p-14 text-center border border-gold-500/15" data-glow>
+        <p class="scramble-text text-gold-500/60 text-xs uppercase tracking-[0.3em] font-body mb-5">Open Positions</p>
+        <h2 class="font-display text-3xl md:text-4xl text-white font-light mb-4" style="letter-spacing:-0.02em;">
+          Join <span class="text-gold-400 italic">The Team</span>
+        </h2>
+        <div class="gold-line mx-auto mb-6"></div>
+        <p class="font-body text-white/50 text-sm leading-relaxed mb-8 max-w-xl mx-auto">
+          Dubai Meridian Forum is actively building its team of passionate, driven students. If you believe in the power of interdisciplinary excellence, we want to hear from you.
+        </p>
+        <a href="contact.html" class="inline-flex items-center gap-3 px-8 py-3 border border-gold-500/40 text-gold-400 text-xs uppercase tracking-[0.2em] font-body hover:bg-gold-500/10 hover:border-gold-400 transition-all duration-300">
+          Express Interest
+          <span>→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-16 border-t border-white/5">
+    <div class="max-w-6xl mx-auto px-6 lg:px-12">
+      <div class="grid md:grid-cols-3 gap-12">
+        <div>
+          <img src="5.png" alt="DMF" class="h-8 opacity-60 mb-4" style="mix-blend-mode:screen;filter:brightness(1.6) saturate(0.8)">
+          <p class="font-body text-white/30 text-xs leading-relaxed">Dubai Meridian Forum &copy; 2026.<br>All rights reserved.</p>
+          <p class="font-arabic text-gold-500/25 text-sm mt-3" dir="rtl">منتدى دبي ميريديان</p>
+        </div>
+        <div>
+          <p class="text-gold-500/50 text-xs uppercase tracking-[0.2em] font-body mb-4">Navigate</p>
+          <div class="flex flex-col gap-2">
+            <a href="index.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">Home</a>
+            <a href="about.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">About</a>
+            <a href="tracks.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">Tracks</a>
+            <a href="partners.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">Partners</a>
+            <a href="media.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">Media</a>
+            <a href="register.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">Register</a>
+            <a href="contact.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">Contact</a>
+          </div>
+        </div>
+        <div>
+          <p class="text-gold-500/50 text-xs uppercase tracking-[0.2em] font-body mb-4">Contact</p>
+          <p class="text-white/30 text-sm font-body leading-relaxed">Aspect Tower, Office No. 2206<br>Zone B, Bay Avenue<br>Business Bay, Dubai</p>
+          <a href="mailto:info@dubaimeridianforum.com" class="text-gold-500/40 text-sm font-body mt-3 inline-block hover:text-gold-400 transition-colors duration-300">info@dubaimeridianforum.com</a>
+        </div>
+      </div>
+      <div class="mt-12 pt-8 border-t border-white/5 text-center">
+        <p class="text-white/20 text-xs font-body tracking-wide">Dubai Meridian Forum &middot; Business Bay, Dubai, UAE</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ─── Nav scroll ───────────────────────────────────────────────────────────────
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) { nav.style.background='rgba(6,6,22,0.96)';nav.style.backdropFilter='blur(20px)';nav.style.borderBottom='1px solid rgba(201,169,110,0.08)'; }
+      else { nav.style.background='transparent';nav.style.backdropFilter='none';nav.style.borderBottom='none'; }
+    });
+
+    // ─── Mobile menu ─────────────────────────────────────────────────────────────
+    document.getElementById('mobileToggle').addEventListener('click',()=>document.getElementById('mobileMenu').classList.add('open'));
+    document.getElementById('mobileClose').addEventListener('click',()=>document.getElementById('mobileMenu').classList.remove('open'));
+
+    // ─── Scroll reveal ────────────────────────────────────────────────────────────
+    const obs = new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:0.1});
+    document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+
+    // ─── Glow card spotlight ──────────────────────────────────────────────────────
+    document.addEventListener('pointermove', e => {
+      document.querySelectorAll('[data-glow]').forEach(card => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--x', `${e.clientX - r.left}px`);
+        card.style.setProperty('--y', `${e.clientY - r.top}px`);
+      });
+    });
+
+    // ─── Team Showcase ────────────────────────────────────────────────────────────
+    (function(){
+      const DEFAULT_BIO = {
+        label: 'The Team',
+        name:  'Dubai Meridian Forum',
+        role:  '',
+        text:  'Behind every great forum is a team of people who refuse to settle for ordinary. DMF is built and run entirely by students — a group of eleven driven individuals who bring together expertise in operations, academia, creative direction, and public engagement to deliver an experience worthy of the world stage.',
+      };
+
+      const members = [
+        { id:'1',  name:'Muheymin Hasanoglu', role:'Chief Executive',               tier:'Executive Leadership', img:'https://i.pravatar.cc/300?img=11',
+          bio:'Muheymin is the founding vision behind Dubai Meridian Forum. As Chief Executive, he sets the strategic direction, secures the relationships that make the forum possible, and ensures every element of the event reflects the ambition of the organisation.' },
+        { id:'2',  name:'Parth Menon',        role:'Chief Operative Officer',        tier:'Chief Officers',       img:'https://i.pravatar.cc/300?img=52',
+          bio:'Parth oversees the operational backbone of DMF — from systems and workflows to cross-team coordination. He keeps the machine running, translating vision into execution and making sure no moving part is left unaccounted for.' },
+        { id:'3',  name:'Sanithi Perera',     role:'Chief Organizing Officer',       tier:'Chief Officers',       img:'https://i.pravatar.cc/300?img=47',
+          bio:'Sanithi leads the end-to-end organisation of the forum, from delegate experience to programme flow. Her meticulous planning and calm under pressure ensure that every participant walks away with a seamless, memorable event.' },
+        { id:'4',  name:'Adithya Rajesh',     role:'Chief Academic Officer',         tier:'Chief Officers',       img:'https://i.pravatar.cc/300?img=15',
+          bio:'Adithya shapes the intellectual heart of the forum. He leads content design across all three tracks, curates speakers, and ensures the academic rigour that sets DMF apart from every other student-run conference in the region.' },
+        { id:'5',  name:'Laila Mohamed',      role:'Director of Public Relations',   tier:'Department Heads',     img:'https://i.pravatar.cc/300?img=32',
+          bio:'Laila drives the public face of DMF — managing media outreach, building press partnerships, and crafting the communications strategy that positions the forum with confidence on a global stage.' },
+        { id:'6',  name:'Adam Farag',         role:'Director of Programme',          tier:'Department Heads',     img:'https://i.pravatar.cc/300?img=68',
+          bio:'Adam architects the programme that delegates experience on the day. From workshop design to speaker liaison, he ensures every session is purposeful, well-paced, and intellectually stimulating.' },
+        { id:'7',  name:'Samara Deshnoor',    role:'Director of Operations',         tier:'Department Heads',     img:'https://i.pravatar.cc/300?img=25',
+          bio:"Samara owns the operational detail — venue logistics, on-site coordination, and day-of execution. Her precision and composure mean that the forum's complex moving parts come together exactly as planned." },
+        { id:'8',  name:'Ronak Karlapudi',    role:'Director of Administrations',    tier:'Department Heads',     img:'https://i.pravatar.cc/300?img=57',
+          bio:'Ronak manages the administrative infrastructure of DMF — overseeing delegate relations, documentation, and the internal systems that keep the organisation running efficiently behind the scenes.' },
+        { id:'9',  name:'Alishba Ayaat',      role:'Creative Director',              tier:'Department Heads',     img:'https://i.pravatar.cc/300?img=44',
+          bio:'Alishba is the creative mind behind the DMF brand. She leads visual identity, design output, and the aesthetic language of everything the forum puts into the world — ensuring it looks as compelling as it sounds.' },
+        { id:'10', name:'Nara Fashalla',      role:'Deputy Creative Director',       tier:'Department Heads',     img:'https://i.pravatar.cc/300?img=23',
+          bio:'Nara works alongside the creative direction to bring concepts to life with precision and flair. She ensures consistency across all visual touchpoints, translating the brand vision into polished, production-ready output.' },
+        { id:'11', name:'Aroush Iftikhar',    role:'Deputy Director of Operations',  tier:'Department Heads',     img:'https://i.pravatar.cc/300?img=60',
+          bio:'Aroush supports operational delivery across the forum, stepping into critical logistics roles wherever the detail demands it. His reliability and initiative make him an essential part of the operations function.' },
+      ];
+
+      const colSizes  = [{ w:178,h:196 },{ w:198,h:216 },{ w:186,h:204 }];
+      const colOffsets= [0,82,40];
+
+      const col1 = members.filter((_,i)=>i%3===0);
+      const col2 = members.filter((_,i)=>i%3===1);
+      const col3 = members.filter((_,i)=>i%3===2);
+
+      const showcase = document.getElementById('teamShowcase');
+      if (!showcase) return;
+
+      // ── Bio panel (left) ────────────────────────────────────────────────────────
+      const bioPanel = document.createElement('div');
+      bioPanel.className = 'team-bio-panel';
+      const bioInner = document.createElement('div');
+      bioInner.className = 'team-bio-inner';
+      bioPanel.appendChild(bioInner);
+
+      function renderBio(data) {
+        bioInner.innerHTML = `
+          <p class="team-bio-label">${data.label}</p>
+          <h3 class="team-bio-name">${data.name}</h3>
+          ${data.role ? `<p class="team-bio-role">${data.role}</p>` : ''}
+          <div class="team-bio-line"></div>
+          <p class="team-bio-text">${data.text}</p>`;
+      }
+
+      let bioTimeout = null;
+      function setBio(data) {
+        clearTimeout(bioTimeout);
+        bioInner.classList.add('fading');
+        bioTimeout = setTimeout(() => {
+          renderBio(data);
+          bioInner.classList.remove('fading');
+        }, 200);
+      }
+
+      renderBio(DEFAULT_BIO);
+
+      // ── Photo grid (middle) ─────────────────────────────────────────────────────
+      const grid = document.createElement('div');
+      grid.className = 'team-photo-grid';
+
+      function buildCol(colMembers, colIdx) {
+        const sz  = colSizes[colIdx];
+        const col = document.createElement('div');
+        col.className = 'team-photo-col';
+        col.style.marginTop = colOffsets[colIdx] + 'px';
+        colMembers.forEach(m => {
+          const card = document.createElement('div');
+          card.className = 'team-photo-card';
+          card.dataset.id = m.id;
+          card.style.width  = sz.w + 'px';
+          card.style.height = sz.h + 'px';
+          const img = document.createElement('img');
+          img.src = m.img;
+          img.alt = m.name;
+          card.appendChild(img);
+          col.appendChild(card);
+        });
+        return col;
+      }
+
+      grid.appendChild(buildCol(col1, 0));
+      grid.appendChild(buildCol(col2, 1));
+      grid.appendChild(buildCol(col3, 2));
+
+      // ── Name list (right) ───────────────────────────────────────────────────────
+      const list = document.createElement('div');
+      list.className = 'team-member-list';
+
+      let lastTier = null;
+      members.forEach(m => {
+        if (m.tier !== lastTier) {
+          const tg = document.createElement('div');
+          tg.style.cssText = lastTier ? 'margin-top:18px;margin-bottom:10px;' : 'margin-bottom:10px;';
+          tg.innerHTML = `<span class="team-tier-label">${m.tier}</span><div class="team-tier-line"></div>`;
+          list.appendChild(tg);
+          lastTier = m.tier;
+        }
+        const row = document.createElement('div');
+        row.className = 'team-member-row';
+        row.dataset.id = m.id;
+        row.innerHTML = `
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span class="team-indicator" data-id="${m.id}"></span>
+            <span class="team-name" data-id="${m.id}">${m.name}</span>
+          </div>
+          <p class="team-role">${m.role}</p>`;
+        list.appendChild(row);
+      });
+
+      showcase.appendChild(bioPanel);
+      showcase.appendChild(grid);
+      showcase.appendChild(list);
+
+      // ── Hover interactions ───────────────────────────────────────────────────────
+      function setHovered(id) {
+        const member = members.find(m => m.id === id) || null;
+
+        // bio
+        if (member) {
+          setBio({ label: member.tier, name: member.name, role: member.role, text: member.bio });
+        } else {
+          setBio(DEFAULT_BIO);
+        }
+
+        // photos
+        document.querySelectorAll('.team-photo-card').forEach(c => {
+          const img = c.querySelector('img');
+          const active = c.dataset.id === id;
+          const dimmed = id !== null && !active;
+          img.style.filter = active ? 'grayscale(0) brightness(1)' : dimmed ? 'grayscale(1) brightness(0.3)' : 'grayscale(1) brightness(0.65)';
+        });
+
+        // name rows
+        document.querySelectorAll('.team-member-row').forEach(r => {
+          const active = r.dataset.id === id;
+          const dimmed = id !== null && !active;
+          r.style.opacity = dimmed ? '0.35' : '1';
+          const ind  = r.querySelector('.team-indicator');
+          const name = r.querySelector('.team-name');
+          if (active) {
+            ind.style.background = '#c9a96e';
+            ind.style.width = '22px';
+            name.style.color = '#e8e8f0';
+          } else {
+            ind.style.background = 'rgba(201,169,110,0.18)';
+            ind.style.width = '16px';
+            name.style.color = 'rgba(232,232,240,0.72)';
+          }
+        });
+      }
+
+      showcase.addEventListener('mouseleave', () => setHovered(null));
+      showcase.querySelectorAll('.team-photo-card').forEach(c => {
+        c.addEventListener('mouseenter', () => setHovered(c.dataset.id));
+      });
+      showcase.querySelectorAll('.team-member-row').forEach(r => {
+        r.addEventListener('mouseenter', () => setHovered(r.dataset.id));
+      });
+    })();
+
+    // ─── ScrambleText ─────────────────────────────────────────────────────────────
+    class ScrambleText {
+      constructor(el) {
+        this.el = el; this.original = el.textContent; this.chars = '_!X$0-+*#';
+        const io = new IntersectionObserver(entries => {
+          entries.forEach(e => { if (e.isIntersecting) { this.animate(); io.unobserve(this.el); } });
+        }, { threshold: 0.3 });
+        io.observe(this.el);
+      }
+      animate() {
+        const text = this.original, len = text.length;
+        let frame = 0;
+        const total = len * 3;
+        const iv = setInterval(() => {
+          let out = '';
+          if (frame < len) {
+            for (let i = 0; i <= frame; i++) out += this.chars[Math.floor(Math.random()*this.chars.length)];
+          } else {
+            const rev = frame - len;
+            out = text.slice(0, rev);
+            for (let i = rev; i < len; i++) out += this.chars[Math.floor(Math.random()*this.chars.length)];
+          }
+          this.el.textContent = out; frame++;
+          if (frame > total) { this.el.textContent = text; clearInterval(iv); }
+        }, 20);
+      }
+    }
+    document.querySelectorAll('.scramble-text').forEach(el => new ScrambleText(el));
+  </script>
+</body>
+</html>

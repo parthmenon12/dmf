@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tracks — Dubai Meridian Forum</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Raleway:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: { 50: '#e8e8f0', 100: '#c5c5d9', 200: '#9494b5', 300: '#5e5e88', 400: '#2d2d5e', 500: '#14143a', 600: '#0d0d2b', 700: '#09091f', 800: '#060616', 900: '#03030b' },
+            gold: { 50: '#fdf8ef', 100: '#f9ecd3', 200: '#f0d5a0', 300: '#e5bc6d', 400: '#d4a44e', 500: '#c9a96e', 600: '#a8863a', 700: '#836629', 800: '#5e491d', 900: '#3a2d12' },
+          },
+          fontFamily: {
+            display: ['"Cormorant Garamond"', 'serif'],
+            body: ['"Raleway"', 'sans-serif'],
+            arabic: ['"Amiri"', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: #060616; color: #e8e8f0; font-family: 'Raleway', sans-serif; }
+    .grain::after {
+      content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9999; opacity: 0.5;
+    }
+    .nav-link { position: relative; letter-spacing: 0.15em; }
+    .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: #c9a96e; transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .nav-link:hover::after { width: 100%; }
+    .gold-line { width: 60px; height: 1px; background: linear-gradient(90deg, #c9a96e, transparent); }
+    .fade-section { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .fade-section.visible { opacity: 1; transform: translateY(0); }
+    .feature-card {
+      background: linear-gradient(145deg, rgba(20, 20, 58, 0.6), rgba(9, 9, 31, 0.8));
+      border: 1px solid rgba(201, 169, 110, 0.08);
+      transition: border-color 0.4s ease, transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
+    }
+    .feature-card:hover {
+      border-color: rgba(201, 169, 110, 0.25); transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(201, 169, 110, 0.06), 0 8px 24px rgba(0,0,0,0.3);
+    }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #060616; }
+    ::-webkit-scrollbar-thumb { background: rgba(201,169,110,0.3); border-radius: 3px; }
+    .mobile-menu { transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .mobile-menu.open { transform: translateX(0); }
+
+    /* Track tabs */
+    .track-tab {
+      position: relative;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    .track-tab::after {
+      content: '';
+      position: absolute;
+      bottom: -8px; left: 0;
+      width: 100%; height: 2px;
+      background: #c9a96e;
+      transform: scaleX(0);
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .track-tab.active::after { transform: scaleX(1); }
+    .track-tab.active { color: #c9a96e; }
+
+    .track-content { display: none; }
+    .track-content.active { display: block; }
+
+    .topic-tag {
+      background: rgba(201, 169, 110, 0.06);
+      border: 1px solid rgba(201, 169, 110, 0.12);
+      transition: border-color 0.3s ease, background 0.3s ease;
+    }
+    .topic-tag:hover {
+      border-color: rgba(201, 169, 110, 0.3);
+      background: rgba(201, 169, 110, 0.1);
+    }
+  </style>
+</head>
+<body class="grain">
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full z-50 transition-all duration-500" id="mainNav">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="flex items-center justify-between h-20">
+        <a href="index.html" class="flex items-center gap-3 group">
+          <img src="brand assets/dmf posts-2/FINAL!!!!.png" alt="DMF Logo" class="h-10 opacity-90 group-hover:opacity-100 transition-opacity duration-300">
+        </a>
+        <div class="hidden lg:flex items-center gap-10">
+          <a href="index.html" class="nav-link text-navy-100 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Home</a>
+          <a href="about.html" class="nav-link text-navy-100 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">About</a>
+          <a href="team.html" class="nav-link text-navy-100 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Team</a>
+          <a href="tracks.html" class="nav-link text-gold-400 text-xs font-body uppercase tracking-widest">Tracks</a>
+          <a href="partners.html" class="nav-link text-white/60 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Partners</a>
+          <a href="contact.html" class="nav-link text-navy-100 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Contact</a>
+        </div>
+        <a href="register.html" class="hidden lg:block px-6 py-2.5 border border-gold-500/40 text-gold-400 text-xs uppercase tracking-[0.2em] font-body hover:bg-gold-500/10 hover:border-gold-400 transition-all duration-400 focus-visible:outline-2 focus-visible:outline-gold-400 focus-visible:outline-offset-2">Register</a>
+        <button id="mobileToggle" class="lg:hidden text-navy-100 hover:text-gold-400 transition-colors" aria-label="Menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="mobile-menu fixed inset-0 z-[60] bg-navy-800/98 backdrop-blur-xl flex flex-col items-center justify-center gap-8">
+    <button id="mobileClose" class="absolute top-6 right-6 text-navy-100 hover:text-gold-400 transition-colors" aria-label="Close">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+    <a href="index.html" class="text-navy-100 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Home</a>
+    <a href="about.html" class="text-navy-100 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">About</a>
+    <a href="team.html" class="text-navy-100 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Team</a>
+    <a href="tracks.html" class="text-gold-400 text-sm font-body uppercase tracking-[0.3em]">Tracks</a>
+    <a href="partners.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Partners</a>
+    <a href="contact.html" class="text-navy-100 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Contact</a>
+  </div>
+
+  <!-- Page Header -->
+  <section class="relative pt-32 pb-20 md:pt-40 md:pb-28">
+    <div class="relative z-10 max-w-6xl mx-auto px-6 lg:px-12">
+      <p class="font-arabic text-gold-500/50 text-base mb-3" dir="rtl">المسارات</p>
+      <p class="text-gold-500/60 text-xs uppercase tracking-[0.3em] font-body mb-4" id="scramble-tracks">Competition Tracks</p>
+      <h1 class="font-display text-5xl md:text-6xl lg:text-7xl text-white font-light" style="letter-spacing: -0.03em; line-height: 1.1;">
+        Three <span class="text-gold-400 italic">Disciplines</span>
+      </h1>
+      <p class="font-body text-navy-200/60 text-sm mt-6 max-w-xl">Each track represents a pillar of the Meridian Challenge. Participants are grouped across all three to form balanced, interdisciplinary teams.</p>
+    </div>
+  </section>
+
+  <!-- Track Navigation Tabs -->
+  <section class="relative py-6 border-b border-gold-500/10">
+    <div class="max-w-6xl mx-auto px-6 lg:px-12">
+      <div class="flex gap-10 md:gap-16 overflow-x-auto">
+        <button class="track-tab active text-xs uppercase tracking-[0.25em] font-body py-3 whitespace-nowrap" data-track="finance">Finance</button>
+        <button class="track-tab text-navy-200/60 text-xs uppercase tracking-[0.25em] font-body py-3 whitespace-nowrap" data-track="law">Law</button>
+        <button class="track-tab text-navy-200/60 text-xs uppercase tracking-[0.25em] font-body py-3 whitespace-nowrap" data-track="engineering">Engineering</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Track Content -->
+  <section class="relative py-20 md:py-32">
+    <div class="max-w-6xl mx-auto px-6 lg:px-12">
+
+      <!-- FINANCE -->
+      <div id="finance" class="track-content active">
+        <div class="fade-section visible grid lg:grid-cols-5 gap-12 lg:gap-16">
+          <!-- Left: Overview -->
+          <div class="lg:col-span-3">
+            <div class="flex items-center gap-4 mb-8">
+              <span class="font-display text-6xl text-gold-500/15">I</span>
+              <div>
+                <h2 class="font-display text-4xl md:text-5xl text-white font-light">Finance</h2>
+                <p class="font-arabic text-gold-500/40 text-sm mt-1" dir="rtl">المالية</p>
+              </div>
+            </div>
+            <div class="gold-line mb-8"></div>
+
+            <p class="font-body text-navy-200/80 leading-[1.8] text-sm mb-5">
+              The Finance track explores the rapidly evolving landscape of global capital markets, fintech innovation, and risk management. Participants with expertise in banking, investment analysis, financial engineering, and economic policy bring the quantitative rigour and strategic thinking essential to the Meridian Challenge.
+            </p>
+            <p class="font-body text-navy-200/80 leading-[1.8] text-sm mb-5">
+              From sovereign wealth strategy to decentralised finance, this track examines how financial systems can be redesigned to serve a more interconnected, resilient global economy. Workshop leaders include senior professionals from the DIFC, leading investment banks, and academic institutions renowned for quantitative finance.
+            </p>
+            <p class="font-body text-navy-200/80 leading-[1.8] text-sm mb-8">
+              During the competition, finance specialists are responsible for building viable business models, structuring capital, managing risk exposure, and presenting investment cases that withstand the scrutiny of international judges.
+            </p>
+
+            <!-- Key Topics -->
+            <p class="text-gold-500/60 text-xs uppercase tracking-[0.25em] font-body mb-4">Key Topics</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="topic-tag px-3 py-1.5 rounded-sm text-xs font-body text-navy-100/70">Capital Markets</span>
+              <span class="topic-tag px-3 py-1.5 rounded-sm text-xs font-body text-navy-100/70">Fintech &amp; DeFi</span>
+              <span class="topic-tag px-3 py-1.5 rounded-sm text-xs font-body text-navy-100/70">Risk Modelling</span>
+              <span class="topic-tag px-3 py-1.5 rounded-sm text-xs font-body text-navy-100/70">ESG &amp; Impact Investing</span>
+              <span class="topic-tag px-3 py-1.5 rounded-sm text-xs font-body text-navy-100/70">Sovereign Wealth</span>
+              <span class="topic-tag px-3 py-1.5 rounded-sm text-xs font-body text-navy-100/70">Islamic Finance</span>
+              <span class="topic-tag px-3 py-1.5 rounded-sm text-xs font-body text-navy-100/70">Venture Capital</span>
+              <span class="topic-tag px-3 py-1.5 rounded-sm text-xs font-body text-navy-100/70">Quantitative Analysis</span>
+            </div>
+          </div>
+
+          <!-- Right: Stats/Highlights -->
+          <div class="lg:col-span-2 space-y-5">
+            <div class="feature-card p-6 rounded-sm">
+              <span class="font-display text-4xl text-gold-400">8+</span>
+              <p class="text-navy-200/50 text-xs font-body mt-1 uppercase tracking-wider">Expert-Led Workshops</p>
+            </div>
+            <div class="feature-card p-6 rounded-sm">
+              <span class="font-display text-4xl text-gold-400">3</span>
+              <p class="text-navy-200/50 text-xs font-body mt-1 uppercase tracking-wider">Panel Discussions</p>
+            </div>
+            <div class="feature-card p-6 rounded-sm">
+              <span class="font-display text-4xl text-gold-400">5</span>
+              <p class="text-navy-200/50 text-xs font-body mt-1 uppercase tracking-wider">Competition Rounds</p>
+            </div>
+            <div class="feature-card p-6 rounded-sm">
+              <p class="text-gold-500/60 text-xs uppercase tracking-[0.2em] font-body mb-3">Track Lead</p>
+              <p class="font-display text-lg text-white">Omar Farouk, CFA</p>
+              <p class="text-navy-200/40 text-xs font-body mt-1">Managing Director, Sovereign Advisory</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LAW -->
+      <div id="law" class="track-content">
+        <div class="fade-section visible grid lg:grid-cols-5 gap-12 lg:gap-16">
+          <div class="lg:col-span-3">
+            <div class="flex items-center gap-4 mb-8">
+              <span class="font-display text-6xl text-gold-500/15">II</span>
+              <div>
+                <h2 class="font-display text-4xl md:text-5xl text-white font-light">Law</h2>
+                <p class="font-arabic text-gold-500/40 text-sm mt-1" dir="rtl">القانون</p>
+              </div>
+            </div>
+            <div class="gold-line mb-8"></div>
+
+            <p class="font-body text-navy-200/80 leading-[1.8] text-sm mb-5">
+              The Law track addresses the evolving regulatory landscape that governs international commerce, technology, and infrastructure. Participants with backgrounds in corporate law, international arbitration, intellectual property, and regulatory affairs provide the legal architecture that underpins every viable business solution.
+            </p>
+            <p class="font-body text-navy-200/80 leading-[1.8] text-sm mb-5">
+              In the context of the Meridian Challenge, legal specialists are tasked with navigating complex regulatory environments, ensuring compliance across jurisdictions, structuring corporate governance frameworks, and defending their team's proposals against adversarial questioning from the judging panel.
+            </p>
+            <p class="font-body text-navy-200/80 leading-[1.8] text-sm mb-8">
+              Workshops are led by practitioners from leading international law firms, the Dubai International Financial Centre Courts, and prominent legal academics specializing in cross-border regulatory frameworks.
+            </p>
+
+            <p class="text-gold-500/60 text-xs uppercase tracking-[0.25em] font-body mb-4">Key Topics</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="topic-tag px-3 py-1.5 rounded-sm text-xs font-body text-navy-100/70">International Arbitration</span>
+              <span class="topic-tag px-3 py-1.5 rounded-sm text-xs font-body text-navy-100/70">Regulatory Compliance</span>
+              <span class="topic-tag px-3 py-1.5 rounded-sm text-xs font-body text-navy-100/70">Intellectual Property</span>
+              <span class="topic-tag px-3 py-1.5 rounded-sm text-xs font-body text-navy-100/70">Corporate Governance</span>
+              <span class="topic-tag px-3 py-1.5 rounded-sm text-xs font-body text-navy-100/70">Commercial Law</span>
+              <span class="topic-tag px-3 py-1.5 rounded-sm text-xs font-body text-navy-100/70">Data Privacy &amp; AI Ethics</span>
+              <span class="topic-tag px-3 py-1.5 rounded-sm text-xs font-body text-navy-100/70">Cross-Border Litigation</span>
+              <span class="topic-tag px-3 py-1.5 rounded-sm text-xs font-body text-navy-100/70">Emerging Market Regulation</span>
+            </div>
+          </div>
+
+          <div class="lg:col-span-2 space-y-5">
+            <div class="feature-card p-6 rounded-sm">
+              <span class="font-display text-4xl text-gold-400">6+</span>
+              <p class="text-navy-200/50 text-xs font-body mt-1 uppercase tracking-wider">Expert-Led Workshops</p>
+            </div>
+            <div class="feature-card p-6 rounded-sm">
+              <span class="font-display text-4xl text-gold-400">4</span>
+              <p class="text-navy-200/50 text-xs font-body mt-1 uppercase tracking-wider">Moot Court Sessions</p>
+            </div>
+            <div class="feature-card p-6 rounded-sm">
+              <span class="font-display text-4xl text-gold-400">5</span>
+              <p class="text-navy-200/50 text-xs font-body mt-1 uppercase tracking-wider">Competition Rounds</p>
+            </div>
+            <div class="feature-card p-6 rounded-sm">
+              <p class="text-gold-500/60 text-xs uppercase tracking-[0.2em] font-body mb-3">Track Lead</p>
+              <p class="font-display text-lg text-white">James Whitfield, LLM</p>
+              <p class="text-navy-200/40 text-xs font-body mt-1">International Court of Justice, Former Associate</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ENGINEERING -->
+      <div id="engineering" class="track-content">
+        <div class="fade-section visible grid lg:grid-cols-5 gap-12 lg:gap-16">
+          <div class="lg:col-span-3">
+            <div class="flex items-center gap-4 mb-8">
+              <span class="font-display text-6xl text-gold-500/15">III</span>
+              <div>
+                <h2 class="font-display text-4xl md:text-5xl text-white font-light">Engineering</h2>
+                <p class="font-arabic text-gold-500/40 text-sm mt-1" dir="rtl">الهندسة</p>
+              </div>
+            </div>
+            <div class="gold-line mb-8"></div>
+
+            <p class="font-body text-navy-200/80 leading-[1.8] text-sm mb-5">
+              The Engineering track challenges participants to design, prototype, and present technical solutions to complex systemic problems. From sustainable infrastructure and smart city design to artificial intelligence and advanced manufacturing, engineers bring the technical feasibility and innovation mindset that transforms ideas into reality.
+            </p>
+            <p class="font-body text-navy-200/80 leading-[1.8] text-sm mb-5">
+              Within the Meridian Challenge, engineering specialists are responsible for the technical architecture of their team's pitch — demonstrating how proposed solutions can be built, scaled, and sustained. They must communicate complex technical concepts to a diverse judging panel, bridging the gap between engineering rigour and business viability.
+            </p>
+            <p class="font-body text-navy-200/80 leading-[1.8] text-sm mb-8">
+              Workshops feature leaders from world-class engineering firms, smart city development authorities, and university research labs at the cutting edge of sustainable technology and systems design.
+            </p>
+
+            <p class="text-gold-500/60 text-xs uppercase tracking-[0.25em] font-body mb-4">Key Topics</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="topic-tag px-3 py-1.5 rounded-sm text-xs font-body text-navy-100/70">Sustainable Infrastructure</span>
+              <span class="topic-tag px-3 py-1.5 rounded-sm text-xs font-body text-navy-100/70">AI &amp; Machine Learning</span>
+              <span class="topic-tag px-3 py-1.5 rounded-sm text-xs font-body text-navy-100/70">Smart City Design</span>
+              <span class="topic-tag px-3 py-1.5 rounded-sm text-xs font-body text-navy-100/70">Systems Engineering</span>
+              <span class="topic-tag px-3 py-1.5 rounded-sm text-xs font-body text-navy-100/70">Renewable Energy</span>
+              <span class="topic-tag px-3 py-1.5 rounded-sm text-xs font-body text-navy-100/70">Robotics &amp; Automation</span>
+              <span class="topic-tag px-3 py-1.5 rounded-sm text-xs font-body text-navy-100/70">Advanced Manufacturing</span>
+              <span class="topic-tag px-3 py-1.5 rounded-sm text-xs font-body text-navy-100/70">Water &amp; Resource Management</span>
+            </div>
+          </div>
+
+          <div class="lg:col-span-2 space-y-5">
+            <div class="feature-card p-6 rounded-sm">
+              <span class="font-display text-4xl text-gold-400">10+</span>
+              <p class="text-navy-200/50 text-xs font-body mt-1 uppercase tracking-wider">Technical Workshops</p>
+            </div>
+            <div class="feature-card p-6 rounded-sm">
+              <span class="font-display text-4xl text-gold-400">2</span>
+              <p class="text-navy-200/50 text-xs font-body mt-1 uppercase tracking-wider">Design Sprints</p>
+            </div>
+            <div class="feature-card p-6 rounded-sm">
+              <span class="font-display text-4xl text-gold-400">5</span>
+              <p class="text-navy-200/50 text-xs font-body mt-1 uppercase tracking-wider">Competition Rounds</p>
+            </div>
+            <div class="feature-card p-6 rounded-sm">
+              <p class="text-gold-500/60 text-xs uppercase tracking-[0.2em] font-body mb-3">Track Lead</p>
+              <p class="font-display text-lg text-white">Eng. Fatima Al-Mansoori</p>
+              <p class="text-navy-200/40 text-xs font-body mt-1">Principal Engineer, Smart City Development</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- How Teams Work -->
+  <section class="relative py-20 md:py-28">
+    <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold-500/20 to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-navy-900 via-navy-800/20 to-navy-900"></div>
+
+    <div class="relative max-w-4xl mx-auto px-6 lg:px-12">
+      <div class="fade-section text-center">
+        <p class="text-gold-500/60 text-xs uppercase tracking-[0.3em] font-body mb-4">The Meridian Challenge</p>
+        <h2 class="font-display text-3xl md:text-4xl text-white font-light mb-6" style="letter-spacing: -0.02em;">
+          How <span class="text-gold-400 italic">Teams</span> Are Formed
+        </h2>
+        <div class="gold-line mx-auto mb-8"></div>
+        <p class="font-body text-navy-200/70 text-sm leading-[1.8] mb-6">
+          Each team in the Meridian Challenge is composed of participants from all three tracks — finance, law, and engineering. Teams are strategically assembled to ensure a balance of expertise, creating a microcosm of the real-world collaboration needed to solve complex, multi-dimensional problems.
+        </p>
+        <p class="font-body text-navy-200/70 text-sm leading-[1.8] mb-6">
+          Teams will face a series of escalating challenges: initial problem analysis, solution design, crisis pivots, and final presentations. Judges evaluate not only the quality of the solution but the team's ability to integrate perspectives, communicate across disciplines, and perform under pressure.
+        </p>
+        <p class="font-body text-navy-200/50 text-sm leading-[1.8] italic">
+          "The Meridian is not where one discipline ends — it is where they all converge."
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="relative py-16 border-t border-gold-500/10">
+    <div class="max-w-6xl mx-auto px-6 lg:px-12">
+      <div class="grid md:grid-cols-3 gap-12">
+        <div>
+          <img src="brand assets/dmf posts-2/FINAL!!!!.png" alt="DMF" class="h-8 opacity-70 mb-4">
+          <p class="font-body text-navy-200/40 text-xs leading-relaxed">Dubai Meridian Forum &copy; 2026.<br>All rights reserved.</p>
+          <p class="font-arabic text-gold-500/30 text-sm mt-3" dir="rtl">منتدى دبي ميريديان</p>
+        </div>
+        <div>
+          <p class="text-gold-500/60 text-xs uppercase tracking-[0.2em] font-body mb-4">Navigate</p>
+          <div class="flex flex-col gap-2">
+            <a href="index.html" class="text-navy-200/50 text-sm font-body hover:text-gold-400 transition-colors duration-300">Home</a>
+            <a href="about.html" class="text-navy-200/50 text-sm font-body hover:text-gold-400 transition-colors duration-300">About</a>
+            <a href="team.html" class="text-navy-200/50 text-sm font-body hover:text-gold-400 transition-colors duration-300">Team</a>
+            <a href="partners.html" class="text-navy-200/50 text-sm font-body hover:text-gold-400 transition-colors duration-300">Partners</a>
+            <a href="media.html" class="text-navy-200/50 text-sm font-body hover:text-gold-400 transition-colors duration-300">Media</a>
+            <a href="register.html" class="text-navy-200/50 text-sm font-body hover:text-gold-400 transition-colors duration-300">Register</a>
+            <a href="contact.html" class="text-navy-200/50 text-sm font-body hover:text-gold-400 transition-colors duration-300">Contact</a>
+          </div>
+        </div>
+        <div>
+          <p class="text-gold-500/60 text-xs uppercase tracking-[0.2em] font-body mb-4">Contact</p>
+          <p class="text-navy-200/50 text-sm font-body leading-relaxed">Aspect Tower, Office No. 2206<br>Zone B, Bay Avenue<br>Business Bay, Dubai</p>
+          <a href="mailto:info@dubaimeridianforum.com" class="text-gold-500/50 text-sm font-body mt-3 inline-block hover:text-gold-400 transition-colors duration-300">info@dubaimeridianforum.com</a>
+        </div>
+      </div>
+      <div class="mt-12 pt-8 border-t border-gold-500/5 text-center">
+        <p class="text-navy-200/30 text-xs font-body tracking-wide">Dubai Meridian Forum &middot; Business Bay, Dubai, UAE</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) { nav.style.background = 'rgba(6,6,22,0.95)'; nav.style.backdropFilter = 'blur(20px)'; nav.style.borderBottom = '1px solid rgba(201,169,110,0.08)'; }
+      else { nav.style.background = 'transparent'; nav.style.backdropFilter = 'none'; nav.style.borderBottom = 'none'; }
+    });
+
+    // Mobile menu
+    document.getElementById('mobileToggle').addEventListener('click', () => document.getElementById('mobileMenu').classList.add('open'));
+    document.getElementById('mobileClose').addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open'));
+
+    // Track tabs
+    const tabs = document.querySelectorAll('.track-tab');
+    const contents = document.querySelectorAll('.track-content');
+
+    // Handle hash navigation
+    function activateTrack(trackId) {
+      tabs.forEach(t => t.classList.remove('active'));
+      contents.forEach(c => c.classList.remove('active'));
+      const targetTab = document.querySelector(`[data-track="${trackId}"]`);
+      const targetContent = document.getElementById(trackId);
+      if (targetTab && targetContent) {
+        targetTab.classList.add('active');
+        targetContent.classList.add('active');
+      }
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const track = tab.dataset.track;
+        activateTrack(track);
+        history.replaceState(null, '', `#${track}`);
+      });
+    });
+
+    // Check hash on load
+    if (window.location.hash) {
+      const hash = window.location.hash.substring(1);
+      if (['finance', 'law', 'engineering'].includes(hash)) {
+        activateTrack(hash);
+      }
+    }
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.15 });
+    document.querySelectorAll('.fade-section').forEach(el => observer.observe(el));
+
+    // ── SpecialText scramble ──────────────────────────────────────────────────────
+    (function(){
+      const CHARS='_!X$0-+*#';
+      function rndChar(prev){let c;do{c=CHARS[Math.floor(Math.random()*CHARS.length)];}while(c===prev);return c;}
+      class SpecialText{
+        constructor(el,{speed=20,once=true}={}){
+          this.el=el;this.text=el.textContent;this.speed=speed;
+          this.iv=null;this.phase='p1';this.step=0;this.done=false;
+          const io=new IntersectionObserver(entries=>{
+            entries.forEach(e=>{if(e.isIntersecting&&!this.done){this._start();if(once)io.unobserve(el);}});
+          },{rootMargin:'-80px'});
+          io.observe(el);
+        }
+        _start(){
+          this.el.textContent='\u00A0'.repeat(this.text.length);
+          this.phase='p1';this.step=0;
+          if(this.iv)clearInterval(this.iv);
+          this.iv=setInterval(()=>this.phase==='p1'?this._p1():this._p2(),this.speed);
+        }
+        _p1(){
+          const max=this.text.length*2,len=Math.min(this.step+1,this.text.length);
+          const c=[];for(let i=0;i<len;i++)c.push(rndChar(c[i-1]));
+          for(let i=len;i<this.text.length;i++)c.push('\u00A0');
+          this.el.textContent=c.join('');
+          if(this.step<max-1){this.step++;}else{this.phase='p2';this.step=0;}
+        }
+        _p2(){
+          const rev=Math.floor(this.step/2),c=[];
+          for(let i=0;i<rev&&i<this.text.length;i++)c.push(this.text[i]);
+          if(rev<this.text.length)c.push(this.step%2===0?'_':rndChar());
+          while(c.length<this.text.length)c.push(rndChar());
+          this.el.textContent=c.join('');
+          if(this.step<this.text.length*2-1){this.step++;}
+          else{this.el.textContent=this.text;clearInterval(this.iv);this.done=true;}
+        }
+      }
+      const el=document.getElementById('scramble-tracks');
+      if(el)new SpecialText(el,{speed:18});
+    })();
+  </script>
+</body>
+</html>

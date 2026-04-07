@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Media — Dubai Meridian Forum</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Raleway:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: { 50:'#e8e8f0',100:'#c5c5d9',200:'#9494b5',300:'#5e5e88',400:'#2d2d5e',500:'#14143a',600:'#0d0d2b',700:'#09091f',800:'#060616',900:'#03030b' },
+            gold: { 400:'#d4a44e',500:'#c9a96e' },
+          },
+          fontFamily: {
+            display:['"Cormorant Garamond"','serif'],
+            body:['"Raleway"','sans-serif'],
+            arabic:['"Amiri"','serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{background:#060616;color:#e8e8f0;font-family:'Raleway',sans-serif;overflow-x:hidden;}
+
+    .grain::after{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:0.5;}
+
+    .nav-link{position:relative;letter-spacing:0.15em;}
+    .nav-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:#c9a96e;transition:width 0.4s cubic-bezier(0.25,0.46,0.45,0.94);}
+    .nav-link:hover::after{width:100%;}
+    .gold-line{width:60px;height:1px;background:linear-gradient(90deg,#c9a96e,transparent);}
+    .fade-up{opacity:0;transform:translateY(40px);transition:opacity 0.8s ease,transform 0.8s ease;}
+    .fade-up.visible{opacity:1;transform:translateY(0);}
+    ::-webkit-scrollbar{width:6px;}
+    ::-webkit-scrollbar-track{background:#060616;}
+    ::-webkit-scrollbar-thumb{background:rgba(201,169,110,0.3);border-radius:3px;}
+    .mobile-menu{transform:translateX(100%);transition:transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);}
+    .mobile-menu.open{transform:translateX(0);}
+    .card{background:linear-gradient(145deg,rgba(20,20,58,0.6),rgba(9,9,31,0.8));border:1px solid rgba(201,169,110,0.08);transition:border-color 0.4s ease,transform 0.4s ease,box-shadow 0.4s ease;}
+    .card:hover{border-color:rgba(201,169,110,0.25);transform:translateY(-4px);box-shadow:0 20px 60px rgba(201,169,110,0.06),0 8px 24px rgba(0,0,0,0.3);}
+
+    /* Video placeholder */
+    .video-placeholder{
+      position:relative;background:#000;border:1px solid rgba(201,169,110,0.15);
+      aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;
+      cursor:pointer;overflow:hidden;
+      transition:border-color 0.4s ease;
+    }
+    .video-placeholder:hover{border-color:rgba(201,169,110,0.35);}
+    .video-placeholder::before{
+      content:'';position:absolute;inset:0;
+      background:radial-gradient(ellipse at center,rgba(201,169,110,0.04) 0%,transparent 70%);
+    }
+    .play-btn{
+      width:72px;height:72px;border-radius:50%;
+      border:1px solid rgba(201,169,110,0.3);
+      display:flex;align-items:center;justify-content:center;
+      background:rgba(201,169,110,0.06);
+      transition:background 0.3s ease,border-color 0.3s ease,transform 0.3s ease;
+      position:relative;z-index:1;
+    }
+    .video-placeholder:hover .play-btn{background:rgba(201,169,110,0.12);border-color:rgba(201,169,110,0.5);transform:scale(1.05);}
+
+    /* Gallery tiles */
+    .gallery-tile{
+      background:linear-gradient(145deg,rgba(9,9,31,0.8),rgba(3,3,11,0.9));
+      border:1px solid rgba(201,169,110,0.06);
+      overflow:hidden;position:relative;
+      transition:border-color 0.4s ease,transform 0.4s ease;
+      cursor:pointer;
+    }
+    .gallery-tile::after{
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(to top,rgba(0,0,0,0.6) 0%,transparent 50%);
+    }
+    .gallery-tile:hover{border-color:rgba(201,169,110,0.3);transform:scale(1.02);}
+    .gallery-tile .tile-label{
+      position:absolute;bottom:0;left:0;right:0;padding:16px;z-index:1;
+      font-family:'Raleway',sans-serif;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;
+      color:rgba(201,169,110,0.7);
+    }
+    /* Noise texture inside tiles */
+    .gallery-tile .tile-bg{
+      width:100%;height:100%;
+      background-image:
+        radial-gradient(ellipse at 30% 40%,rgba(201,169,110,0.04) 0%,transparent 60%),
+        radial-gradient(ellipse at 70% 70%,rgba(20,20,58,0.8) 0%,transparent 70%);
+    }
+  </style>
+</head>
+<body class="grain">
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full z-50 transition-all duration-500" id="mainNav">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="flex items-center justify-between h-20">
+        <a href="index.html" class="flex items-center group">
+          <img src="5.png" alt="DMF" class="h-10 opacity-90 group-hover:opacity-100 transition-opacity duration-300" style="mix-blend-mode:screen;filter:brightness(1.6) saturate(0.8)">
+        </a>
+        <div class="hidden lg:flex items-center gap-10">
+          <a href="index.html" class="nav-link text-navy-100 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Home</a>
+          <a href="about.html" class="nav-link text-navy-100 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">About</a>
+          <a href="team.html" class="nav-link text-navy-100 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Team</a>
+          <a href="tracks.html" class="nav-link text-navy-100 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Tracks</a>
+          <a href="partners.html" class="nav-link text-white/60 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Partners</a>
+          <a href="contact.html" class="nav-link text-navy-100 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Contact</a>
+        </div>
+        <a href="register.html" class="hidden lg:block px-6 py-2.5 border border-gold-500/40 text-gold-400 text-xs uppercase tracking-[0.2em] font-body hover:bg-gold-500/10 hover:border-gold-400 transition-all duration-300">Register</a>
+        <button id="mobileToggle" class="lg:hidden text-navy-100 hover:text-gold-400 transition-colors" aria-label="Menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="mobile-menu fixed inset-0 z-[60] bg-black/98 backdrop-blur-xl flex flex-col items-center justify-center gap-8">
+    <button id="mobileClose" class="absolute top-6 right-6 text-white/60 hover:text-gold-400 transition-colors" aria-label="Close">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+    <a href="index.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Home</a>
+    <a href="about.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">About</a>
+    <a href="team.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Team</a>
+    <a href="tracks.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Tracks</a>
+    <a href="partners.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Partners</a>
+    <a href="contact.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Contact</a>
+    <a href="register.html" class="text-gold-400 text-sm font-body uppercase tracking-[0.3em] border border-gold-500/30 px-6 py-2">Register</a>
+  </div>
+
+  <!-- Page Header -->
+  <section class="relative pt-32 pb-20 md:pt-40 md:pb-28">
+    <div class="relative z-10 max-w-6xl mx-auto px-6 lg:px-12">
+      <p class="font-arabic text-gold-500/50 text-base mb-3" dir="rtl">الإعلام</p>
+      <p class="scramble-text text-gold-500/60 text-xs uppercase tracking-[0.3em] font-body mb-4">Press &amp; Media</p>
+      <h1 class="font-display text-5xl md:text-6xl lg:text-7xl text-white font-light" style="letter-spacing:-0.03em;line-height:1.1;">
+        The Forum<br><span class="text-gold-400 italic">On Record</span>
+      </h1>
+    </div>
+  </section>
+
+  <!-- Announcement Reel -->
+  <section class="py-12 md:py-20">
+    <div class="max-w-4xl mx-auto px-6 lg:px-12 fade-up">
+      <div class="video-placeholder rounded-sm max-w-3xl mx-auto">
+        <div class="tile-bg absolute inset-0"></div>
+        <div class="play-btn">
+          <svg class="w-7 h-7 text-gold-400 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+      </div>
+      <div class="mt-5 text-center">
+        <p class="font-display text-lg text-white mb-2">Official Announcement — Dubai Meridian Forum 2026</p>
+        <p class="font-body text-white/40 text-sm">Video content coming soon. Follow our channels for the latest updates.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="w-full h-px bg-gradient-to-r from-transparent via-gold-500/20 to-transparent"></div>
+
+  <!-- Photo Gallery -->
+  <section class="py-20 md:py-32">
+    <div class="max-w-6xl mx-auto px-6 lg:px-12">
+      <div class="fade-up text-center mb-12">
+        <p class="scramble-text text-gold-500/60 text-xs uppercase tracking-[0.3em] font-body mb-4">Gallery</p>
+        <h2 class="font-display text-4xl md:text-5xl text-white font-light" style="letter-spacing:-0.02em;">
+          Behind <span class="text-gold-400 italic">The Forum</span>
+        </h2>
+      </div>
+
+      <!-- Masonry grid — alternating heights via CSS -->
+      <div class="fade-up grid grid-cols-2 md:grid-cols-3 gap-3" id="galleryGrid">
+        <div class="gallery-tile rounded-sm" style="height:220px;">
+          <div class="tile-bg" style="height:100%;background:linear-gradient(135deg,rgba(20,20,58,0.9),rgba(9,9,31,1));">
+            <div style="width:100%;height:100%;background:radial-gradient(ellipse at 40% 30%,rgba(201,169,110,0.05),transparent 60%);"></div>
+          </div>
+          <span class="tile-label">Opening Ceremony</span>
+        </div>
+        <div class="gallery-tile rounded-sm" style="height:300px;">
+          <div class="tile-bg" style="height:100%;background:linear-gradient(145deg,rgba(9,9,31,0.95),rgba(3,3,11,1));">
+            <div style="width:100%;height:100%;background:radial-gradient(ellipse at 60% 50%,rgba(201,169,110,0.04),transparent 55%);"></div>
+          </div>
+          <span class="tile-label">Workshop Sessions</span>
+        </div>
+        <div class="gallery-tile rounded-sm" style="height:220px;">
+          <div class="tile-bg" style="height:100%;background:linear-gradient(155deg,rgba(20,20,58,0.85),rgba(9,9,31,1));">
+            <div style="width:100%;height:100%;background:radial-gradient(ellipse at 30% 60%,rgba(201,169,110,0.06),transparent 50%);"></div>
+          </div>
+          <span class="tile-label">The Meridian Challenge</span>
+        </div>
+        <div class="gallery-tile rounded-sm" style="height:300px;">
+          <div class="tile-bg" style="height:100%;background:linear-gradient(125deg,rgba(9,9,31,1),rgba(20,20,58,0.8));">
+            <div style="width:100%;height:100%;background:radial-gradient(ellipse at 70% 40%,rgba(201,169,110,0.05),transparent 60%);"></div>
+          </div>
+          <span class="tile-label">Networking Gala</span>
+        </div>
+        <div class="gallery-tile rounded-sm" style="height:220px;">
+          <div class="tile-bg" style="height:100%;background:linear-gradient(135deg,rgba(3,3,11,1),rgba(20,20,58,0.7));">
+            <div style="width:100%;height:100%;background:radial-gradient(ellipse at 50% 70%,rgba(201,169,110,0.04),transparent 55%);"></div>
+          </div>
+          <span class="tile-label">Delegate Portraits</span>
+        </div>
+        <div class="gallery-tile rounded-sm" style="height:300px;">
+          <div class="tile-bg" style="height:100%;background:linear-gradient(165deg,rgba(20,20,58,0.9),rgba(3,3,11,1));">
+            <div style="width:100%;height:100%;background:radial-gradient(ellipse at 30% 30%,rgba(201,169,110,0.06),transparent 50%);"></div>
+          </div>
+          <span class="tile-label">Dubai Venue</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="w-full h-px bg-gradient-to-r from-transparent via-gold-500/20 to-transparent"></div>
+
+  <!-- Press Kit -->
+  <section class="py-20 md:py-28">
+    <div class="max-w-6xl mx-auto px-6 lg:px-12">
+      <div class="fade-up grid lg:grid-cols-2 gap-16 items-start">
+        <div>
+          <p class="scramble-text text-gold-500/60 text-xs uppercase tracking-[0.3em] font-body mb-4">Press Resources</p>
+          <h2 class="font-display text-4xl md:text-5xl text-white font-light mb-6" style="letter-spacing:-0.02em;">
+            Press &amp; Media <span class="text-gold-400 italic">Resources</span>
+          </h2>
+          <div class="gold-line mb-8"></div>
+          <p class="font-body text-white/50 text-sm leading-relaxed mb-6">
+            Access the official DMF 2026 press kit including high-resolution logos, event descriptions, key imagery, delegate statistics, and background on the Dubai Meridian Forum's mission and structure.
+          </p>
+          <p class="font-body text-white/40 text-sm leading-relaxed mb-8">
+            Media accreditation requests and interview enquiries are welcome. Please contact our Director of Public Relations to discuss coverage opportunities.
+          </p>
+          <a href="contact.html" class="inline-flex items-center gap-3 px-8 py-3 border border-gold-500/40 text-gold-400 text-xs uppercase tracking-[0.2em] font-body hover:bg-gold-500/10 hover:border-gold-400 transition-all duration-300">
+            Request Press Kit
+            <span>→</span>
+          </a>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-2 gap-5">
+          <div class="card p-6 rounded-sm">
+            <span class="font-display text-3xl text-gold-400 block mb-1">300–600</span>
+            <p class="text-white/40 text-xs font-body uppercase tracking-wider">Delegates</p>
+          </div>
+          <div class="card p-6 rounded-sm">
+            <span class="font-display text-3xl text-gold-400 block mb-1">3</span>
+            <p class="text-white/40 text-xs font-body uppercase tracking-wider">Industry Tracks</p>
+          </div>
+          <div class="card p-6 rounded-sm">
+            <span class="font-display text-3xl text-gold-400 block mb-1">5</span>
+            <p class="text-white/40 text-xs font-body uppercase tracking-wider">Days</p>
+          </div>
+          <div class="card p-6 rounded-sm">
+            <span class="font-display text-3xl text-gold-400 block mb-1">$35k</span>
+            <p class="text-white/40 text-xs font-body uppercase tracking-wider">Prize Pool</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="w-full h-px bg-gradient-to-r from-transparent via-gold-500/20 to-transparent"></div>
+
+  <!-- Follow Us -->
+  <section class="py-16 md:py-20">
+    <div class="max-w-xl mx-auto px-6 text-center fade-up">
+      <p class="text-gold-500/60 text-xs uppercase tracking-[0.3em] font-body mb-4">Stay Updated</p>
+      <h2 class="font-display text-3xl text-white font-light mb-3" style="letter-spacing:-0.02em;">
+        Follow <span class="text-gold-400 italic">Our Journey</span>
+      </h2>
+      <p class="font-body text-white/40 text-sm mb-6">@dubaimeridianforum</p>
+      <a href="https://www.instagram.com/dubaimeridianforum" target="_blank" rel="noopener" class="inline-flex items-center gap-3 px-8 py-3 border border-gold-500/30 text-gold-400 text-xs uppercase tracking-[0.2em] font-body hover:bg-gold-500/8 hover:border-gold-400 transition-all duration-300">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Follow on Instagram
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-16 border-t border-white/5">
+    <div class="max-w-6xl mx-auto px-6 lg:px-12">
+      <div class="grid md:grid-cols-3 gap-12">
+        <div>
+          <img src="5.png" alt="DMF" class="h-8 opacity-60 mb-4" style="mix-blend-mode:screen;filter:brightness(1.6) saturate(0.8)">
+          <p class="font-body text-white/30 text-xs leading-relaxed">Dubai Meridian Forum &copy; 2026.<br>All rights reserved.</p>
+          <p class="font-arabic text-gold-500/25 text-sm mt-3" dir="rtl">منتدى دبي ميريديان</p>
+        </div>
+        <div>
+          <p class="text-gold-500/50 text-xs uppercase tracking-[0.2em] font-body mb-4">Navigate</p>
+          <div class="flex flex-col gap-2">
+            <a href="index.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">Home</a>
+            <a href="about.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">About</a>
+            <a href="team.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">Team</a>
+            <a href="tracks.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">Tracks</a>
+            <a href="partners.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">Partners</a>
+            <a href="register.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">Register</a>
+            <a href="contact.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">Contact</a>
+          </div>
+        </div>
+        <div>
+          <p class="text-gold-500/50 text-xs uppercase tracking-[0.2em] font-body mb-4">Contact</p>
+          <p class="text-white/30 text-sm font-body leading-relaxed">Aspect Tower, Office No. 2206<br>Zone B, Bay Avenue<br>Business Bay, Dubai</p>
+          <a href="mailto:info@dubaimeridianforum.com" class="text-gold-500/40 text-sm font-body mt-3 inline-block hover:text-gold-400 transition-colors duration-300">info@dubaimeridianforum.com</a>
+        </div>
+      </div>
+      <div class="mt-12 pt-8 border-t border-white/5 text-center">
+        <p class="text-white/20 text-xs font-body tracking-wide">Dubai Meridian Forum &middot; Business Bay, Dubai, UAE</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) { nav.style.background='rgba(6,6,22,0.96)';nav.style.backdropFilter='blur(20px)';nav.style.borderBottom='1px solid rgba(201,169,110,0.08)'; }
+      else { nav.style.background='transparent';nav.style.backdropFilter='none';nav.style.borderBottom='none'; }
+    });
+    document.getElementById('mobileToggle').addEventListener('click',()=>document.getElementById('mobileMenu').classList.add('open'));
+    document.getElementById('mobileClose').addEventListener('click',()=>document.getElementById('mobileMenu').classList.remove('open'));
+    const obs = new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:0.1});
+    document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+
+    class ScrambleText {
+      constructor(el) {
+        this.el=el;this.original=el.textContent;this.chars='_!X$0-+*#';
+        const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){this.animate();io.unobserve(this.el);}});},{threshold:0.3});
+        io.observe(this.el);
+      }
+      animate(){
+        const text=this.original,len=text.length;let frame=0;const total=len*3;
+        const iv=setInterval(()=>{
+          let out='';
+          if(frame<len){for(let i=0;i<=frame;i++)out+=this.chars[Math.floor(Math.random()*this.chars.length)];}
+          else{const rev=frame-len;out=text.slice(0,rev);for(let i=rev;i<len;i++)out+=this.chars[Math.floor(Math.random()*this.chars.length)];}
+          this.el.textContent=out;frame++;if(frame>total){this.el.textContent=text;clearInterval(iv);}
+        },20);
+      }
+    }
+    document.querySelectorAll('.scramble-text').forEach(el=>new ScrambleText(el));
+  </script>
+</body>
+</html>

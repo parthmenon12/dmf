@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register — Dubai Meridian Forum</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Raleway:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: { 50:'#e8e8f0',100:'#c5c5d9',200:'#9494b5',300:'#5e5e88',400:'#2d2d5e',500:'#14143a',600:'#0d0d2b',700:'#09091f',800:'#060616',900:'#03030b' },
+            gold: { 400:'#d4a44e',500:'#c9a96e' },
+          },
+          fontFamily: {
+            display:['"Cormorant Garamond"','serif'],
+            body:['"Raleway"','sans-serif'],
+            arabic:['"Amiri"','serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{background:#060616;color:#e8e8f0;font-family:'Raleway',sans-serif;overflow-x:hidden;}
+
+    .grain::after{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:0.5;}
+
+    .nav-link{position:relative;letter-spacing:0.15em;}
+    .nav-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:#c9a96e;transition:width 0.4s cubic-bezier(0.25,0.46,0.45,0.94);}
+    .nav-link:hover::after{width:100%;}
+    .gold-line{width:60px;height:1px;background:linear-gradient(90deg,#c9a96e,transparent);}
+    .fade-up{opacity:0;transform:translateY(40px);transition:opacity 0.8s ease,transform 0.8s ease;}
+    .fade-up.visible{opacity:1;transform:translateY(0);}
+    ::-webkit-scrollbar{width:6px;}
+    ::-webkit-scrollbar-track{background:#060616;}
+    ::-webkit-scrollbar-thumb{background:rgba(201,169,110,0.3);border-radius:3px;}
+    .mobile-menu{transform:translateX(100%);transition:transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);}
+    .mobile-menu.open{transform:translateX(0);}
+    .card{background:linear-gradient(145deg,rgba(20,20,58,0.6),rgba(9,9,31,0.8));border:1px solid rgba(201,169,110,0.08);transition:border-color 0.4s ease,transform 0.4s ease,box-shadow 0.4s ease;}
+    .card:hover{border-color:rgba(201,169,110,0.25);transform:translateY(-4px);box-shadow:0 20px 60px rgba(201,169,110,0.06),0 8px 24px rgba(0,0,0,0.3);}
+
+    /* HeroWave */
+    #wave-hero{position:relative;width:100%;height:100vh;overflow:hidden;}
+    #wave-canvas{position:absolute;top:0;left:0;width:100%;height:100%;display:block;}
+    .wave-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.6);}
+    .wave-content{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1.5rem;}
+
+    @keyframes scrollBounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(6px);}}
+    .scroll-bounce{animation:scrollBounce 2s ease-in-out infinite;}
+
+    /* Countdown in register hero */
+    .reg-cd-card{
+      background:linear-gradient(to bottom,rgba(255,255,255,0.06),rgba(255,255,255,0.02));
+      border:1px solid rgba(201,169,110,0.15);
+      backdrop-filter:blur(16px);
+    }
+
+    /* ── Feature Carousel ─────────────────────────────────────── */
+    .fc-card{
+      position:relative;
+      background:linear-gradient(145deg,rgba(20,20,58,0.5),rgba(9,9,31,0.85));
+      border:1px solid rgba(201,169,110,0.12);
+      border-radius:20px;overflow:hidden;
+      transition:border-color 0.4s ease;
+    }
+    .fc-card::before{
+      content:'';position:absolute;inset:0;border-radius:inherit;
+      background:radial-gradient(600px circle at var(--mx,-9999px) var(--my,-9999px),rgba(201,169,110,0.07) 0%,transparent 60%);
+      pointer-events:none;z-index:0;
+    }
+    .fc-card:hover{border-color:rgba(201,169,110,0.28);}
+    .fc-inner{
+      position:relative;z-index:1;
+      display:grid;grid-template-columns:2fr 3fr;gap:48px;
+      align-items:center;padding:40px;min-height:460px;
+    }
+    @media(max-width:768px){
+      .fc-inner{grid-template-columns:1fr;min-height:auto;padding:28px;gap:28px;}
+      .fc-visual{height:220px!important;}
+    }
+    .fc-visual{position:relative;height:320px;overflow:visible;}
+
+    /* Text enter animation */
+    @keyframes fcTextIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes fcSlideLeft{from{opacity:0;transform:translateX(-20px);}to{opacity:1;transform:translateX(0);}}
+    @keyframes fcSlideRight{from{opacity:0;transform:translateX(20px);}to{opacity:1;transform:translateX(0);}}
+    @keyframes fcFadeScale{from{opacity:0;transform:scale(0.94);}to{opacity:1;transform:scale(1);}}
+
+    .fc-anim-label{animation:fcSlideLeft 0.3s cubic-bezier(0.22,1,0.36,1) 0.05s both;}
+    .fc-anim-title{animation:fcSlideLeft 0.3s cubic-bezier(0.22,1,0.36,1) 0.10s both;}
+    .fc-anim-line {animation:fcSlideLeft 0.3s cubic-bezier(0.22,1,0.36,1) 0.13s both;}
+    .fc-anim-desc {animation:fcSlideLeft 0.3s cubic-bezier(0.22,1,0.36,1) 0.16s both;}
+    .fc-anim-fadescale{animation:fcFadeScale 0.5s cubic-bezier(0.22,1,0.36,1) both;}
+    .fc-anim-fadescale-d{animation:fcFadeScale 0.5s cubic-bezier(0.22,1,0.36,1) 0.1s both;}
+    .fc-anim-slide-l{animation:fcSlideLeft 0.45s cubic-bezier(0.22,1,0.36,1) both;}
+    .fc-anim-slide-r{animation:fcSlideRight 0.45s cubic-bezier(0.22,1,0.36,1) 0.1s both;}
+
+    /* Pill nav */
+    .fc-nav{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:28px;}
+    .fc-pill{
+      display:flex;align-items:center;gap:8px;
+      padding:6px 14px;border-radius:999px;border:none;outline:none;
+      font-family:'Raleway',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.05em;
+      cursor:pointer;
+      transition:background 0.3s ease,color 0.3s ease,transform 0.25s ease,box-shadow 0.3s ease;
+      transform:scale(0.95);
+    }
+    .fc-pill.is-active{background:#c9a96e;color:#060616;transform:scale(1);box-shadow:0 4px 20px rgba(201,169,110,0.25);}
+    .fc-pill.is-done{background:rgba(201,169,110,0.15);color:#c9a96e;transform:scale(0.95);}
+    .fc-pill.is-idle{background:rgba(148,148,181,0.1);color:rgba(148,148,181,0.5);transform:scale(0.95);}
+    .fc-pill:hover:not(.is-active){background:rgba(201,169,110,0.12);color:rgba(201,169,110,0.8);}
+    .fc-pill-num{
+      width:20px;height:20px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      font-size:10px;font-weight:600;flex-shrink:0;
+    }
+    .fc-pill.is-active .fc-pill-num{background:rgba(6,6,22,0.25);color:#060616;}
+    .fc-pill.is-done .fc-pill-num{background:#c9a96e;color:#060616;}
+    .fc-pill.is-idle .fc-pill-num{background:rgba(148,148,181,0.15);}
+
+    /* Mock UI cards inside visual panel */
+    .mock-card{
+      position:absolute;
+      background:linear-gradient(145deg,rgba(13,13,43,0.92),rgba(6,6,22,0.97));
+      border:1px solid rgba(201,169,110,0.14);border-radius:10px;
+      box-shadow:0 20px 60px rgba(0,0,0,0.6),0 4px 16px rgba(0,0,0,0.4);
+      overflow:hidden;
+    }
+  </style>
+</head>
+<body class="grain">
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full z-50 transition-all duration-500" id="mainNav">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="flex items-center justify-between h-20">
+        <a href="index.html" class="flex items-center group">
+          <img src="5.png" alt="DMF" class="h-10 opacity-90 group-hover:opacity-100 transition-opacity duration-300" style="mix-blend-mode:screen;filter:brightness(1.6) saturate(0.8)">
+        </a>
+        <div class="hidden lg:flex items-center gap-10">
+          <a href="index.html" class="nav-link text-navy-100 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Home</a>
+          <a href="about.html" class="nav-link text-navy-100 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">About</a>
+          <a href="team.html" class="nav-link text-navy-100 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Team</a>
+          <a href="tracks.html" class="nav-link text-navy-100 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Tracks</a>
+          <a href="partners.html" class="nav-link text-white/60 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Partners</a>
+          <a href="contact.html" class="nav-link text-navy-100 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Contact</a>
+        </div>
+        <a href="register.html" class="hidden lg:block px-6 py-2.5 border border-gold-400 text-gold-400 text-xs uppercase tracking-[0.2em] font-body bg-gold-500/8">Register</a>
+        <button id="mobileToggle" class="lg:hidden text-navy-100 hover:text-gold-400 transition-colors" aria-label="Menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="mobile-menu fixed inset-0 z-[60] bg-black/98 backdrop-blur-xl flex flex-col items-center justify-center gap-8">
+    <button id="mobileClose" class="absolute top-6 right-6 text-white/60 hover:text-gold-400 transition-colors" aria-label="Close">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+    <a href="index.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Home</a>
+    <a href="about.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">About</a>
+    <a href="team.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Team</a>
+    <a href="tracks.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Tracks</a>
+    <a href="partners.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Partners</a>
+    <a href="contact.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Contact</a>
+    <a href="register.html" class="text-gold-400 text-sm font-body uppercase tracking-[0.3em] border border-gold-500/30 px-6 py-2">Register</a>
+  </div>
+
+  <!-- ─── HERO: HeroWave Canvas ─────────────────────────────────────────────────── -->
+  <section id="wave-hero">
+    <canvas id="wave-canvas"></canvas>
+    <div class="wave-overlay"></div>
+    <div class="wave-content">
+      <p class="scramble-text text-gold-500/70 text-xs uppercase tracking-[0.35em] font-body mb-5">Join the Forum</p>
+      <h1 class="font-display text-6xl md:text-8xl lg:text-9xl text-white font-light mb-2" style="letter-spacing:-0.03em;line-height:1.0;">
+        Register for
+      </h1>
+      <h2 class="font-display text-5xl md:text-7xl lg:text-8xl font-light italic mb-8" style="letter-spacing:-0.03em;line-height:1.0;background:linear-gradient(135deg,#c9a96e,#e5bc6d,#c9a96e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+        DMF 2026
+      </h2>
+      <p class="font-body text-white/50 text-xs md:text-sm uppercase tracking-[0.25em] mb-3">Dubai &middot; August 2–6, 2026 &middot; Finance &middot; Law &middot; Engineering</p>
+      <p class="font-body text-white/25 text-xs uppercase tracking-[0.2em] mb-10">Registration details below</p>
+
+      <!-- Countdown -->
+      <div class="flex gap-4 md:gap-8 mb-8">
+        <div class="reg-cd-card px-4 py-4 md:px-6 md:py-5 text-center min-w-[64px] md:min-w-[80px] rounded-sm">
+          <span class="font-display text-2xl md:text-4xl text-gold-400 block font-light" id="rcd-days">--</span>
+          <span class="text-white/30 text-[9px] uppercase tracking-[0.25em] font-body mt-1 block">Days</span>
+        </div>
+        <div class="reg-cd-card px-4 py-4 md:px-6 md:py-5 text-center min-w-[64px] md:min-w-[80px] rounded-sm">
+          <span class="font-display text-2xl md:text-4xl text-gold-400 block font-light" id="rcd-hours">--</span>
+          <span class="text-white/30 text-[9px] uppercase tracking-[0.25em] font-body mt-1 block">Hours</span>
+        </div>
+        <div class="reg-cd-card px-4 py-4 md:px-6 md:py-5 text-center min-w-[64px] md:min-w-[80px] rounded-sm">
+          <span class="font-display text-2xl md:text-4xl text-gold-400 block font-light" id="rcd-mins">--</span>
+          <span class="text-white/30 text-[9px] uppercase tracking-[0.25em] font-body mt-1 block">Minutes</span>
+        </div>
+        <div class="reg-cd-card px-4 py-4 md:px-6 md:py-5 text-center min-w-[64px] md:min-w-[80px] rounded-sm">
+          <span class="font-display text-2xl md:text-4xl text-gold-400 block font-light" id="rcd-secs">--</span>
+          <span class="text-white/30 text-[9px] uppercase tracking-[0.25em] font-body mt-1 block">Seconds</span>
+        </div>
+      </div>
+
+      <a href="contact.html" class="inline-flex items-center gap-3 px-8 py-3 border border-gold-500/40 text-gold-400 text-xs uppercase tracking-[0.2em] font-body hover:bg-gold-500/10 hover:border-gold-400 transition-all duration-300">
+        Express Interest
+        <span>→</span>
+      </a>
+
+      <p class="font-arabic text-white/20 text-base mt-8" dir="rtl">التسجيل يفتح قريباً</p>
+    </div>
+
+    <!-- Scroll arrow -->
+    <a href="#register-info" class="scroll-bounce absolute bottom-8 left-1/2 text-white/30 hover:text-gold-400 transition-colors duration-300">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"/></svg>
+    </a>
+  </section>
+
+  <!-- ─── REGISTRATION INFO ─────────────────────────────────────────────────────── -->
+  <section id="register-info" class="py-20 md:py-32" style="background:#060616;">
+    <div class="max-w-5xl mx-auto px-6 lg:px-12">
+      <div class="fade-up text-center mb-12">
+        <p class="scramble-text text-gold-500/60 text-xs uppercase tracking-[0.3em] font-body mb-4">Registration Details</p>
+        <h2 class="font-display text-4xl md:text-5xl text-white font-light" style="letter-spacing:-0.02em;">
+          Registrations Open <span class="text-gold-400 italic">Soon</span>
+        </h2>
+        <div class="gold-line mx-auto mt-6"></div>
+      </div>
+
+      <div class="fade-up grid md:grid-cols-3 gap-6 mb-12">
+        <div class="card p-7 rounded-sm text-center">
+          <p class="font-display text-4xl text-gold-400 mb-2">May</p>
+          <p class="font-display text-xl text-white mb-2">1, 2026</p>
+          <p class="font-body text-white/40 text-xs uppercase tracking-wider">Registration Opens</p>
+        </div>
+        <div class="card p-7 rounded-sm text-center">
+          <p class="font-display text-4xl text-gold-400 mb-2">Aug</p>
+          <p class="font-display text-xl text-white mb-2">2–6, 2026</p>
+          <p class="font-body text-white/40 text-xs uppercase tracking-wider">Forum Dates</p>
+        </div>
+        <div class="card p-7 rounded-sm text-center">
+          <p class="font-display text-4xl text-gold-400 mb-2">3</p>
+          <p class="font-display text-xl text-white mb-2">Pass Tiers</p>
+          <p class="font-body text-white/40 text-xs uppercase tracking-wider">Observer · Competitor · Professional</p>
+        </div>
+      </div>
+
+      <div class="fade-up text-center">
+        <p class="font-body text-white/40 text-sm mb-6 max-w-2xl mx-auto leading-relaxed">
+          Registration for Dubai Meridian Forum 2026 opens May 1. In the meantime, express your interest and we will ensure you receive priority notification when applications open.
+        </p>
+        <a href="contact.html" class="inline-flex items-center gap-3 px-8 py-3 border border-gold-500/40 text-gold-400 text-xs uppercase tracking-[0.2em] font-body hover:bg-gold-500/10 hover:border-gold-400 transition-all duration-300">
+          Express Interest
+          <span>→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="w-full h-px bg-gradient-to-r from-transparent via-gold-500/20 to-transparent"></div>
+
+  <!-- ─── HOW IT WORKS CAROUSEL ─────────────────────────────────────────────────── -->
+  <section class="py-20 md:py-32" style="background:#060616;">
+    <div class="max-w-5xl mx-auto px-6 lg:px-12">
+      <div class="fade-up text-center mb-14">
+        <p class="scramble-text text-gold-500/60 text-xs uppercase tracking-[0.3em] font-body mb-4">Registration Guide</p>
+        <h2 class="font-display text-4xl md:text-5xl text-white font-light" style="letter-spacing:-0.02em;">
+          How It <span class="text-gold-400 italic">Works</span>
+        </h2>
+      </div>
+
+      <div class="fade-up">
+        <!-- ── Big card ── -->
+        <div class="fc-card" id="fcCard">
+          <div class="fc-inner">
+            <!-- Text panel -->
+            <div class="fc-text" id="fcText">
+              <!-- JS renders this -->
+            </div>
+            <!-- Visual panel -->
+            <div class="fc-visual" id="fcVisual">
+              <!-- JS renders this -->
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Pill nav ── -->
+        <nav class="fc-nav" id="fcNav" aria-label="Registration steps">
+          <!-- JS renders pills -->
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-16 border-t border-white/5">
+    <div class="max-w-6xl mx-auto px-6 lg:px-12">
+      <div class="grid md:grid-cols-3 gap-12">
+        <div>
+          <img src="5.png" alt="DMF" class="h-8 opacity-60 mb-4" style="mix-blend-mode:screen;filter:brightness(1.6) saturate(0.8)">
+          <p class="font-body text-white/30 text-xs leading-relaxed">Dubai Meridian Forum &copy; 2026.<br>All rights reserved.</p>
+          <p class="font-arabic text-gold-500/25 text-sm mt-3" dir="rtl">منتدى دبي ميريديان</p>
+        </div>
+        <div>
+          <p class="text-gold-500/50 text-xs uppercase tracking-[0.2em] font-body mb-4">Navigate</p>
+          <div class="flex flex-col gap-2">
+            <a href="index.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">Home</a>
+            <a href="about.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">About</a>
+            <a href="team.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">Team</a>
+            <a href="tracks.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">Tracks</a>
+            <a href="partners.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">Partners</a>
+            <a href="media.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">Media</a>
+            <a href="contact.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">Contact</a>
+          </div>
+        </div>
+        <div>
+          <p class="text-gold-500/50 text-xs uppercase tracking-[0.2em] font-body mb-4">Contact</p>
+          <p class="text-white/30 text-sm font-body leading-relaxed">Aspect Tower, Office No. 2206<br>Zone B, Bay Avenue<br>Business Bay, Dubai</p>
+          <a href="mailto:info@dubaimeridianforum.com" class="text-gold-500/40 text-sm font-body mt-3 inline-block hover:text-gold-400 transition-colors duration-300">info@dubaimeridianforum.com</a>
+        </div>
+      </div>
+      <div class="mt-12 pt-8 border-t border-white/5 text-center">
+        <p class="text-white/20 text-xs font-body tracking-wide">Dubai Meridian Forum &middot; Business Bay, Dubai, UAE</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ─── Nav scroll ───────────────────────────────────────────────────────────────
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) { nav.style.background='rgba(6,6,22,0.96)';nav.style.backdropFilter='blur(20px)';nav.style.borderBottom='1px solid rgba(201,169,110,0.08)'; }
+      else { nav.style.background='transparent';nav.style.backdropFilter='none';nav.style.borderBottom='none'; }
+    });
+    document.getElementById('mobileToggle').addEventListener('click',()=>document.getElementById('mobileMenu').classList.add('open'));
+    document.getElementById('mobileClose').addEventListener('click',()=>document.getElementById('mobileMenu').classList.remove('open'));
+
+    // ─── Scroll reveal ────────────────────────────────────────────────────────────
+    const obs = new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:0.1});
+    document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+
+    // ─── HeroWave Canvas (pixel-shader style) ────────────────────────────────────
+    (function() {
+      const canvas = document.getElementById('wave-canvas');
+      const ctx = canvas.getContext('2d');
+      const SCALE = 3;
+      let width, height, imageData, data;
+
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = document.getElementById('wave-hero').clientHeight;
+        width = Math.floor(canvas.width / SCALE);
+        height = Math.floor(canvas.height / SCALE);
+        imageData = ctx.createImageData(width, height);
+        data = imageData.data;
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      const SIN_TABLE = new Float32Array(1024);
+      const COS_TABLE = new Float32Array(1024);
+      for (let i = 0; i < 1024; i++) {
+        const angle = (i / 1024) * Math.PI * 2;
+        SIN_TABLE[i] = Math.sin(angle);
+        COS_TABLE[i] = Math.cos(angle);
+      }
+      const fastSin = x => SIN_TABLE[((((x % (Math.PI*2)) / (Math.PI*2)) * 1024) | 0) & 1023];
+      const fastCos = x => COS_TABLE[((((x % (Math.PI*2)) / (Math.PI*2)) * 1024) | 0) & 1023];
+
+      const startTime = Date.now();
+      function render() {
+        const time = (Date.now() - startTime) * 0.001;
+        for (let y = 0; y < height; y++) {
+          for (let x = 0; x < width; x++) {
+            const u_x = (2 * x - width) / height;
+            const u_y = (2 * y - height) / height;
+            let a = 0, d = 0;
+            for (let i = 0; i < 4; i++) {
+              a += fastCos(i - d + time * 0.5 - a * u_x);
+              d += fastSin(i * u_y + a);
+            }
+            const wave = (fastSin(a) + fastCos(d)) * 0.5;
+            const intensity = 0.3 + 0.4 * wave;
+            const baseVal = 0.08 + 0.12 * fastCos(u_x + u_y + time * 0.3);
+            const blueAccent = 0.15 * fastSin(a * 1.5 + time * 0.2);
+            const purpleAccent = 0.1 * fastCos(d * 2 + time * 0.1);
+            const r = Math.max(0, Math.min(1, baseVal + purpleAccent * 0.8)) * intensity;
+            const g = Math.max(0, Math.min(1, baseVal + blueAccent * 0.6)) * intensity;
+            const b = Math.max(0, Math.min(1, baseVal + blueAccent * 1.2 + purpleAccent * 0.4)) * intensity;
+            const idx = (y * width + x) * 4;
+            data[idx]   = r * 255;
+            data[idx+1] = g * 255;
+            data[idx+2] = b * 255;
+            data[idx+3] = 255;
+          }
+        }
+        ctx.putImageData(imageData, 0, 0);
+        ctx.imageSmoothingEnabled = false;
+        ctx.drawImage(canvas, 0, 0, width, height, 0, 0, canvas.width, canvas.height);
+        requestAnimationFrame(render);
+      }
+      render();
+    })();
+
+    // ─── Countdown ───────────────────────────────────────────────────────────────
+    const forumTarget = new Date('2026-08-01T20:00:00Z');
+    function tickReg() {
+      const diff = forumTarget - new Date();
+      if (diff <= 0) { ['rcd-days','rcd-hours','rcd-mins','rcd-secs'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent='00';}); return; }
+      const d=document.getElementById('rcd-days'),h=document.getElementById('rcd-hours'),m=document.getElementById('rcd-mins'),s=document.getElementById('rcd-secs');
+      if(d)d.textContent=String(Math.floor(diff/86400000)).padStart(2,'0');
+      if(h)h.textContent=String(Math.floor(diff%86400000/3600000)).padStart(2,'0');
+      if(m)m.textContent=String(Math.floor(diff%3600000/60000)).padStart(2,'0');
+      if(s)s.textContent=String(Math.floor(diff%60000/1000)).padStart(2,'0');
+    }
+    tickReg(); setInterval(tickReg, 1000);
+
+    // ─── Feature Carousel (FeatureCarousel React → vanilla port) ─────────────────
+    (function() {
+      const STEPS = [
+        {
+          name: 'Step 1',
+          title: 'Choose Your Track',
+          titleGold: 'Track',
+          description: 'Select from Finance, Law, or Engineering. Each track has its own competition stream, workshops, and prize category. Your track determines your committee placement and competition brief.',
+          visual: 'step1'
+        },
+        {
+          name: 'Step 2',
+          title: 'Select Your Pass',
+          titleGold: 'Pass',
+          description: 'Observer Pass for full conference access without competition. Competitor Pass for prize eligibility and competition participation. Professional Pass for VIP access, mentorship, and networking dinners.',
+          visual: 'step2'
+        },
+        {
+          name: 'Step 3',
+          title: 'Complete Registration',
+          titleGold: 'Registration',
+          description: 'Fill in your details — name, institution, nationality, and dietary requirements. Team-based entries require all team members to register individually with the same team name.',
+          visual: 'step3'
+        },
+        {
+          name: 'Step 4',
+          title: 'Confirm & Attend',
+          titleGold: 'Attend',
+          description: 'Receive your confirmation email with your delegate pack, schedule, venue details, and pre-reading materials. Arrive at Business Bay, Dubai on August 2, 2026.',
+          visual: 'step4'
+        }
+      ];
+
+      let current = 0;
+      let timer = null;
+      const INTERVAL = 5000;
+
+      const card  = document.getElementById('fcCard');
+      const textEl  = document.getElementById('fcText');
+      const visualEl = document.getElementById('fcVisual');
+      const navEl   = document.getElementById('fcNav');
+
+      // ── Mouse spotlight ──────────────────────────────────────────────────────
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+        card.style.setProperty('--my', `${e.clientY - r.top}px`);
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.setProperty('--mx', '-9999px');
+        card.style.setProperty('--my', '-9999px');
+      });
+
+      // ── Visual HTML per step ─────────────────────────────────────────────────
+      function getVisual(v) {
+        if (v === 'step1') return `
+          <div class="mock-card fc-anim-slide-l" style="width:58%;left:0;top:12%;padding:18px 20px;">
+            <p style="font-family:'Raleway',sans-serif;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(201,169,110,0.5);margin-bottom:10px;">Select Track</p>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <div style="padding:9px 12px;background:rgba(201,169,110,0.12);border:1px solid rgba(201,169,110,0.35);border-radius:6px;display:flex;align-items:center;justify-content:space-between;">
+                <span style="font-family:'Cormorant Garamond',serif;font-size:15px;color:#c9a96e;">Finance</span>
+                <span style="width:6px;height:6px;border-radius:50%;background:#c9a96e;"></span>
+              </div>
+              <div style="padding:9px 12px;background:rgba(20,20,58,0.5);border:1px solid rgba(201,169,110,0.08);border-radius:6px;">
+                <span style="font-family:'Cormorant Garamond',serif;font-size:15px;color:rgba(232,232,240,0.4);">Law</span>
+              </div>
+              <div style="padding:9px 12px;background:rgba(20,20,58,0.5);border:1px solid rgba(201,169,110,0.08);border-radius:6px;">
+                <span style="font-family:'Cormorant Garamond',serif;font-size:15px;color:rgba(232,232,240,0.4);">Engineering</span>
+              </div>
+            </div>
+          </div>
+          <div class="mock-card fc-anim-slide-r" style="width:56%;right:0;top:50%;padding:16px 18px;">
+            <p style="font-family:'Raleway',sans-serif;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(201,169,110,0.4);margin-bottom:8px;">Finance Track</p>
+            <p style="font-family:'Cormorant Garamond',serif;font-size:17px;color:#e8e8f0;margin-bottom:6px;">Capital Markets &amp; Fintech</p>
+            <div style="height:1px;background:rgba(201,169,110,0.1);margin-bottom:8px;"></div>
+            <p style="font-family:'Raleway',sans-serif;font-size:10px;color:rgba(148,148,181,0.6);line-height:1.6;">Workshops · Competition Rounds · Panel Access</p>
+          </div>`;
+
+        if (v === 'step2') return `
+          <div class="mock-card fc-anim-fadescale" style="width:70%;left:50%;transform:translateX(-50%);top:5%;padding:18px 20px;">
+            <p style="font-family:'Raleway',sans-serif;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(201,169,110,0.5);margin-bottom:12px;">Select Pass</p>
+            <div style="display:flex;flex-direction:column;gap:7px;">
+              <div style="padding:10px 14px;background:rgba(20,20,58,0.5);border:1px solid rgba(201,169,110,0.08);border-radius:6px;display:flex;justify-content:space-between;align-items:center;">
+                <div>
+                  <p style="font-family:'Raleway',sans-serif;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(232,232,240,0.5);">Observer</p>
+                  <p style="font-family:'Raleway',sans-serif;font-size:9px;color:rgba(148,148,181,0.35);margin-top:2px;">Full conference access</p>
+                </div>
+              </div>
+              <div style="padding:10px 14px;background:rgba(201,169,110,0.1);border:1px solid rgba(201,169,110,0.35);border-radius:6px;display:flex;justify-content:space-between;align-items:center;">
+                <div>
+                  <p style="font-family:'Raleway',sans-serif;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#c9a96e;">Competitor</p>
+                  <p style="font-family:'Raleway',sans-serif;font-size:9px;color:rgba(201,169,110,0.5);margin-top:2px;">Competition + prizes</p>
+                </div>
+                <span style="width:6px;height:6px;border-radius:50%;background:#c9a96e;"></span>
+              </div>
+              <div style="padding:10px 14px;background:rgba(20,20,58,0.5);border:1px solid rgba(201,169,110,0.08);border-radius:6px;">
+                <p style="font-family:'Raleway',sans-serif;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(232,232,240,0.5);">Professional</p>
+                <p style="font-family:'Raleway',sans-serif;font-size:9px;color:rgba(148,148,181,0.35);margin-top:2px;">VIP · Mentorship · Gala</p>
+              </div>
+            </div>
+          </div>
+          <div class="mock-card fc-anim-fadescale-d" style="width:44%;right:4%;bottom:2%;padding:14px 16px;">
+            <p style="font-family:'Raleway',sans-serif;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(201,169,110,0.4);margin-bottom:6px;">Selected</p>
+            <p style="font-family:'Cormorant Garamond',serif;font-size:16px;color:#c9a96e;">Competitor Pass</p>
+          </div>`;
+
+        if (v === 'step3') return `
+          <div class="mock-card fc-anim-fadescale" style="width:88%;left:6%;top:8%;padding:22px 24px;">
+            <p style="font-family:'Raleway',sans-serif;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(201,169,110,0.5);margin-bottom:16px;">Delegate Registration</p>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div>
+                <div style="height:7px;background:rgba(201,169,110,0.15);border-radius:2px;margin-bottom:6px;width:55%;"></div>
+                <div style="height:30px;background:rgba(20,20,58,0.7);border:1px solid rgba(201,169,110,0.12);border-radius:6px;padding:0 12px;display:flex;align-items:center;">
+                  <span style="font-family:'Raleway',sans-serif;font-size:10px;color:rgba(148,148,181,0.25);">Full name</span>
+                </div>
+              </div>
+              <div>
+                <div style="height:7px;background:rgba(201,169,110,0.15);border-radius:2px;margin-bottom:6px;width:40%;"></div>
+                <div style="height:30px;background:rgba(20,20,58,0.7);border:1px solid rgba(201,169,110,0.12);border-radius:6px;padding:0 12px;display:flex;align-items:center;">
+                  <span style="font-family:'Raleway',sans-serif;font-size:10px;color:rgba(148,148,181,0.25);">University / Institution</span>
+                </div>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                <div style="height:30px;background:rgba(20,20,58,0.7);border:1px solid rgba(201,169,110,0.12);border-radius:6px;padding:0 12px;display:flex;align-items:center;">
+                  <span style="font-family:'Raleway',sans-serif;font-size:10px;color:rgba(148,148,181,0.25);">Nationality</span>
+                </div>
+                <div style="height:30px;background:rgba(20,20,58,0.7);border:1px solid rgba(201,169,110,0.12);border-radius:6px;padding:0 12px;display:flex;align-items:center;">
+                  <span style="font-family:'Raleway',sans-serif;font-size:10px;color:rgba(148,148,181,0.25);">Track</span>
+                </div>
+              </div>
+              <div style="height:1px;background:rgba(201,169,110,0.08);margin:4px 0;"></div>
+              <div style="height:32px;background:rgba(201,169,110,0.12);border:1px solid rgba(201,169,110,0.3);border-radius:6px;display:flex;align-items:center;justify-content:center;">
+                <span style="font-family:'Raleway',sans-serif;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:#c9a96e;">Submit Application</span>
+              </div>
+            </div>
+          </div>`;
+
+        if (v === 'step4') return `
+          <div class="mock-card fc-anim-fadescale" style="width:82%;left:50%;transform:translateX(-50%);top:10%;padding:28px 24px;text-align:center;">
+            <div style="width:52px;height:52px;border-radius:50%;border:1px solid rgba(201,169,110,0.35);background:rgba(201,169,110,0.08);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
+              <svg width="22" height="22" fill="none" stroke="#c9a96e" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <p style="font-family:'Cormorant Garamond',serif;font-size:22px;color:#e8e8f0;margin-bottom:4px;">Registration Confirmed</p>
+            <p style="font-family:'Raleway',sans-serif;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(201,169,110,0.5);margin-bottom:16px;">Delegate Pack Sent</p>
+            <div style="height:1px;background:rgba(201,169,110,0.1);margin-bottom:14px;"></div>
+            <p style="font-family:'Raleway',sans-serif;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(201,169,110,0.4);">Business Bay, Dubai</p>
+            <p style="font-family:'Cormorant Garamond',serif;font-size:18px;color:rgba(232,232,240,0.5);margin-top:6px;">August 2, 2026</p>
+          </div>`;
+
+        return '';
+      }
+
+      // ── Build title HTML (bold last word in gold italic) ─────────────────────
+      function buildTitle(step) {
+        const words = step.title.split(' ');
+        const last = words.pop();
+        return `${words.join(' ')} <span style="color:#d4a44e;font-style:italic;">${last}</span>`;
+      }
+
+      // ── Render text panel ─────────────────────────────────────────────────────
+      function renderText(idx) {
+        const s = STEPS[idx];
+        textEl.innerHTML = `
+          <p class="fc-anim-label" style="font-family:'Raleway',sans-serif;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(201,169,110,0.55);margin-bottom:14px;">${s.name}</p>
+          <h3 class="fc-anim-title" style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:300;color:#e8e8f0;line-height:1.15;letter-spacing:-0.02em;margin-bottom:18px;">${buildTitle(s)}</h3>
+          <div class="fc-anim-line" style="width:60px;height:1px;background:linear-gradient(90deg,#c9a96e,transparent);margin-bottom:20px;"></div>
+          <p class="fc-anim-desc" style="font-family:'Raleway',sans-serif;font-size:13px;line-height:1.8;color:rgba(232,232,240,0.55);">${s.description}</p>`;
+      }
+
+      // ── Render visual panel ───────────────────────────────────────────────────
+      function renderVisual(idx) {
+        visualEl.innerHTML = getVisual(STEPS[idx].visual);
+      }
+
+      // ── Render pill nav ───────────────────────────────────────────────────────
+      function renderNav(active) {
+        navEl.innerHTML = STEPS.map((s, i) => {
+          const done = i < active;
+          const cls  = i === active ? 'is-active' : done ? 'is-done' : 'is-idle';
+          const numContent = done
+            ? `<svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>`
+            : `${i + 1}`;
+          return `<button class="fc-pill ${cls}" data-idx="${i}" aria-label="${s.name}">
+            <span class="fc-pill-num">${numContent}</span>
+            <span>${s.name}</span>
+          </button>`;
+        }).join('');
+
+        navEl.querySelectorAll('.fc-pill').forEach(btn => {
+          btn.addEventListener('click', () => {
+            goTo(parseInt(btn.dataset.idx));
+            resetTimer();
+          });
+        });
+      }
+
+      // ── Transition to step ────────────────────────────────────────────────────
+      function goTo(idx) {
+        current = ((idx % STEPS.length) + STEPS.length) % STEPS.length;
+        renderText(current);
+        renderVisual(current);
+        renderNav(current);
+      }
+
+      // ── Auto-cycle ────────────────────────────────────────────────────────────
+      function resetTimer() {
+        clearTimeout(timer);
+        timer = setTimeout(() => { goTo(current + 1); resetTimer(); }, INTERVAL);
+      }
+
+      // ── Init ──────────────────────────────────────────────────────────────────
+      goTo(0);
+      resetTimer();
+    })();
+
+    // ─── ScrambleText ─────────────────────────────────────────────────────────────
+    class ScrambleText {
+      constructor(el) {
+        this.el=el;this.original=el.textContent;this.chars='_!X$0-+*#';
+        const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){this.animate();io.unobserve(this.el);}});},{threshold:0.3});
+        io.observe(this.el);
+      }
+      animate(){
+        const text=this.original,len=text.length;let frame=0;const total=len*3;
+        const iv=setInterval(()=>{
+          let out='';
+          if(frame<len){for(let i=0;i<=frame;i++)out+=this.chars[Math.floor(Math.random()*this.chars.length)];}
+          else{const rev=frame-len;out=text.slice(0,rev);for(let i=rev;i<len;i++)out+=this.chars[Math.floor(Math.random()*this.chars.length)];}
+          this.el.textContent=out;frame++;if(frame>total){this.el.textContent=text;clearInterval(iv);}
+        },20);
+      }
+    }
+    document.querySelectorAll('.scramble-text').forEach(el=>new ScrambleText(el));
+  </script>
+</body>
+</html>

@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Dubai Meridian Forum</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Raleway:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy:{800:'#060616',900:'#03030b'},
+            gold:{400:'#d4a44e',500:'#c9a96e'},
+          },
+          fontFamily: {
+            display:['"Cormorant Garamond"','serif'],
+            body:['"Raleway"','sans-serif'],
+            arabic:['"Amiri"','serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{background:#060616;color:#e8e8f0;font-family:'Raleway',sans-serif;}
+    .grain::after{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:0.5;}
+    .nav-link{position:relative;letter-spacing:0.15em;}
+    .nav-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:#c9a96e;transition:width 0.4s cubic-bezier(0.25,0.46,0.45,0.94);}
+    .nav-link:hover::after{width:100%;}
+    .gold-line{width:60px;height:1px;background:linear-gradient(90deg,#c9a96e,transparent);}
+    .fade-up{opacity:0;transform:translateY(40px);transition:opacity 0.8s ease,transform 0.8s ease;}
+    .fade-up.visible{opacity:1;transform:translateY(0);}
+    ::-webkit-scrollbar{width:6px;}
+    ::-webkit-scrollbar-track{background:#060616;}
+    ::-webkit-scrollbar-thumb{background:rgba(201,169,110,0.3);border-radius:3px;}
+    .mobile-menu{transform:translateX(100%);transition:transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);}
+    .mobile-menu.open{transform:translateX(0);}
+
+    /* Form */
+    .form-input{background:rgba(20,20,58,0.4);border:1px solid rgba(201,169,110,0.1);outline:none;transition:border-color 0.3s,box-shadow 0.3s;}
+    .form-input:focus{border-color:rgba(201,169,110,0.4);box-shadow:0 0 0 3px rgba(201,169,110,0.06);}
+    .form-input::placeholder{color:rgba(148,148,181,0.35);}
+
+    /* Card */
+    .card{background:linear-gradient(145deg,rgba(20,20,58,0.6),rgba(9,9,31,0.8));border:1px solid rgba(201,169,110,0.08);transition:border-color 0.4s;}
+    .card:hover{border-color:rgba(201,169,110,0.2);}
+
+    /* Entropy canvas container */
+    #entropy-wrap{
+      position:relative;
+      background:#000;
+      border-radius:2px;
+      overflow:hidden;
+    }
+    #entropy-canvas{
+      display:block;
+    }
+
+    /* Entropy label */
+    .entropy-label{
+      position:absolute;
+      bottom:0;left:0;right:0;
+      display:flex;justify-content:space-between;
+      padding:10px 16px;
+      font-family:'Raleway',sans-serif;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;
+      color:rgba(255,255,255,0.2);
+      pointer-events:none;
+    }
+  </style>
+</head>
+<body class="grain">
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full z-50 transition-all duration-500" id="mainNav">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="flex items-center justify-between h-20">
+        <a href="index.html" class="flex items-center group">
+          <img src="5.png" alt="DMF" class="h-10 opacity-90 group-hover:opacity-100 transition-opacity duration-300" style="mix-blend-mode:screen;filter:brightness(1.6) saturate(0.8)">
+        </a>
+        <div class="hidden lg:flex items-center gap-10">
+          <a href="index.html" class="nav-link text-white/60 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Home</a>
+          <a href="about.html" class="nav-link text-white/60 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">About</a>
+          <a href="team.html" class="nav-link text-white/60 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Team</a>
+          <a href="tracks.html" class="nav-link text-white/60 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Tracks</a>
+          <a href="partners.html" class="nav-link text-white/60 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Partners</a>
+          <a href="contact.html" class="nav-link text-gold-400 text-xs font-body uppercase tracking-widest">Contact</a>
+        </div>
+        <a href="register.html" class="hidden lg:block px-6 py-2.5 border border-gold-500/40 text-gold-400 text-xs uppercase tracking-[0.2em] font-body hover:bg-gold-500/10 hover:border-gold-400 transition-all duration-300">Register</a>
+        <button id="mobileToggle" class="lg:hidden text-white/60 hover:text-gold-400 transition-colors" aria-label="Menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="mobile-menu fixed inset-0 z-[60] bg-navy-800/98 backdrop-blur-xl flex flex-col items-center justify-center gap-8">
+    <button id="mobileClose" class="absolute top-6 right-6 text-white/60 hover:text-gold-400 transition-colors">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+    <a href="index.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Home</a>
+    <a href="about.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">About</a>
+    <a href="team.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Team</a>
+    <a href="tracks.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Tracks</a>
+    <a href="partners.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Partners</a>
+    <a href="contact.html" class="text-gold-400 text-sm font-body uppercase tracking-[0.3em]">Contact</a>
+  </div>
+
+  <!-- Page Header -->
+  <section class="relative pt-32 pb-16 md:pt-40 md:pb-20">
+    <div class="relative z-10 max-w-6xl mx-auto px-6 lg:px-12">
+      <p class="font-arabic text-gold-500/50 text-base mb-3" dir="rtl">تواصل معنا</p>
+      <p class="text-gold-500/60 text-xs uppercase tracking-[0.3em] font-body mb-4" id="scramble-contact">Get in Touch</p>
+      <h1 class="font-display text-5xl md:text-6xl lg:text-7xl text-white font-light" style="letter-spacing:-0.03em;line-height:1.1;">
+        Contact <span class="text-gold-400 italic">Us</span>
+      </h1>
+    </div>
+  </section>
+
+  <!-- Contact info strip -->
+  <section class="py-8 border-t border-b border-white/5">
+    <div class="max-w-6xl mx-auto px-6 lg:px-12">
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="flex items-start gap-4">
+          <div class="w-8 h-8 shrink-0 flex items-center justify-center border border-gold-500/15 rounded-sm mt-0.5">
+            <svg class="w-3.5 h-3.5 text-gold-500/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <div>
+            <p class="text-gold-500/50 text-[10px] uppercase tracking-[0.2em] font-body mb-1">Office</p>
+            <p class="text-white/60 text-sm font-body leading-relaxed">Aspect Tower, Office No. 2206<br>Zone B, Bay Avenue<br>Business Bay, Dubai, UAE</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="w-8 h-8 shrink-0 flex items-center justify-center border border-gold-500/15 rounded-sm mt-0.5">
+            <svg class="w-3.5 h-3.5 text-gold-500/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <div>
+            <p class="text-gold-500/50 text-[10px] uppercase tracking-[0.2em] font-body mb-1">Email</p>
+            <a href="mailto:info@dubaimeridianforum.com" class="text-gold-500/60 text-sm font-body hover:text-gold-400 transition-colors block">info@dubaimeridianforum.com</a>
+            <a href="mailto:registrations@dubaimeridianforum.com" class="text-white/30 text-xs font-body hover:text-gold-400 transition-colors block mt-1">registrations@dubaimeridianforum.com</a>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="w-8 h-8 shrink-0 flex items-center justify-center border border-gold-500/15 rounded-sm mt-0.5">
+            <svg class="w-3.5 h-3.5 text-gold-500/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div>
+            <p class="text-gold-500/50 text-[10px] uppercase tracking-[0.2em] font-body mb-1">Hours</p>
+            <p class="text-white/60 text-sm font-body leading-relaxed">Sun – Thu, 9:00 AM – 6:00 PM GST</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main: Form + Entropy -->
+  <section class="py-20 md:py-32">
+    <div class="max-w-6xl mx-auto px-6 lg:px-12">
+      <div class="fade-up grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+
+        <!-- Contact Form -->
+        <div>
+          <p class="text-gold-500/60 text-xs uppercase tracking-[0.3em] font-body mb-4">Send a Message</p>
+          <h2 class="font-display text-3xl md:text-4xl text-white font-light mb-2" style="line-height:1.2;">
+            We'd Love to <span class="text-gold-400 italic">Hear</span> From You
+          </h2>
+          <div class="gold-line mb-8"></div>
+          <p class="font-body text-white/50 text-sm mb-8 leading-relaxed">Whether you're a prospective participant, potential sponsor, or member of the press, our team responds within 48 hours.</p>
+
+          <form class="space-y-5" onsubmit="event.preventDefault();document.getElementById('formOk').classList.remove('hidden');">
+            <div class="grid md:grid-cols-2 gap-5">
+              <div>
+                <label class="block text-white/30 text-[10px] font-body uppercase tracking-wider mb-2">First Name</label>
+                <input type="text" class="form-input w-full px-4 py-3 rounded-sm text-sm font-body text-white" placeholder="Your first name" required>
+              </div>
+              <div>
+                <label class="block text-white/30 text-[10px] font-body uppercase tracking-wider mb-2">Last Name</label>
+                <input type="text" class="form-input w-full px-4 py-3 rounded-sm text-sm font-body text-white" placeholder="Your last name" required>
+              </div>
+            </div>
+            <div>
+              <label class="block text-white/30 text-[10px] font-body uppercase tracking-wider mb-2">Email</label>
+              <input type="email" class="form-input w-full px-4 py-3 rounded-sm text-sm font-body text-white" placeholder="your.email@example.com" required>
+            </div>
+            <div>
+              <label class="block text-white/30 text-[10px] font-body uppercase tracking-wider mb-2">Subject</label>
+              <select class="form-input w-full px-4 py-3 rounded-sm text-sm font-body text-white">
+                <option value="" style="background:#0d0d2b;">Select a topic</option>
+                <option value="reg" style="background:#0d0d2b;">Registration Enquiry</option>
+                <option value="sponsor" style="background:#0d0d2b;">Sponsorship &amp; Partnerships</option>
+                <option value="press" style="background:#0d0d2b;">Press &amp; Media</option>
+                <option value="speaking" style="background:#0d0d2b;">Speaking Opportunities</option>
+                <option value="general" style="background:#0d0d2b;">General Enquiry</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-white/30 text-[10px] font-body uppercase tracking-wider mb-2">Message</label>
+              <textarea rows="5" class="form-input w-full px-4 py-3 rounded-sm text-sm font-body text-white resize-none" placeholder="How can we help you?" required></textarea>
+            </div>
+            <button type="submit" class="px-10 py-3.5 bg-gold-500/10 border border-gold-500/30 text-gold-400 text-xs uppercase tracking-[0.25em] font-body hover:bg-gold-500/20 hover:border-gold-400 transition-all duration-300 focus-visible:outline-2 focus-visible:outline-gold-400 focus-visible:outline-offset-2 active:scale-[0.98]">
+              Send Message
+            </button>
+            <div id="formOk" class="hidden p-4 rounded-sm border border-gold-500/20 bg-gold-500/5">
+              <p class="text-gold-400 text-sm font-body">Thank you. Our team will be in touch shortly.</p>
+            </div>
+          </form>
+        </div>
+
+        <!-- Entropy Canvas (from 3.txt) -->
+        <div>
+          <p class="text-gold-500/60 text-xs uppercase tracking-[0.3em] font-body mb-4">Order &amp; Entropy</p>
+          <h2 class="font-display text-3xl md:text-4xl text-white font-light mb-2" style="line-height:1.2;">
+            Where Precision <span class="text-gold-400 italic">Meets</span> Possibility
+          </h2>
+          <div class="gold-line mb-8"></div>
+          <p class="font-body text-white/50 text-sm mb-8 leading-relaxed">Like the disciplines we bring together, order and chaos are not opposites — they are partners. The Meridian sits at their intersection.</p>
+
+          <div id="entropy-wrap" class="w-full rounded-sm">
+            <canvas id="entropy-canvas"></canvas>
+            <div class="entropy-label">
+              <span>Order</span>
+              <span>Entropy</span>
+            </div>
+          </div>
+
+          <!-- Arabic quote -->
+          <div class="mt-8 pl-5 border-l border-gold-500/15">
+            <p class="font-arabic text-gold-500/40 text-lg leading-relaxed" dir="rtl">"نقطة التقاء العقول — حيث يلتقي المستقبل"</p>
+            <p class="font-body text-white/25 text-xs mt-2 italic">"The meeting point of minds — where the future converges"</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-16 border-t border-white/5">
+    <div class="max-w-6xl mx-auto px-6 lg:px-12">
+      <div class="grid md:grid-cols-3 gap-12">
+        <div>
+          <img src="5.png" alt="DMF" class="h-8 opacity-60 mb-4" style="mix-blend-mode:screen;filter:brightness(1.6) saturate(0.8)">
+          <p class="font-body text-white/30 text-xs leading-relaxed">Dubai Meridian Forum &copy; 2026.<br>All rights reserved.</p>
+          <p class="font-arabic text-gold-500/25 text-sm mt-3" dir="rtl">منتدى دبي ميريديان</p>
+        </div>
+        <div>
+          <p class="text-gold-500/50 text-xs uppercase tracking-[0.2em] font-body mb-4">Navigate</p>
+          <div class="flex flex-col gap-2">
+            <a href="index.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">Home</a>
+            <a href="about.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">About</a>
+            <a href="team.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">Team</a>
+            <a href="tracks.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">Tracks</a>
+            <a href="partners.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">Partners</a>
+            <a href="media.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">Media</a>
+            <a href="register.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">Register</a>
+          </div>
+        </div>
+        <div>
+          <p class="text-gold-500/50 text-xs uppercase tracking-[0.2em] font-body mb-4">Contact</p>
+          <p class="text-white/30 text-sm font-body leading-relaxed">Aspect Tower, Office No. 2206<br>Zone B, Bay Avenue<br>Business Bay, Dubai</p>
+          <a href="mailto:info@dubaimeridianforum.com" class="text-gold-500/40 text-sm font-body mt-3 inline-block hover:text-gold-400 transition-colors duration-300">info@dubaimeridianforum.com</a>
+        </div>
+      </div>
+      <div class="mt-12 pt-8 border-t border-white/5 text-center">
+        <p class="text-white/20 text-xs font-body tracking-wide">Dubai Meridian Forum &middot; Business Bay, Dubai, UAE</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ─── Nav ─────────────────────────────────────────────────────────────────────
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) { nav.style.background='rgba(6,6,22,0.96)';nav.style.backdropFilter='blur(20px)';nav.style.borderBottom='1px solid rgba(201,169,110,0.08)'; }
+      else { nav.style.background='transparent';nav.style.backdropFilter='none';nav.style.borderBottom='none'; }
+    });
+    document.getElementById('mobileToggle').addEventListener('click',()=>document.getElementById('mobileMenu').classList.add('open'));
+    document.getElementById('mobileClose').addEventListener('click',()=>document.getElementById('mobileMenu').classList.remove('open'));
+    const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:0.12});
+    document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+
+    // ─── Entropy Canvas (from 3.txt) — vanilla port ──────────────────────────────
+    (function() {
+      const wrap   = document.getElementById('entropy-wrap');
+      const canvas = document.getElementById('entropy-canvas');
+      const ctx    = canvas.getContext('2d');
+
+      // Responsive size
+      let SIZE = Math.min(wrap.clientWidth, 520);
+      const dpr = window.devicePixelRatio || 1;
+
+      function setSize() {
+        SIZE = Math.min(wrap.clientWidth, 520);
+        canvas.width  = SIZE * dpr;
+        canvas.height = SIZE * dpr;
+        canvas.style.width  = SIZE + 'px';
+        canvas.style.height = SIZE + 'px';
+        ctx.scale(dpr, dpr);
+      }
+      setSize();
+
+      const PARTICLE_COLOR = '#ffffff';
+
+      class Particle {
+        constructor(x, y, order) {
+          this.x = x;
+          this.y = y;
+          this.originalX = x;
+          this.originalY = y;
+          this.size   = 1.6;
+          this.order  = order;
+          this.vx     = (Math.random() - 0.5) * 2;
+          this.vy     = (Math.random() - 0.5) * 2;
+          this.influence = 0;
+          this.neighbors = [];
+        }
+
+        update() {
+          if (this.order) {
+            // Ordered: return to grid, influenced by chaos neighbours
+            const dx = this.originalX - this.x;
+            const dy = this.originalY - this.y;
+            let cx = 0, cy = 0;
+            for (const n of this.neighbors) {
+              if (!n.order) {
+                const dist = Math.hypot(this.x - n.x, this.y - n.y);
+                const str  = Math.max(0, 1 - dist / 100);
+                cx += n.vx * str;
+                cy += n.vy * str;
+                this.influence = Math.max(this.influence, str);
+              }
+            }
+            const inf = this.influence;
+            this.x += dx * 0.05 * (1 - inf) + cx * inf;
+            this.y += dy * 0.05 * (1 - inf) + cy * inf;
+            this.influence *= 0.99;
+          } else {
+            // Chaotic: random walk, bounded to right half
+            this.vx += (Math.random() - 0.5) * 0.5;
+            this.vy += (Math.random() - 0.5) * 0.5;
+            this.vx *= 0.95;
+            this.vy *= 0.95;
+            this.x += this.vx;
+            this.y += this.vy;
+            if (this.x < SIZE / 2 || this.x > SIZE) this.vx *= -1;
+            if (this.y < 0         || this.y > SIZE) this.vy *= -1;
+            this.x = Math.max(SIZE / 2, Math.min(SIZE, this.x));
+            this.y = Math.max(0,         Math.min(SIZE, this.y));
+          }
+        }
+
+        draw() {
+          const alpha = this.order ? 0.8 - this.influence * 0.5 : 0.8;
+          const hex   = Math.round(alpha * 255).toString(16).padStart(2, '0');
+          ctx.fillStyle = PARTICLE_COLOR + hex;
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      // Build grid
+      let particles = [];
+      const GRID = 22;
+
+      function buildParticles() {
+        particles = [];
+        const spacing = SIZE / GRID;
+        for (let i = 0; i < GRID; i++) {
+          for (let j = 0; j < GRID; j++) {
+            const x = spacing * i + spacing / 2;
+            const y = spacing * j + spacing / 2;
+            particles.push(new Particle(x, y, x < SIZE / 2));
+          }
+        }
+      }
+      buildParticles();
+
+      function updateNeighbors() {
+        for (const p of particles) {
+          p.neighbors = [];
+          for (const o of particles) {
+            if (o === p) continue;
+            if (Math.hypot(p.x - o.x, p.y - o.y) < 100) p.neighbors.push(o);
+          }
+        }
+      }
+      updateNeighbors();
+
+      let frame = 0;
+      let animId;
+
+      function animate() {
+        animId = requestAnimationFrame(animate);
+        ctx.clearRect(0, 0, SIZE, SIZE);
+
+        // Background
+        ctx.fillStyle = '#000';
+        ctx.fillRect(0, 0, SIZE, SIZE);
+
+        // Update neighbours every 30 frames
+        if (frame % 30 === 0) updateNeighbors();
+
+        // Draw connections first
+        ctx.lineWidth = 0.5;
+        for (const p of particles) {
+          for (const n of p.neighbors) {
+            const dist = Math.hypot(p.x - n.x, p.y - n.y);
+            if (dist < 50) {
+              const alpha = 0.18 * (1 - dist / 50);
+              const hex   = Math.round(alpha * 255).toString(16).padStart(2, '0');
+              ctx.strokeStyle = PARTICLE_COLOR + hex;
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(n.x, n.y);
+              ctx.stroke();
+            }
+          }
+        }
+
+        // Update and draw particles
+        for (const p of particles) {
+          p.update();
+          p.draw();
+        }
+
+        // Dividing line
+        ctx.strokeStyle = 'rgba(255,255,255,0.12)';
+        ctx.lineWidth = 0.5;
+        ctx.setLineDash([4, 4]);
+        ctx.beginPath();
+        ctx.moveTo(SIZE / 2, 0);
+        ctx.lineTo(SIZE / 2, SIZE);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        frame++;
+      }
+
+      animate();
+
+      // Resize
+      window.addEventListener('resize', () => {
+        cancelAnimationFrame(animId);
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        setSize();
+        buildParticles();
+        updateNeighbors();
+        frame = 0;
+        animate();
+      });
+    })();
+
+    // ── SpecialText scramble ──────────────────────────────────────────────────────
+    (function(){
+      const CHARS='_!X$0-+*#';
+      function rndChar(prev){let c;do{c=CHARS[Math.floor(Math.random()*CHARS.length)];}while(c===prev);return c;}
+      class SpecialText{
+        constructor(el,{speed=20,once=true}={}){
+          this.el=el;this.text=el.textContent;this.speed=speed;
+          this.iv=null;this.phase='p1';this.step=0;this.done=false;
+          const io=new IntersectionObserver(entries=>{
+            entries.forEach(e=>{if(e.isIntersecting&&!this.done){this._start();if(once)io.unobserve(el);}});
+          },{rootMargin:'-80px'});
+          io.observe(el);
+        }
+        _start(){
+          this.el.textContent='\u00A0'.repeat(this.text.length);
+          this.phase='p1';this.step=0;
+          if(this.iv)clearInterval(this.iv);
+          this.iv=setInterval(()=>this.phase==='p1'?this._p1():this._p2(),this.speed);
+        }
+        _p1(){
+          const max=this.text.length*2,len=Math.min(this.step+1,this.text.length);
+          const c=[];for(let i=0;i<len;i++)c.push(rndChar(c[i-1]));
+          for(let i=len;i<this.text.length;i++)c.push('\u00A0');
+          this.el.textContent=c.join('');
+          if(this.step<max-1){this.step++;}else{this.phase='p2';this.step=0;}
+        }
+        _p2(){
+          const rev=Math.floor(this.step/2),c=[];
+          for(let i=0;i<rev&&i<this.text.length;i++)c.push(this.text[i]);
+          if(rev<this.text.length)c.push(this.step%2===0?'_':rndChar());
+          while(c.length<this.text.length)c.push(rndChar());
+          this.el.textContent=c.join('');
+          if(this.step<this.text.length*2-1){this.step++;}
+          else{this.el.textContent=this.text;clearInterval(this.iv);this.done=true;}
+        }
+      }
+      const el=document.getElementById('scramble-contact');
+      if(el)new SpecialText(el,{speed:20});
+    })();
+  </script>
+</body>
+</html>
