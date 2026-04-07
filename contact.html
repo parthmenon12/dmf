@@ -172,15 +172,15 @@
           <div class="gold-line mb-8"></div>
           <p class="font-body text-white/50 text-sm mb-8 leading-relaxed">Whether you're a prospective participant, potential sponsor, or member of the press, our team responds within 48 hours.</p>
 
-          <form class="space-y-5" onsubmit="event.preventDefault();document.getElementById('formOk').classList.remove('hidden');">
+          <form action="https://formspree.io/f/xdapjneg" method="POST" class="space-y-6"> </form>
             <div class="grid md:grid-cols-2 gap-5">
               <div>
                 <label class="block text-white/30 text-[10px] font-body uppercase tracking-wider mb-2">First Name</label>
-                <input type="text" class="form-input w-full px-4 py-3 rounded-sm text-sm font-body text-white" placeholder="Your first name" required>
+                <input type="text" name="first_name" class="form-input w-full px-4 py-3 rounded-sm text-sm font-body text-white" placeholder="Your first name" required>
               </div>
               <div>
                 <label class="block text-white/30 text-[10px] font-body uppercase tracking-wider mb-2">Last Name</label>
-                <input type="text" class="form-input w-full px-4 py-3 rounded-sm text-sm font-body text-white" placeholder="Your last name" required>
+                <input type="text" name="last_name" class="form-input w-full px-4 py-3 rounded-sm text-sm font-body text-white" placeholder="Your last name" required>
               </div>
             </div>
             <div>
@@ -189,7 +189,7 @@
             </div>
             <div>
               <label class="block text-white/30 text-[10px] font-body uppercase tracking-wider mb-2">Subject</label>
-              <select class="form-input w-full px-4 py-3 rounded-sm text-sm font-body text-white">
+              <select name="subject" class="form-input w-full px-4 py-3 rounded-sm text-sm font-body text-white">
                 <option value="" style="background:#0d0d2b;">Select a topic</option>
                 <option value="reg" style="background:#0d0d2b;">Registration Enquiry</option>
                 <option value="sponsor" style="background:#0d0d2b;">Sponsorship &amp; Partnerships</option>
@@ -200,7 +200,7 @@
             </div>
             <div>
               <label class="block text-white/30 text-[10px] font-body uppercase tracking-wider mb-2">Message</label>
-              <textarea rows="5" class="form-input w-full px-4 py-3 rounded-sm text-sm font-body text-white resize-none" placeholder="How can we help you?" required></textarea>
+              <textarea name="message" rows="5" class="form-input w-full px-4 py-3 rounded-sm text-sm font-body text-white resize-none" placeholder="How can we help you?" required></textarea>
             </div>
             <button type="submit" class="px-10 py-3.5 bg-gold-500/10 border border-gold-500/30 text-gold-400 text-xs uppercase tracking-[0.25em] font-body hover:bg-gold-500/20 hover:border-gold-400 transition-all duration-300 focus-visible:outline-2 focus-visible:outline-gold-400 focus-visible:outline-offset-2 active:scale-[0.98]">
               Send Message
