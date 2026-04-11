@@ -316,12 +316,19 @@
     document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
 
     // ─── Glow card spotlight ──────────────────────────────────────────────────────
+    let moveTicking = false;
     document.addEventListener('pointermove', e => {
-      document.querySelectorAll('[data-glow]').forEach(card => {
-        const r = card.getBoundingClientRect();
-        card.style.setProperty('--x', `${e.clientX - r.left}px`);
-        card.style.setProperty('--y', `${e.clientY - r.top}px`);
-      });
+      if (!moveTicking) {
+        requestAnimationFrame(() => {
+          document.querySelectorAll('[data-glow]').forEach(card => {
+            const r = card.getBoundingClientRect();
+            card.style.setProperty('--x', `${e.clientX - r.left}px`);
+            card.style.setProperty('--y', `${e.clientY - r.top}px`);
+          });
+          moveTicking = false;
+        });
+        moveTicking = true;
+      }
     });
 
     // ─── Team Showcase ────────────────────────────────────────────────────────────
