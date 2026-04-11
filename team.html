@@ -267,7 +267,6 @@
             <a href="about.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">About</a>
             <a href="tracks.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">Tracks</a>
             <a href="partners.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">Partners</a>
-            <a href="media.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">Media</a>
             <a href="register.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">Register</a>
             <a href="contact.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">Contact</a>
           </div>
@@ -319,27 +318,27 @@
       };
 
       const members = [
-        { id:'1',  name:'Muheymin Hasanoglu', role:'Chief Executive',               tier:'Executive Leadership', img:'https://i.pravatar.cc/300?img=11',
+        { id:'1',  name:'Muheymin Hasan', role:'Chief Executive',               tier:'Executive Leadership', img:'img-hasan.jpg',
           bio:'Muheymin is the founding vision behind Dubai Meridian Forum. As Chief Executive, he sets the strategic direction, secures the relationships that make the forum possible, and ensures every element of the event reflects the ambition of the organisation.' },
-        { id:'2',  name:'Parth Menon',        role:'Chief Operative Officer',        tier:'Chief Officers',       img:'https://i.pravatar.cc/300?img=52',
+        { id:'2',  name:'Parth Menon',        role:'Chief Operating Officer',        tier:'Chief Officers',       img:'img-parth.jpg',
           bio:'Parth oversees the operational backbone of DMF — from systems and workflows to cross-team coordination. He keeps the machine running, translating vision into execution and making sure no moving part is left unaccounted for.' },
-        { id:'3',  name:'Sanithi Perera',     role:'Chief Organizing Officer',       tier:'Chief Officers',       img:'https://i.pravatar.cc/300?img=47',
+        { id:'3',  name:'Sanithi Perera',     role:'Chief Organizing Officer',       tier:'Chief Officers',       img:'img-sanithi.jpg',
           bio:'Sanithi leads the end-to-end organisation of the forum, from delegate experience to programme flow. Her meticulous planning and calm under pressure ensure that every participant walks away with a seamless, memorable event.' },
-        { id:'4',  name:'Adithya Rajesh',     role:'Chief Academic Officer',         tier:'Chief Officers',       img:'https://i.pravatar.cc/300?img=15',
+        { id:'4',  name:'Adithya Rajesh',     role:'Chief Academic Officer',         tier:'Chief Officers',       img:'img-adithya.jpg',
           bio:'Adithya shapes the intellectual heart of the forum. He leads content design across all three tracks, curates speakers, and ensures the academic rigour that sets DMF apart from every other student-run conference in the region.' },
-        { id:'5',  name:'Laila Mohamed',      role:'Director of Public Relations',   tier:'Department Heads',     img:'https://i.pravatar.cc/300?img=32',
+        { id:'5',  name:'Laila Mohamed',      role:'Director of Public Relations',   tier:'Department Heads',     img:'img-laila.jpg',
           bio:'Laila drives the public face of DMF — managing media outreach, building press partnerships, and crafting the communications strategy that positions the forum with confidence on a global stage.' },
         { id:'6',  name:'Adam Farag',         role:'Director of Programme',          tier:'Department Heads',     img:'https://i.pravatar.cc/300?img=68',
           bio:'Adam architects the programme that delegates experience on the day. From workshop design to speaker liaison, he ensures every session is purposeful, well-paced, and intellectually stimulating.' },
-        { id:'7',  name:'Samara Deshnoor',    role:'Director of Operations',         tier:'Department Heads',     img:'https://i.pravatar.cc/300?img=25',
+        { id:'7',  name:'Samara Deshnoor',    role:'Director of Operations',         tier:'Department Heads',     img:'img-samara.jpg',
           bio:"Samara owns the operational detail — venue logistics, on-site coordination, and day-of execution. Her precision and composure mean that the forum's complex moving parts come together exactly as planned." },
-        { id:'8',  name:'Ronak Karlapudi',    role:'Director of Administrations',    tier:'Department Heads',     img:'https://i.pravatar.cc/300?img=57',
+        { id:'8',  name:'Ronak Karlapudi',    role:'Director of Administrations',    tier:'Department Heads',     img:'img-ronak.jpg',
           bio:'Ronak manages the administrative infrastructure of DMF — overseeing delegate relations, documentation, and the internal systems that keep the organisation running efficiently behind the scenes.' },
-        { id:'9',  name:'Alishba Ayaat',      role:'Creative Director',              tier:'Department Heads',     img:'https://i.pravatar.cc/300?img=44',
+        { id:'9',  name:'Alishba Ayaat',      role:'Creative Director',              tier:'Department Heads',     img:'img-alishba.jpg',
           bio:'Alishba is the creative mind behind the DMF brand. She leads visual identity, design output, and the aesthetic language of everything the forum puts into the world — ensuring it looks as compelling as it sounds.' },
-        { id:'10', name:'Nara Fashalla',      role:'Deputy Creative Director',       tier:'Department Heads',     img:'https://i.pravatar.cc/300?img=23',
+        { id:'10', name:'Nara Fashalla',      role:'Deputy Creative Director',       tier:'Department Heads',     img:'img-nara.jpg',
           bio:'Nara works alongside the creative direction to bring concepts to life with precision and flair. She ensures consistency across all visual touchpoints, translating the brand vision into polished, production-ready output.' },
-        { id:'11', name:'Aroush Iftikhar',    role:'Deputy Director of Operations',  tier:'Department Heads',     img:'https://i.pravatar.cc/300?img=60',
+        { id:'11', name:'Aroush Iftikhar',    role:'Deputy Director of Operations',  tier:'Department Heads',     img:'img-aroush.jpg',
           bio:'Aroush supports operational delivery across the forum, stepping into critical logistics roles wherever the detail demands it. His reliability and initiative make him an essential part of the operations function.' },
       ];
 
@@ -454,7 +453,7 @@
           const img = c.querySelector('img');
           const active = c.dataset.id === id;
           const dimmed = id !== null && !active;
-          img.style.filter = active ? 'grayscale(0) brightness(1)' : dimmed ? 'grayscale(1) brightness(0.3)' : 'grayscale(1) brightness(0.65)';
+          img.style.filter = active ? 'grayscale(0) brightness(1) sepia(0)' : dimmed ? 'grayscale(0.6) brightness(0.4) sepia(0.3)' : 'grayscale(0.35) brightness(0.85) sepia(0.25)';
         });
 
         // name rows
