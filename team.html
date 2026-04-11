@@ -473,12 +473,21 @@
         });
       }
 
-      showcase.addEventListener('mouseleave', () => setHovered(null));
+      let hoverDebounce = null;
+      function debouncedHover(id) {
+        clearTimeout(hoverDebounce);
+        hoverDebounce = setTimeout(() => setHovered(id), 60);
+      }
+
+      showcase.addEventListener('mouseleave', () => {
+        clearTimeout(hoverDebounce);
+        setHovered(null);
+      });
       showcase.querySelectorAll('.team-photo-card').forEach(c => {
-        c.addEventListener('mouseenter', () => setHovered(c.dataset.id));
+        c.addEventListener('mouseenter', () => debouncedHover(c.dataset.id));
       });
       showcase.querySelectorAll('.team-member-row').forEach(r => {
-        r.addEventListener('mouseenter', () => setHovered(r.dataset.id));
+        r.addEventListener('mouseenter', () => debouncedHover(r.dataset.id));
       });
     })();
 
