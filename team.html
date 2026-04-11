@@ -186,7 +186,7 @@
   <script>
     (function() {
       const svg = document.querySelector('#paths-bg svg');
-      const numPaths = 36;
+      const numPaths = 20;
 
       for (let i = 0; i < numPaths; i++) {
         // Replicate the React component's path formula for both position=1 and position=-1
@@ -204,8 +204,7 @@
           p.setAttribute('stroke-width', width);
           p.setAttribute('stroke-opacity', Math.min(opacity, 0.55));
           p.setAttribute('fill', 'none');
-          p.setAttribute('stroke-dasharray', '1 0');
-          p.style.cssText = `animation: pathFlow ${dur}s ${delay}s linear infinite;`;
+          p.style.cssText = `animation: pathFlow ${dur}s ${delay}s ease-in-out infinite;`;
           svg.appendChild(p);
         });
       }
@@ -214,11 +213,10 @@
 
   <style>
     @keyframes pathFlow {
-      0%   { stroke-dashoffset: 0;    opacity: 0.3; }
-      50%  { opacity: 0.65; }
-      100% { stroke-dashoffset: -2000; opacity: 0.3; }
+      0%, 100% { opacity: 0.15; }
+      50%       { opacity: 0.55; }
     }
-    #paths-bg path { stroke-dasharray: 2000; }
+    #paths-bg path { stroke-dasharray: none; }
   </style>
 
   <!-- Team Showcase -->
