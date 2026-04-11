@@ -284,9 +284,27 @@
   <script>
     // ─── Nav scroll ───────────────────────────────────────────────────────────────
     const nav = document.getElementById('mainNav');
+    const pathsBg = document.getElementById('paths-bg');
+    let scrollTicking = false;
+    let scrollStopTimer = null;
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 60) { nav.style.background='rgba(6,6,22,0.96)';nav.style.backdropFilter='blur(20px)';nav.style.borderBottom='1px solid rgba(201,169,110,0.08)'; }
-      else { nav.style.background='transparent';nav.style.backdropFilter='none';nav.style.borderBottom='none'; }
+      // Pause path animations during scroll to reduce GPU load
+      if (pathsBg) pathsBg.style.animationPlayState = 'paused';
+      pathsBg && pathsBg.querySelectorAll('path').forEach(p => p.style.animationPlayState = 'paused');
+      clearTimeout(scrollStopTimer);
+      scrollStopTimer = setTimeout(() => {
+        pathsBg && pathsBg.querySelectorAll('path').forEach(p => p.style.animationPlayState = 'running');
+      }, 150);
+
+      // Throttle nav update with requestAnimationFrame
+      if (!scrollTicking) {
+        requestAnimationFrame(() => {
+          if (window.scrollY > 60) { nav.style.background='rgba(6,6,22,0.96)';nav.style.backdropFilter='blur(20px)';nav.style.borderBottom='1px solid rgba(201,169,110,0.08)'; }
+          else { nav.style.background='transparent';nav.style.backdropFilter='none';nav.style.borderBottom='none'; }
+          scrollTicking = false;
+        });
+        scrollTicking = true;
+      }
     });
 
     // ─── Mobile menu ─────────────────────────────────────────────────────────────
