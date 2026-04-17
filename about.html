@@ -342,34 +342,71 @@
     <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gold-500/20 to-transparent"></div>
 
     <div class="relative max-w-6xl mx-auto px-6 lg:px-12">
-      <div class="fade-section text-center mb-16">
-        <p class="text-gold-500/60 text-xs uppercase tracking-[0.3em] font-body mb-4">Our Principles</p>
-        <h2 class="font-display text-4xl md:text-5xl text-white font-light" style="letter-spacing: -0.02em;">
-          The Meridian <span class="text-gold-400 italic">Values</span>
-        </h2>
+
+      <!-- Top: heading left, decorative icons right -->
+      <div class="fade-section flex flex-col md:flex-row items-center gap-12 mb-16">
+        <div class="md:w-1/2">
+          <p class="text-gold-500/60 text-xs uppercase tracking-[0.3em] font-body mb-4">Our Principles</p>
+          <h2 class="font-display text-4xl md:text-5xl text-white font-light mb-5" style="letter-spacing: -0.02em;">
+            We cultivate <span class="text-gold-400 italic">excellence-driven</span> thinkers
+          </h2>
+          <p class="font-body text-sm leading-relaxed" style="color:rgba(200,210,230,0.5);">The Meridian Forum is built on principles we believe every future leader should embody.</p>
+        </div>
+        <div class="md:w-1/2 flex justify-center">
+          <!-- Decorative icon cluster -->
+          <div class="relative w-64 h-48 select-none" aria-hidden="true">
+            <!-- Row 1 -->
+            <span class="absolute" style="top:0;left:32px;width:52px;height:52px;background:rgba(201,169,110,0.18);border:1px solid rgba(201,169,110,0.25);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:22px;">🏆</span>
+            <span class="absolute" style="top:0;left:100px;width:52px;height:52px;background:rgba(201,169,110,0.28);border:1px solid rgba(201,169,110,0.35);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:22px;">🤝</span>
+            <span class="absolute" style="top:0;left:168px;width:52px;height:52px;background:rgba(201,169,110,0.14);border:1px solid rgba(201,169,110,0.2);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:22px;">💡</span>
+            <!-- Row 2 (offset) -->
+            <span class="absolute" style="top:64px;left:0;width:52px;height:52px;background:rgba(201,169,110,0.10);border:1px solid rgba(201,169,110,0.15);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:22px;">🌍</span>
+            <span class="absolute" style="top:64px;left:68px;width:52px;height:52px;background:rgba(201,169,110,0.22);border:1px solid rgba(201,169,110,0.28);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:22px;">⚡</span>
+            <span class="absolute" style="top:64px;left:136px;width:52px;height:52px;background:rgba(201,169,110,0.18);border:1px solid rgba(201,169,110,0.25);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:22px;">🎯</span>
+            <span class="absolute" style="top:64px;left:204px;width:52px;height:52px;background:rgba(201,169,110,0.12);border:1px solid rgba(201,169,110,0.18);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:22px;">🔬</span>
+            <!-- Row 3 -->
+            <span class="absolute" style="top:128px;left:32px;width:52px;height:52px;background:rgba(201,169,110,0.16);border:1px solid rgba(201,169,110,0.22);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:22px;">✨</span>
+            <span class="absolute" style="top:128px;left:100px;width:52px;height:52px;background:rgba(201,169,110,0.25);border:1px solid rgba(201,169,110,0.32);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:22px;">🌐</span>
+            <span class="absolute" style="top:128px;left:168px;width:52px;height:52px;background:rgba(201,169,110,0.10);border:1px solid rgba(201,169,110,0.16);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:22px;">📐</span>
+          </div>
+        </div>
       </div>
 
-      <div class="fade-section grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-        <div class="p-7 rounded-sm transition-all duration-300 hover:scale-[1.02]" style="background:linear-gradient(145deg,#c9a96e,#d4a44e);box-shadow:0 8px 32px rgba(201,169,110,0.25);">
-          <span class="font-display text-3xl block mb-3" style="color:rgba(0,0,0,0.12);">01</span>
-          <h3 class="font-display text-lg mb-2" style="color:#0a0a1a;">Excellence</h3>
-          <p class="font-body text-xs leading-relaxed" style="color:rgba(0,0,0,0.55);">We hold every participant, speaker, and judge to the highest standard of academic and professional rigour.</p>
+      <!-- Values grid: icon + title + description -->
+      <div class="fade-section grid md:grid-cols-2 gap-10">
+
+        <div class="flex gap-5">
+          <div class="flex-shrink-0 w-11 h-11 rounded-sm flex items-center justify-center text-xl" style="background:rgba(201,169,110,0.2);border:1px solid rgba(201,169,110,0.3);">🏆</div>
+          <div>
+            <h3 class="font-display text-lg text-white mb-2">Excellence</h3>
+            <p class="font-body text-sm leading-relaxed" style="color:rgba(200,210,230,0.5);">We hold every participant, speaker, and judge to the highest standard of academic and professional rigour.</p>
+          </div>
         </div>
-        <div class="p-7 rounded-sm transition-all duration-300 hover:scale-[1.02]" style="background:linear-gradient(145deg,#c9a96e,#d4a44e);box-shadow:0 8px 32px rgba(201,169,110,0.25);">
-          <span class="font-display text-3xl block mb-3" style="color:rgba(0,0,0,0.12);">02</span>
-          <h3 class="font-display text-lg mb-2" style="color:#0a0a1a;">Collaboration</h3>
-          <p class="font-body text-xs leading-relaxed" style="color:rgba(0,0,0,0.55);">True innovation emerges at the intersection of disciplines. We foster environments where diverse minds unite.</p>
+
+        <div class="flex gap-5">
+          <div class="flex-shrink-0 w-11 h-11 rounded-sm flex items-center justify-center text-xl" style="background:rgba(201,169,110,0.2);border:1px solid rgba(201,169,110,0.3);">🤝</div>
+          <div>
+            <h3 class="font-display text-lg text-white mb-2">Collaboration</h3>
+            <p class="font-body text-sm leading-relaxed" style="color:rgba(200,210,230,0.5);">True innovation emerges at the intersection of disciplines. We foster environments where diverse minds unite.</p>
+          </div>
         </div>
-        <div class="p-7 rounded-sm transition-all duration-300 hover:scale-[1.02]" style="background:linear-gradient(145deg,#c9a96e,#d4a44e);box-shadow:0 8px 32px rgba(201,169,110,0.25);">
-          <span class="font-display text-3xl block mb-3" style="color:rgba(0,0,0,0.12);">03</span>
-          <h3 class="font-display text-lg mb-2" style="color:#0a0a1a;">Creativity</h3>
-          <p class="font-body text-xs leading-relaxed" style="color:rgba(0,0,0,0.55);">We champion bold thinking and original ideas, encouraging participants to challenge convention and reimagine what is possible.</p>
+
+        <div class="flex gap-5">
+          <div class="flex-shrink-0 w-11 h-11 rounded-sm flex items-center justify-center text-xl" style="background:rgba(201,169,110,0.2);border:1px solid rgba(201,169,110,0.3);">💡</div>
+          <div>
+            <h3 class="font-display text-lg text-white mb-2">Creativity</h3>
+            <p class="font-body text-sm leading-relaxed" style="color:rgba(200,210,230,0.5);">We champion bold thinking and original ideas, encouraging participants to challenge convention and reimagine what is possible.</p>
+          </div>
         </div>
-        <div class="p-7 rounded-sm transition-all duration-300 hover:scale-[1.02]" style="background:linear-gradient(145deg,#c9a96e,#d4a44e);box-shadow:0 8px 32px rgba(201,169,110,0.25);">
-          <span class="font-display text-3xl block mb-3" style="color:rgba(0,0,0,0.12);">04</span>
-          <h3 class="font-display text-lg mb-2" style="color:#0a0a1a;">Impact</h3>
-          <p class="font-body text-xs leading-relaxed" style="color:rgba(0,0,0,0.55);">Every challenge, workshop, and presentation is designed to create real-world value beyond the forum.</p>
+
+        <div class="flex gap-5">
+          <div class="flex-shrink-0 w-11 h-11 rounded-sm flex items-center justify-center text-xl" style="background:rgba(201,169,110,0.2);border:1px solid rgba(201,169,110,0.3);">🌍</div>
+          <div>
+            <h3 class="font-display text-lg text-white mb-2">Impact</h3>
+            <p class="font-body text-sm leading-relaxed" style="color:rgba(200,210,230,0.5);">Every challenge, workshop, and presentation is designed to create real-world value beyond the forum.</p>
+          </div>
         </div>
+
       </div>
     </div>
   </section>
