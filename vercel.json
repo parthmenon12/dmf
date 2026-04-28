@@ -1,7 +1,6 @@
 {
   "github": {
-    "enabled": false,
-    "autoAlias": false
-  },
-  "ignoreCommand": "exit 0"
+    "enabled": true,
+    "autoAlias": true
+  }
 }
