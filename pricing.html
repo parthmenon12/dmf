@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delegate Packages — Dubai Meridian Forum 2026</title>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Delegate Packages — Dubai Meridian Forum 2026">
+  <meta property="og:description" content="Choose your delegate package for DMF 2026. August 2–5, Dubai. $35,000 in project funding on the line.">
+  <meta property="og:image" content="https://www.dubaimeridian.com/og-thumbnail.png">
+  <meta property="og:url" content="https://www.dubaimeridian.com/pricing.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://www.dubaimeridian.com/og-thumbnail.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Raleway:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: { 50:'#e8e8f0',100:'#c5c5d9',200:'#9494b5',300:'#5e5e88',400:'#2d2d5e',500:'#14143a',600:'#0d0d2b',700:'#09091f',800:'#060616',900:'#03030b' },
+            gold: { 400:'#d4a44e',500:'#c9a96e' },
+          },
+          fontFamily: {
+            display:['"Cormorant Garamond"','serif'],
+            body:['"Raleway"','sans-serif'],
+            arabic:['"Amiri"','serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --navy-deep: #060616;
+      --navy-mid:  #0b1120;
+      --navy-card: #0f1a2e;
+      --navy-card-hi: #131f35;
+      --navy-line: rgba(201,169,110,0.18);
+      --navy-line-strong: rgba(201,169,110,0.42);
+      --gold:      #c9a96e;
+      --gold-hi:   #d4a44e;
+      --gold-soft: #e7cf9b;
+      --paper:     #f0ead6;
+      --paper-dim: rgba(240,234,214,0.72);
+      --paper-faint: rgba(240,234,214,0.42);
+      --grey-soft: #8a8a9a;
+      --serif: "Cormorant Garamond", "Times New Roman", serif;
+      --sans:  "Raleway", "Helvetica Neue", Arial, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--navy-deep);
+      color: var(--paper);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+
+    /* Grain overlay */
+    body::after {
+      content: '';
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9999; opacity: 0.5;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #060616; }
+    ::-webkit-scrollbar-thumb { background: rgba(201,169,110,0.3); border-radius: 3px; }
+
+    /* Nav */
+    .nav-link { position: relative; letter-spacing: 0.15em; }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 1px; background: #c9a96e;
+      transition: width 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    /* Mobile menu */
+    .mobile-menu { transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .mobile-menu.open { transform: translateX(0); }
+
+    /* Hero */
+    #pricing-hero {
+      position: relative; width: 100%; min-height: 72vh;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    #hero-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block; }
+    .hero-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.55); }
+    .hero-content {
+      position: relative; z-index: 2;
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; padding: 120px 1.5rem 80px;
+    }
+
+    @keyframes scrollBounce { 0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(6px);} }
+    .scroll-bounce { animation: scrollBounce 2s ease-in-out infinite; }
+
+    /* =========================================================
+       PRICING SECTION
+       ========================================================= */
+    .dmf-pricing {
+      position: relative;
+      background: var(--navy-deep);
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .dmf-pricing::before {
+      content: "";
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(201,169,110,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 50% 110%, rgba(201,169,110,0.05) 0%, transparent 65%),
+        linear-gradient(180deg, var(--navy-mid) 0%, var(--navy-deep) 50%, var(--navy-mid) 100%);
+      pointer-events: none; z-index: 0;
+    }
+    .dmf-pricing > .inner { position: relative; z-index: 2; }
+
+    /* Typography */
+    .eyebrow {
+      font-family: var(--sans); font-weight: 500;
+      font-size: 11px; letter-spacing: 0.36em;
+      text-transform: uppercase; color: var(--gold);
+    }
+    .h-display {
+      font-family: var(--serif); font-weight: 300;
+      letter-spacing: -0.015em; line-height: 1.02; color: var(--paper);
+    }
+    .h-display em { font-style: italic; color: var(--gold); font-weight: 400; }
+    .lede { font-family: var(--sans); font-weight: 300; color: var(--paper-dim); line-height: 1.55; }
+    .micro {
+      font-family: var(--sans); font-weight: 500;
+      font-size: 10px; letter-spacing: 0.32em;
+      text-transform: uppercase; color: var(--gold);
+    }
+    .hair-gold-short { height: 1px; width: 80px; background: var(--gold); }
+
+    /* Cards */
+    .card {
+      position: relative;
+      background: var(--navy-card);
+      border: 1px solid var(--navy-line);
+      padding: 40px 32px 36px;
+      display: flex; flex-direction: column;
+      transition: transform 380ms cubic-bezier(.2,.7,.2,1),
+                  box-shadow 380ms ease, border-color 380ms ease, background 380ms ease;
+      will-change: transform;
+    }
+    .card::before {
+      content: ""; position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;
+      border: 1px solid transparent; pointer-events: none;
+      transition: border-color 380ms ease;
+    }
+    .card:hover::before { border-color: rgba(201,169,110,0.10); }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--navy-line-strong);
+      box-shadow:
+        0 18px 48px -16px rgba(0,0,0,0.55),
+        0 0 0 1px rgba(201,169,110,0.18),
+        0 0 60px -20px rgba(201,169,110,0.35);
+    }
+
+    /* Elevated card */
+    .card--elevated {
+      background: var(--navy-card-hi);
+      border-color: var(--navy-line-strong);
+      box-shadow:
+        0 22px 60px -18px rgba(0,0,0,0.65),
+        0 0 0 1px rgba(201,169,110,0.28),
+        0 0 80px -28px rgba(201,169,110,0.55);
+    }
+    .card--elevated:hover {
+      box-shadow:
+        0 28px 70px -18px rgba(0,0,0,0.75),
+        0 0 0 1px rgba(201,169,110,0.42),
+        0 0 100px -28px rgba(201,169,110,0.7);
+    }
+    @media (min-width: 1024px) {
+      .card--elevated { transform: translateY(-12px); }
+      .card--elevated:hover { transform: translateY(-16px); }
+    }
+
+    /* Most Popular badge */
+    .badge-popular {
+      position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+      padding: 7px 16px;
+      background: var(--navy-deep); border: 1px solid var(--gold);
+      color: var(--gold); font-family: var(--sans); font-weight: 600;
+      font-size: 9.5px; letter-spacing: 0.36em; text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .badge-popular::before, .badge-popular::after {
+      content: ""; position: absolute; top: 50%; width: 6px; height: 6px;
+      transform: translateY(-50%) rotate(45deg); background: var(--gold);
+    }
+    .badge-popular::before { left: -3px; }
+    .badge-popular::after { right: -3px; }
+
+    /* Card content */
+    .pkg-name {
+      font-family: var(--serif); font-style: italic; font-weight: 400;
+      font-size: 26px; letter-spacing: -0.005em; color: var(--paper); line-height: 1.05;
+    }
+    .pkg-descriptor {
+      margin-top: 10px; font-family: var(--sans); font-weight: 500;
+      font-size: 9.5px; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--paper-faint); line-height: 1.5;
+    }
+    .pkg-price-row { margin-top: 22px; display: flex; align-items: baseline; gap: 10px; }
+    .pkg-price {
+      font-family: var(--serif); font-weight: 300; font-size: 64px;
+      line-height: 1; letter-spacing: -0.02em; color: var(--gold);
+      font-feature-settings: "lnum";
+    }
+    .pkg-price-unit {
+      font-family: var(--sans); font-weight: 500; font-size: 11px;
+      letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold);
+    }
+    .card-sep {
+      margin: 24px 0 22px; height: 1px;
+      background: linear-gradient(90deg, var(--gold) 0%, transparent 100%);
+      opacity: 0.55;
+    }
+
+    /* Features */
+    .features { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+    .features li { display: grid; grid-template-columns: 18px 1fr; column-gap: 12px; align-items: start; }
+    .features .ico { margin-top: 4px; width: 14px; height: 14px; color: var(--gold); }
+    .features .ftr-label {
+      font-family: var(--sans); font-weight: 500; font-size: 10px;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--paper-faint);
+      display: block; margin-bottom: 3px;
+    }
+    .features .ftr-value { font-family: var(--sans); font-weight: 400; font-size: 14px; color: var(--paper); line-height: 1.45; }
+
+    /* Prize row */
+    .prize-row {
+      margin-top: 22px; padding: 14px;
+      border: 1px solid rgba(201,169,110,0.28); background: rgba(201,169,110,0.045);
+      display: grid; grid-template-columns: 16px 1fr; column-gap: 12px; align-items: start;
+      animation: prize-pulse 3s ease-in-out infinite;
+    }
+    .prize-row .prize-ico { margin-top: 3px; width: 14px; height: 14px; color: var(--gold-soft); }
+    .prize-row .prize-label {
+      font-family: var(--sans); font-weight: 500; font-size: 9px;
+      letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold-soft); margin-bottom: 4px;
+    }
+    .prize-row .prize-value {
+      font-family: var(--serif); font-style: italic; font-weight: 400;
+      font-size: 14px; line-height: 1.4; color: var(--gold-soft); letter-spacing: 0.01em;
+    }
+    @keyframes prize-pulse { 0%,100%{opacity:0.78;} 50%{opacity:1;} }
+
+    /* CTA */
+    .cta-spacer { flex: 1 1 auto; min-height: 24px; }
+    .cta {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      width: 100%; padding: 16px 18px;
+      background: transparent; border: 1px solid var(--gold);
+      color: var(--gold); font-family: var(--sans); font-weight: 600;
+      font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase;
+      cursor: pointer; text-decoration: none;
+      transition: background 280ms ease, color 280ms ease, letter-spacing 280ms ease;
+    }
+    .cta:hover { background: var(--gold); color: var(--navy-deep); letter-spacing: 0.4em; }
+    .cta .arrow { width: 14px; height: 8px; transition: transform 280ms ease; }
+    .cta:hover .arrow { transform: translateX(4px); }
+
+    /* Locked card */
+    .card--locked { opacity: 0.55; cursor: not-allowed; filter: saturate(0.6); }
+    .card--locked:hover { transform: none; border-color: var(--navy-line); box-shadow: none; animation: locked-wiggle 320ms ease-in-out; }
+    @keyframes locked-wiggle { 0%,100%{transform:translateX(0);} 25%{transform:translateX(-2px);} 75%{transform:translateX(2px);} }
+    .card--locked .features { filter: blur(2.5px); user-select: none; }
+    .card--locked .pkg-price-row .pkg-price { display: none; }
+    .card--locked .padlock { color: var(--grey-soft); width: 38px; height: 38px; }
+    .card--locked .cta { border-color: rgba(138,138,154,0.45); color: var(--grey-soft); cursor: not-allowed; pointer-events: none; }
+    .card--locked .cta:hover { background: transparent; color: var(--grey-soft); letter-spacing: 0.32em; }
+    .locked-note {
+      margin-top: 14px; font-family: var(--serif); font-style: italic;
+      font-weight: 400; font-size: 13px; color: var(--paper-faint); text-align: center;
+    }
+    .coming-soon-watermark {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      pointer-events: none; z-index: 2;
+    }
+    .coming-soon-watermark span {
+      font-family: var(--sans); font-weight: 600; font-size: 22px;
+      letter-spacing: 0.55em; text-transform: uppercase;
+      color: rgba(240,234,214,0.06); transform: rotate(-22deg); white-space: nowrap;
+      border-top: 1px solid rgba(240,234,214,0.06);
+      border-bottom: 1px solid rgba(240,234,214,0.06);
+      padding: 6px 14px;
+    }
+
+    /* Trust strip */
+    .trust-strip {
+      display: flex; align-items: center; justify-content: center;
+      flex-wrap: wrap; gap: 18px 28px;
+      font-family: var(--sans); font-weight: 500; font-size: 10px;
+      letter-spacing: 0.32em; text-transform: uppercase; color: var(--paper-dim);
+    }
+    .trust-strip .dot { width: 4px; height: 4px; background: var(--gold); border-radius: 50%; display: inline-block; }
+
+    /* Early bird */
+    .earlybird {
+      text-align: center; font-family: var(--serif); font-style: italic;
+      font-weight: 400; font-size: 15px; color: var(--gold); opacity: 0.78;
+      letter-spacing: 0.005em; line-height: 1.5;
+      max-width: 60ch; margin-left: auto; margin-right: auto;
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 900ms cubic-bezier(.2,.7,.2,1), transform 900ms cubic-bezier(.2,.7,.2,1);
+      transition-delay: var(--reveal-delay, 0ms);
+    }
+    .reveal.is-in { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .prize-row { animation: none; }
+    }
+
+    /* Gold line divider */
+    .gold-line { width: 60px; height: 1px; background: linear-gradient(90deg,#c9a96e,transparent); }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full z-50 transition-all duration-500" id="mainNav">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <div class="flex items-center justify-between h-20">
+        <a href="index.html" class="flex items-center group">
+          <img src="5.png" alt="DMF" class="h-14 opacity-90 group-hover:opacity-100 transition-opacity duration-300" style="mix-blend-mode:screen;filter:brightness(1.6) saturate(0.8)">
+        </a>
+        <div class="hidden lg:flex items-center gap-10">
+          <a href="index.html" class="nav-link text-white/60 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300" style="font-family:'Raleway',sans-serif;">Home</a>
+          <a href="about.html" class="nav-link text-white/60 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300" style="font-family:'Raleway',sans-serif;">About</a>
+          <a href="team.html" class="nav-link text-white/60 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300" style="font-family:'Raleway',sans-serif;">Team</a>
+          <a href="tracks.html" class="nav-link text-white/60 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300" style="font-family:'Raleway',sans-serif;">Tracks</a>
+          <a href="partners.html" class="nav-link text-white/60 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300" style="font-family:'Raleway',sans-serif;">Partners</a>
+          <a href="contact.html" class="nav-link text-white/60 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300" style="font-family:'Raleway',sans-serif;">Contact</a>
+        </div>
+        <a href="register.html" class="hidden lg:block px-6 py-2.5 border border-gold-400 text-gold-400 text-xs uppercase tracking-[0.2em] hover:bg-gold-500/10 transition-all duration-300" style="font-family:'Raleway',sans-serif;">Register</a>
+        <button id="mobileToggle" class="lg:hidden text-white/60 hover:text-gold-400 transition-colors" aria-label="Menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="mobile-menu fixed inset-0 z-[60] bg-black/98 backdrop-blur-xl flex flex-col items-center justify-center gap-8">
+    <button id="mobileClose" class="absolute top-6 right-6 text-white/60 hover:text-gold-400 transition-colors" aria-label="Close">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+    <a href="index.html" class="text-white/60 text-sm uppercase tracking-[0.3em] hover:text-gold-400 transition-colors" style="font-family:'Raleway',sans-serif;">Home</a>
+    <a href="about.html" class="text-white/60 text-sm uppercase tracking-[0.3em] hover:text-gold-400 transition-colors" style="font-family:'Raleway',sans-serif;">About</a>
+    <a href="team.html" class="text-white/60 text-sm uppercase tracking-[0.3em] hover:text-gold-400 transition-colors" style="font-family:'Raleway',sans-serif;">Team</a>
+    <a href="tracks.html" class="text-white/60 text-sm uppercase tracking-[0.3em] hover:text-gold-400 transition-colors" style="font-family:'Raleway',sans-serif;">Tracks</a>
+    <a href="partners.html" class="text-white/60 text-sm uppercase tracking-[0.3em] hover:text-gold-400 transition-colors" style="font-family:'Raleway',sans-serif;">Partners</a>
+    <a href="contact.html" class="text-white/60 text-sm uppercase tracking-[0.3em] hover:text-gold-400 transition-colors" style="font-family:'Raleway',sans-serif;">Contact</a>
+    <a href="register.html" class="text-gold-400 text-sm uppercase tracking-[0.3em] border border-gold-500/30 px-6 py-2" style="font-family:'Raleway',sans-serif;">Register</a>
+  </div>
+
+  <!-- Hero -->
+  <section id="pricing-hero">
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="text-gold-500/70 text-xs uppercase tracking-[0.35em] mb-5" style="font-family:'Raleway',sans-serif;">Dubai Meridian Forum 2026</p>
+      <h1 class="font-display text-6xl md:text-8xl lg:text-9xl text-white font-light mb-2" style="letter-spacing:-0.03em;line-height:1.0;font-family:'Cormorant Garamond',serif;">
+        Delegate
+      </h1>
+      <h2 class="font-display text-5xl md:text-7xl lg:text-8xl font-light italic mb-8" style="letter-spacing:-0.03em;line-height:1.0;background:linear-gradient(135deg,#c9a96e,#e5bc6d,#c9a96e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-family:'Cormorant Garamond',serif;">
+        Packages
+      </h2>
+      <p class="text-white/50 text-xs md:text-sm uppercase tracking-[0.25em] mb-3" style="font-family:'Raleway',sans-serif;">August 2–5, 2026 &middot; Dubai &middot; Four Tracks &middot; One Prize Pool</p>
+      <p class="text-white/60 text-sm md:text-base mb-10" style="font-family:'Raleway',sans-serif;font-weight:300;">
+        <span style="color:rgba(201,169,110,0.9);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1em;">$35,000</span> in project funding on the line
+      </p>
+      <a href="#packages" class="inline-flex items-center gap-3 px-8 py-3 border border-gold-500/40 text-gold-400 text-xs uppercase tracking-[0.2em] hover:bg-gold-500/10 hover:border-gold-400 transition-all duration-300" style="font-family:'Raleway',sans-serif;">
+        View Packages
+        <svg width="14" height="8" viewBox="0 0 14 8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M0.5 4h12"/><path d="M9 0.8 12.7 4 9 7.2"/></svg>
+      </a>
+    </div>
+    <a href="#packages" class="scroll-bounce absolute bottom-8 left-1/2 text-white/30 hover:text-gold-400 transition-colors duration-300" style="-webkit-transform:translateX(-50%);">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"/></svg>
+    </a>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="packages" class="dmf-pricing">
+    <div class="inner mx-auto px-6 md:px-10 lg:px-14 xl:px-20 py-20 md:py-28 lg:py-32" style="max-width:1400px;">
+
+      <!-- Header -->
+      <header class="text-center mb-16 md:mb-20" style="max-width:48rem;margin-left:auto;margin-right:auto;">
+        <div class="reveal eyebrow" style="--reveal-delay:0ms;">Delegate Packages — DMF 2026</div>
+        <h2 class="reveal h-display mt-5" style="--reveal-delay:120ms;font-size:clamp(2.4rem,6vw,4.75rem);">
+          Choose Your <em>Position</em>
+        </h2>
+        <p class="reveal lede mt-6 text-base md:text-lg" style="--reveal-delay:240ms;">
+          August 2–5, 2026 &nbsp;·&nbsp; Dubai &nbsp;·&nbsp; Four tracks. One prize pool.
+          <span style="color:var(--paper);">$35,000</span> in project funding on the line.
+        </p>
+        <div class="reveal mx-auto mt-10 hair-gold-short" style="--reveal-delay:360ms;"></div>
+      </header>
+
+      <!-- Cards grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-5 mb-16 md:mb-20" style="align-items:stretch;">
+
+        <!-- ========== PACKAGE I — CATALYST ========== -->
+        <article class="card reveal" style="--reveal-delay:0ms;">
+          <div>
+            <div class="micro" style="opacity:0.85;">I.</div>
+            <h3 class="pkg-name mt-2">The Catalyst Package</h3>
+            <div class="pkg-descriptor">Standard Entry for Emerging Talent</div>
+            <div class="pkg-price-row">
+              <span class="pkg-price">700</span>
+              <span class="pkg-price-unit">AED</span>
+            </div>
+          </div>
+
+          <div class="card-sep"></div>
+
+          <ul class="features">
+            <li>
+              <svg class="ico" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2.2,7.4 5.8,11 12,3.4"/></svg>
+              <div>
+                <span class="ftr-label">Access</span>
+                <span class="ftr-value">Full General Admission (August 2–5)</span>
+              </div>
+            </li>
+            <li>
+              <svg class="ico" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2.2,7.4 5.8,11 12,3.4"/></svg>
+              <div>
+                <span class="ftr-label">Core Asset</span>
+                <span class="ftr-value">The Elite Business Toolkit</span>
+              </div>
+            </li>
+            <li>
+              <svg class="ico" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2.2,7.4 5.8,11 12,3.4"/></svg>
+              <div>
+                <span class="ftr-label">Workshop</span>
+                <span class="ftr-value">One Workshop or Panel of Choice</span>
+              </div>
+            </li>
+            <li>
+              <svg class="ico" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2.2,7.4 5.8,11 12,3.4"/></svg>
+              <div>
+                <span class="ftr-label">Competition</span>
+                <span class="ftr-value">Full Meridian Challenge Eligibility</span>
+              </div>
+            </li>
+          </ul>
+
+          <div class="prize-row">
+            <svg class="prize-ico" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3.5 2h7v2.5a3.5 3.5 0 0 1-7 0V2z"/>
+              <path d="M3.5 2.7H1.6v1.2a2 2 0 0 0 2 2"/>
+              <path d="M10.5 2.7h1.9v1.2a2 2 0 0 1-2 2"/>
+              <path d="M5.5 8.2h3v1.6h-3z"/>
+              <path d="M4 12h6"/>
+              <path d="M5 9.8l-1 2.2"/>
+              <path d="M9 9.8l1 2.2"/>
+            </svg>
+            <div>
+              <div class="prize-label">Prize Pool</div>
+              <div class="prize-value">35K Investment Pool · 10 Legal Umbrellas · 25 Internship Placements</div>
+            </div>
+          </div>
+
+          <div class="cta-spacer"></div>
+
+          <a href="register.html" class="cta mt-7">
+            <span>Secure Your Place</span>
+            <svg class="arrow" viewBox="0 0 14 8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M0.5 4h12"/><path d="M9 0.8 12.7 4 9 7.2"/>
+            </svg>
+          </a>
+        </article>
+
+        <!-- ========== PACKAGE II — ENTERPRISE (ELEVATED) ========== -->
+        <article class="card card--elevated reveal" style="--reveal-delay:120ms;">
+          <div class="badge-popular">Most Popular</div>
+          <div>
+            <div class="micro" style="opacity:0.95;">II.</div>
+            <h3 class="pkg-name mt-2">The Enterprise Package</h3>
+            <div class="pkg-descriptor">Strategic Tier for Operational Founders</div>
+            <div class="pkg-price-row">
+              <span class="pkg-price">850</span>
+              <span class="pkg-price-unit">AED</span>
+            </div>
+          </div>
+
+          <div class="card-sep"></div>
+
+          <ul class="features">
+            <li>
+              <svg class="ico" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2.2,7.4 5.8,11 12,3.4"/></svg>
+              <div>
+                <span class="ftr-label">Access</span>
+                <span class="ftr-value">Full General Admission (August 2–5)</span>
+              </div>
+            </li>
+            <li>
+              <svg class="ico" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2.2,7.4 5.8,11 12,3.4"/></svg>
+              <div>
+                <span class="ftr-label">Core Asset</span>
+                <span class="ftr-value">The Elite Business Toolkit</span>
+              </div>
+            </li>
+            <li>
+              <svg class="ico" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2.2,7.4 5.8,11 12,3.4"/></svg>
+              <div>
+                <span class="ftr-label">Workshops &amp; Panels</span>
+                <span class="ftr-value">All Workshops &amp; Panels — Full Access</span>
+              </div>
+            </li>
+            <li>
+              <svg class="ico" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2.2,7.4 5.8,11 12,3.4"/></svg>
+              <div>
+                <span class="ftr-label">Competition</span>
+                <span class="ftr-value">Full Meridian Challenge Eligibility</span>
+              </div>
+            </li>
+            <li>
+              <svg class="ico" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2.2,7.4 5.8,11 12,3.4"/></svg>
+              <div>
+                <span class="ftr-label">Strategy Asset</span>
+                <span class="ftr-value">Pre-Event Consultation (15-Min Project Audit)</span>
+              </div>
+            </li>
+            <li>
+              <svg class="ico" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2.2,7.4 5.8,11 12,3.4"/></svg>
+              <div>
+                <span class="ftr-label">Network</span>
+                <span class="ftr-value">VIP Networking Access</span>
+              </div>
+            </li>
+          </ul>
+
+          <div class="prize-row">
+            <svg class="prize-ico" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3.5 2h7v2.5a3.5 3.5 0 0 1-7 0V2z"/>
+              <path d="M3.5 2.7H1.6v1.2a2 2 0 0 0 2 2"/>
+              <path d="M10.5 2.7h1.9v1.2a2 2 0 0 1-2 2"/>
+              <path d="M5.5 8.2h3v1.6h-3z"/>
+              <path d="M4 12h6"/>
+            </svg>
+            <div>
+              <div class="prize-label">Prize Pool</div>
+              <div class="prize-value">35K Investment Pool · 10 Legal Umbrellas · 25 Internship Placements</div>
+            </div>
+          </div>
+
+          <div class="cta-spacer"></div>
+
+          <a href="register.html" class="cta mt-7">
+            <span>Secure Your Place</span>
+            <svg class="arrow" viewBox="0 0 14 8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M0.5 4h12"/><path d="M9 0.8 12.7 4 9 7.2"/>
+            </svg>
+          </a>
+        </article>
+
+        <!-- ========== PACKAGE III — EXECUTIVE ========== -->
+        <article class="card reveal" style="--reveal-delay:240ms;">
+          <div>
+            <div class="micro" style="opacity:0.85;">III.</div>
+            <h3 class="pkg-name mt-2">The Meridian Executive</h3>
+            <div class="pkg-descriptor">The Ultimate Acquisition Tier</div>
+            <div class="pkg-price-row">
+              <span class="pkg-price">999</span>
+              <span class="pkg-price-unit">AED</span>
+            </div>
+          </div>
+
+          <div class="card-sep"></div>
+
+          <ul class="features">
+            <li>
+              <svg class="ico" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2.2,7.4 5.8,11 12,3.4"/></svg>
+              <div>
+                <span class="ftr-label">Access</span>
+                <span class="ftr-value">Premium Entry &amp; Priority Seating (August 2–5)</span>
+              </div>
+            </li>
+            <li>
+              <svg class="ico" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2.2,7.4 5.8,11 12,3.4"/></svg>
+              <div>
+                <span class="ftr-label">Core Asset</span>
+                <span class="ftr-value">The Elite Business Toolkit</span>
+              </div>
+            </li>
+            <li>
+              <svg class="ico" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2.2,7.4 5.8,11 12,3.4"/></svg>
+              <div>
+                <span class="ftr-label">Workshops &amp; Panels</span>
+                <span class="ftr-value">All Workshops &amp; Panels — Full Access</span>
+              </div>
+            </li>
+            <li>
+              <svg class="ico" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2.2,7.4 5.8,11 12,3.4"/></svg>
+              <div>
+                <span class="ftr-label">Competition</span>
+                <span class="ftr-value">Full Meridian Challenge Eligibility</span>
+              </div>
+            </li>
+            <li>
+              <svg class="ico" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2.2,7.4 5.8,11 12,3.4"/></svg>
+              <div>
+                <span class="ftr-label">Strategy Asset</span>
+                <span class="ftr-value">Pre-Event Mentorship (Extended Consultation)</span>
+              </div>
+            </li>
+            <li>
+              <svg class="ico" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2.2,7.4 5.8,11 12,3.4"/></svg>
+              <div>
+                <span class="ftr-label">Network</span>
+                <span class="ftr-value">Guaranteed Direct Sit-Down with VIP Sponsors</span>
+              </div>
+            </li>
+            <li>
+              <svg class="ico" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2.2,7.4 5.8,11 12,3.4"/></svg>
+              <div>
+                <span class="ftr-label">Post-Event</span>
+                <span class="ftr-value">Priority Internship &amp; Partnership Placement</span>
+              </div>
+            </li>
+            <li>
+              <svg class="ico" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2.2,7.4 5.8,11 12,3.4"/></svg>
+              <div>
+                <span class="ftr-label">Loyalty</span>
+                <span class="ftr-value">Discounted Rate for Next DMF Edition</span>
+              </div>
+            </li>
+          </ul>
+
+          <div class="prize-row">
+            <svg class="prize-ico" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3.5 2h7v2.5a3.5 3.5 0 0 1-7 0V2z"/>
+              <path d="M3.5 2.7H1.6v1.2a2 2 0 0 0 2 2"/>
+              <path d="M10.5 2.7h1.9v1.2a2 2 0 0 1-2 2"/>
+              <path d="M5.5 8.2h3v1.6h-3z"/>
+              <path d="M4 12h6"/>
+            </svg>
+            <div>
+              <div class="prize-label">Prize Pool</div>
+              <div class="prize-value">35K Investment Pool · 10 Legal Umbrellas · 25 Internship Placements</div>
+            </div>
+          </div>
+
+          <div class="cta-spacer"></div>
+
+          <a href="register.html" class="cta mt-7">
+            <span>Secure Your Place</span>
+            <svg class="arrow" viewBox="0 0 14 8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M0.5 4h12"/><path d="M9 0.8 12.7 4 9 7.2"/>
+            </svg>
+          </a>
+        </article>
+
+        <!-- ========== PACKAGE IV — STUDENT (LOCKED) ========== -->
+        <article class="card card--locked reveal" style="--reveal-delay:360ms;" aria-disabled="true">
+          <div class="coming-soon-watermark"><span>Coming Soon</span></div>
+          <div>
+            <div class="micro" style="opacity:0.85;color:var(--grey-soft);">IV.</div>
+            <h3 class="pkg-name mt-2" style="color:var(--paper-dim);">Student Delegate Package</h3>
+            <div class="pkg-descriptor" style="color:var(--paper-faint);">For Full-Time Students — Coming Soon</div>
+            <div class="pkg-price-row" style="margin-top:14px;">
+              <svg class="padlock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="5.5" y="10.5" width="13" height="10" rx="1"/>
+                <path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/>
+                <circle cx="12" cy="15.5" r="1.1" fill="currentColor"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="card-sep" style="opacity:0.25;"></div>
+
+          <ul class="features">
+            <li>
+              <svg class="ico" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2.2,7.4 5.8,11 12,3.4"/></svg>
+              <div>
+                <span class="ftr-label">Access</span>
+                <span class="ftr-value">Reserved for Full-Time Students</span>
+              </div>
+            </li>
+            <li>
+              <svg class="ico" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2.2,7.4 5.8,11 12,3.4"/></svg>
+              <div>
+                <span class="ftr-label">Verification</span>
+                <span class="ftr-value">University ID Required</span>
+              </div>
+            </li>
+            <li>
+              <svg class="ico" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2.2,7.4 5.8,11 12,3.4"/></svg>
+              <div>
+                <span class="ftr-label">Pricing</span>
+                <span class="ftr-value">Heavily Discounted — TBA</span>
+              </div>
+            </li>
+            <li>
+              <svg class="ico" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2.2,7.4 5.8,11 12,3.4"/></svg>
+              <div>
+                <span class="ftr-label">Capacity</span>
+                <span class="ftr-value">Strict Limited Allocation</span>
+              </div>
+            </li>
+          </ul>
+
+          <div class="cta-spacer"></div>
+
+          <button class="cta mt-7" disabled aria-disabled="true">
+            <span>Notify Me</span>
+          </button>
+          <div class="locked-note">Heavily discounted access. Availability limited.</div>
+        </article>
+      </div>
+
+      <!-- Trust strip -->
+      <div class="reveal trust-strip mb-8" style="--reveal-delay:0ms;">
+        <span>Backed by Industry Sponsors</span>
+        <span class="dot"></span>
+        <span>Official Certificates Issued</span>
+        <span class="dot"></span>
+        <span>Limited Delegate Capacity</span>
+      </div>
+
+      <!-- Early bird -->
+      <p class="reveal earlybird" style="--reveal-delay:120ms;">
+        Early delegate pricing available — group &amp; delegation discounts apply. Contact us for institutional rates.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div style="width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(201,169,110,0.2),transparent);"></div>
+
+  <!-- Footer -->
+  <footer class="py-16 border-t border-white/5">
+    <div class="max-w-6xl mx-auto px-6 lg:px-12">
+      <div class="grid md:grid-cols-3 gap-12">
+        <div>
+          <img src="5.png" alt="DMF" class="h-8 opacity-60 mb-4" style="mix-blend-mode:screen;filter:brightness(1.6) saturate(0.8)">
+          <p class="text-white/30 text-xs leading-relaxed" style="font-family:'Raleway',sans-serif;">Dubai Meridian Forum &copy; 2026.<br>All rights reserved.</p>
+          <p class="text-gold-500/25 text-sm mt-3" style="font-family:'Amiri',serif;" dir="rtl">منتدى دبي ميريديان</p>
+        </div>
+        <div>
+          <p class="text-gold-500/50 text-xs uppercase tracking-[0.2em] mb-4" style="font-family:'Raleway',sans-serif;">Navigate</p>
+          <div class="flex flex-col gap-2">
+            <a href="index.html" class="text-white/30 text-sm hover:text-gold-400 transition-colors duration-300" style="font-family:'Raleway',sans-serif;">Home</a>
+            <a href="about.html" class="text-white/30 text-sm hover:text-gold-400 transition-colors duration-300" style="font-family:'Raleway',sans-serif;">About</a>
+            <a href="team.html" class="text-white/30 text-sm hover:text-gold-400 transition-colors duration-300" style="font-family:'Raleway',sans-serif;">Team</a>
+            <a href="tracks.html" class="text-white/30 text-sm hover:text-gold-400 transition-colors duration-300" style="font-family:'Raleway',sans-serif;">Tracks</a>
+            <a href="partners.html" class="text-white/30 text-sm hover:text-gold-400 transition-colors duration-300" style="font-family:'Raleway',sans-serif;">Partners</a>
+            <a href="register.html" class="text-white/30 text-sm hover:text-gold-400 transition-colors duration-300" style="font-family:'Raleway',sans-serif;">Register</a>
+            <a href="contact.html" class="text-white/30 text-sm hover:text-gold-400 transition-colors duration-300" style="font-family:'Raleway',sans-serif;">Contact</a>
+          </div>
+        </div>
+        <div>
+          <p class="text-gold-500/50 text-xs uppercase tracking-[0.2em] mb-4" style="font-family:'Raleway',sans-serif;">Contact</p>
+          <p class="text-white/30 text-sm leading-relaxed" style="font-family:'Raleway',sans-serif;">Aspect Tower, Office No. 2206<br>Zone B, Bay Avenue<br>Business Bay, Dubai</p>
+          <a href="mailto:Info@dubaimeridian.com" class="text-gold-500/40 text-sm mt-3 inline-block hover:text-gold-400 transition-colors duration-300" style="font-family:'Raleway',sans-serif;">Info@dubaimeridian.com</a>
+        </div>
+      </div>
+      <div class="mt-12 pt-8 border-t border-white/5 text-center">
+        <p class="text-white/20 text-xs tracking-wide" style="font-family:'Raleway',sans-serif;">Dubai Meridian Forum &middot; Business Bay, Dubai, UAE</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) {
+        nav.style.background = 'rgba(6,6,22,0.96)';
+        nav.style.backdropFilter = 'blur(20px)';
+        nav.style.borderBottom = '1px solid rgba(201,169,110,0.08)';
+      } else {
+        nav.style.background = 'transparent';
+        nav.style.backdropFilter = 'none';
+        nav.style.borderBottom = 'none';
+      }
+    });
+    document.getElementById('mobileToggle').addEventListener('click', () => document.getElementById('mobileMenu').classList.add('open'));
+    document.getElementById('mobileClose').addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open'));
+
+    // Scroll reveal
+    (function() {
+      const els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) { els.forEach(el => el.classList.add('is-in')); return; }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) { entry.target.classList.add('is-in'); io.unobserve(entry.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      els.forEach(el => io.observe(el));
+    })();
+
+    // Locked card wiggle replay on each hover
+    (function() {
+      const locked = document.querySelector('.card--locked');
+      if (!locked) return;
+      locked.addEventListener('mouseenter', () => {
+        locked.style.animation = 'none';
+        void locked.offsetWidth;
+        locked.style.animation = '';
+      });
+    })();
+
+    // Hero wave canvas
+    (function() {
+      const canvas = document.getElementById('hero-canvas');
+      const ctx = canvas.getContext('2d');
+      const SCALE = 3;
+      let width, height, imageData, data;
+
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = document.getElementById('pricing-hero').clientHeight;
+        width = Math.floor(canvas.width / SCALE);
+        height = Math.floor(canvas.height / SCALE);
+        imageData = ctx.createImageData(width, height);
+        data = imageData.data;
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      const SIN_TABLE = new Float32Array(1024);
+      const COS_TABLE = new Float32Array(1024);
+      for (let i = 0; i < 1024; i++) {
+        const angle = (i / 1024) * Math.PI * 2;
+        SIN_TABLE[i] = Math.sin(angle);
+        COS_TABLE[i] = Math.cos(angle);
+      }
+      const fastSin = x => SIN_TABLE[((((x % (Math.PI*2)) / (Math.PI*2)) * 1024) | 0) & 1023];
+      const fastCos = x => COS_TABLE[((((x % (Math.PI*2)) / (Math.PI*2)) * 1024) | 0) & 1023];
+
+      const startTime = Date.now();
+      function render() {
+        const time = (Date.now() - startTime) * 0.001;
+        for (let y = 0; y < height; y++) {
+          for (let x = 0; x < width; x++) {
+            const u_x = (2 * x - width) / height;
+            const u_y = (2 * y - height) / height;
+            let a = 0, d = 0;
+            for (let i = 0; i < 4; i++) { a += fastCos(i - d + time * 0.5 - a * u_x); d += fastSin(i * u_y + a); }
+            const wave = (fastSin(a) + fastCos(d)) * 0.5;
+            const intensity = 0.3 + 0.4 * wave;
+            const baseVal = 0.08 + 0.12 * fastCos(u_x + u_y + time * 0.3);
+            const blueAccent = 0.15 * fastSin(a * 1.5 + time * 0.2);
+            const purpleAccent = 0.1 * fastCos(d * 2 + time * 0.1);
+            const r = Math.max(0, Math.min(1, baseVal + purpleAccent * 0.8)) * intensity;
+            const g = Math.max(0, Math.min(1, baseVal + blueAccent * 0.6)) * intensity;
+            const b = Math.max(0, Math.min(1, baseVal + blueAccent * 1.2 + purpleAccent * 0.4)) * intensity;
+            const idx = (y * width + x) * 4;
+            data[idx] = r * 255; data[idx+1] = g * 255; data[idx+2] = b * 255; data[idx+3] = 255;
+          }
+        }
+        ctx.putImageData(imageData, 0, 0);
+        ctx.imageSmoothingEnabled = false;
+        ctx.drawImage(canvas, 0, 0, width, height, 0, 0, canvas.width, canvas.height);
+        requestAnimationFrame(render);
+      }
+      render();
+    })();
+  </script>
+
+</body>
+</html>

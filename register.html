@@ -19,10 +19,10 @@
       theme: {
         extend: {
           colors: {
-            navy: { 50:'#e8e8f0',100:'#c5c5d9',200:'#9494b5',300:'#5e5e88',400:'#2d2d5e',500:'#14143a',600:'#0d0d2b',700:'#09091f',800:'#060616',900:'#03030b' },
-            gold: { 400:'#d4a44e',500:'#c9a96e' },
+            navy:{ 50:'#e8e8f0',100:'#c5c5d9',200:'#9494b5',300:'#5e5e88',400:'#2d2d5e',500:'#14143a',600:'#0d0d2b',700:'#09091f',800:'#060616',900:'#03030b' },
+            gold:{ 400:'#d4a44e',500:'#c9a96e' },
           },
-          fontFamily: {
+          fontFamily:{
             display:['"Cormorant Garamond"','serif'],
             body:['"Raleway"','sans-serif'],
             arabic:['"Amiri"','serif'],
@@ -34,7 +34,7 @@
   <style>
     *{margin:0;padding:0;box-sizing:border-box;}
     html{scroll-behavior:smooth;}
-    body{background:#060616;color:#e8e8f0;font-family:'Raleway',sans-serif;overflow-x:hidden;}
+    body{background:#000;color:#e8e8f0;font-family:'Raleway',sans-serif;overflow-x:hidden;}
 
     .grain::after{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:0.5;}
 
@@ -49,96 +49,177 @@
     ::-webkit-scrollbar-thumb{background:rgba(201,169,110,0.3);border-radius:3px;}
     .mobile-menu{transform:translateX(100%);transition:transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);}
     .mobile-menu.open{transform:translateX(0);}
-    .card{background:linear-gradient(145deg,rgba(20,20,58,0.6),rgba(9,9,31,0.8));border:1px solid rgba(201,169,110,0.08);transition:border-color 0.4s ease,transform 0.4s ease,box-shadow 0.4s ease;}
-    .card:hover{border-color:rgba(201,169,110,0.25);transform:translateY(-4px);box-shadow:0 20px 60px rgba(201,169,110,0.06),0 8px 24px rgba(0,0,0,0.3);}
 
-    /* HeroWave */
-    #wave-hero{position:relative;width:100%;height:100vh;overflow:hidden;}
-    #wave-canvas{position:absolute;top:0;left:0;width:100%;height:100%;display:block;}
-    .wave-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.6);}
-    .wave-content{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1.5rem;}
+    /* ── HERO ── */
+    #star-hero{position:relative;min-height:70vh;width:100%;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#040818;}
+    #star-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 90% 60% at 50% 45%,rgba(201,169,110,0.07) 0%,rgba(14,18,52,0.4) 50%,transparent 100%);pointer-events:none;z-index:1;}
+    #bgPathsWrap{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+    .hero-inner{position:relative;z-index:10;text-align:center;padding:2rem;width:100%;}
+    #heroTitle{text-shadow:0 0 80px rgba(201,169,110,0.3),0 0 30px rgba(201,169,110,0.15),0 2px 40px rgba(0,0,0,0.9);}
+
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes letterDrop{from{transform:translateY(70px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+    .hero-meta{animation:fadeInUp 1.4s ease both;}
 
     @keyframes scrollBounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(6px);}}
     .scroll-bounce{animation:scrollBounce 2s ease-in-out infinite;}
 
-    /* Countdown in register hero */
-    .reg-cd-card{
+    /* ── COUNTDOWN ── */
+    .cd-card{
       background:linear-gradient(to bottom,rgba(255,255,255,0.06),rgba(255,255,255,0.02));
-      border:1px solid rgba(201,169,110,0.15);
+      border:1px solid rgba(201,169,110,0.18);
       backdrop-filter:blur(16px);
     }
 
-    /* ── Feature Carousel ─────────────────────────────────────── */
-    .fc-card{
-      position:relative;
-      background:linear-gradient(145deg,rgba(20,20,58,0.5),rgba(9,9,31,0.85));
-      border:1px solid rgba(201,169,110,0.12);
-      border-radius:20px;overflow:hidden;
-      transition:border-color 0.4s ease;
-    }
-    .fc-card::before{
-      content:'';position:absolute;inset:0;border-radius:inherit;
-      background:radial-gradient(600px circle at var(--mx,-9999px) var(--my,-9999px),rgba(201,169,110,0.07) 0%,transparent 60%);
-      pointer-events:none;z-index:0;
-    }
-    .fc-card:hover{border-color:rgba(201,169,110,0.28);}
-    .fc-inner{
-      position:relative;z-index:1;
-      display:grid;grid-template-columns:2fr 3fr;gap:48px;
-      align-items:center;padding:40px;min-height:460px;
+    /* ── FORM ── */
+    .form-wrap{
+      display:grid;
+      grid-template-columns:280px 1fr;
+      background:linear-gradient(145deg,rgba(13,13,43,0.9),rgba(6,6,22,0.95));
+      border:1px solid rgba(201,169,110,0.14);
+      border-radius:16px;
+      overflow:hidden;
+      box-shadow:0 40px 120px rgba(0,0,0,0.6);
     }
     @media(max-width:768px){
-      .fc-inner{grid-template-columns:1fr;min-height:auto;padding:28px;gap:28px;}
-      .fc-visual{height:220px!important;}
+      .form-wrap{grid-template-columns:1fr;}
+      .form-left-panel{display:none;}
     }
-    .fc-visual{position:relative;height:320px;overflow:visible;}
 
-    /* Text enter animation */
-    @keyframes fcTextIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-    @keyframes fcSlideLeft{from{opacity:0;transform:translateX(-20px);}to{opacity:1;transform:translateX(0);}}
-    @keyframes fcSlideRight{from{opacity:0;transform:translateX(20px);}to{opacity:1;transform:translateX(0);}}
-    @keyframes fcFadeScale{from{opacity:0;transform:scale(0.94);}to{opacity:1;transform:scale(1);}}
-
-    .fc-anim-label{animation:fcSlideLeft 0.3s cubic-bezier(0.22,1,0.36,1) 0.05s both;}
-    .fc-anim-title{animation:fcSlideLeft 0.3s cubic-bezier(0.22,1,0.36,1) 0.10s both;}
-    .fc-anim-line {animation:fcSlideLeft 0.3s cubic-bezier(0.22,1,0.36,1) 0.13s both;}
-    .fc-anim-desc {animation:fcSlideLeft 0.3s cubic-bezier(0.22,1,0.36,1) 0.16s both;}
-    .fc-anim-fadescale{animation:fcFadeScale 0.5s cubic-bezier(0.22,1,0.36,1) both;}
-    .fc-anim-fadescale-d{animation:fcFadeScale 0.5s cubic-bezier(0.22,1,0.36,1) 0.1s both;}
-    .fc-anim-slide-l{animation:fcSlideLeft 0.45s cubic-bezier(0.22,1,0.36,1) both;}
-    .fc-anim-slide-r{animation:fcSlideRight 0.45s cubic-bezier(0.22,1,0.36,1) 0.1s both;}
-
-    /* Pill nav */
-    .fc-nav{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:28px;}
-    .fc-pill{
-      display:flex;align-items:center;gap:8px;
-      padding:6px 14px;border-radius:999px;border:none;outline:none;
-      font-family:'Raleway',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.05em;
-      cursor:pointer;
-      transition:background 0.3s ease,color 0.3s ease,transform 0.25s ease,box-shadow 0.3s ease;
-      transform:scale(0.95);
-    }
-    .fc-pill.is-active{background:#c9a96e;color:#060616;transform:scale(1);box-shadow:0 4px 20px rgba(201,169,110,0.25);}
-    .fc-pill.is-done{background:rgba(201,169,110,0.15);color:#c9a96e;transform:scale(0.95);}
-    .fc-pill.is-idle{background:rgba(148,148,181,0.1);color:rgba(148,148,181,0.5);transform:scale(0.95);}
-    .fc-pill:hover:not(.is-active){background:rgba(201,169,110,0.12);color:rgba(201,169,110,0.8);}
-    .fc-pill-num{
-      width:20px;height:20px;border-radius:50%;
-      display:flex;align-items:center;justify-content:center;
-      font-size:10px;font-weight:600;flex-shrink:0;
-    }
-    .fc-pill.is-active .fc-pill-num{background:rgba(6,6,22,0.25);color:#060616;}
-    .fc-pill.is-done .fc-pill-num{background:#c9a96e;color:#060616;}
-    .fc-pill.is-idle .fc-pill-num{background:rgba(148,148,181,0.15);}
-
-    /* Mock UI cards inside visual panel */
-    .mock-card{
-      position:absolute;
-      background:linear-gradient(145deg,rgba(13,13,43,0.92),rgba(6,6,22,0.97));
-      border:1px solid rgba(201,169,110,0.14);border-radius:10px;
-      box-shadow:0 20px 60px rgba(0,0,0,0.6),0 4px 16px rgba(0,0,0,0.4);
+    .form-left-panel{
+      background:linear-gradient(160deg,#0d0d2b 0%,#14143a 60%,#0d0d2b 100%);
+      padding:2.5rem;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      position:relative;
       overflow:hidden;
     }
+    .form-left-panel::before{
+      content:'';position:absolute;top:-40%;right:-30%;
+      width:280px;height:280px;
+      border-radius:50%;
+      background:radial-gradient(circle,rgba(201,169,110,0.07) 0%,transparent 70%);
+    }
+    .form-left-panel::after{
+      content:'';position:absolute;bottom:-20%;left:-20%;
+      width:200px;height:200px;
+      border-radius:50%;
+      background:radial-gradient(circle,rgba(201,169,110,0.04) 0%,transparent 70%);
+    }
+
+    .form-right-panel{
+      padding:2.5rem 2.5rem 2rem;
+      background:rgba(255,255,255,0.015);
+    }
+
+    /* Progress bar */
+    .progress-bar-track{height:2px;background:rgba(201,169,110,0.1);border-radius:1px;overflow:hidden;margin-bottom:2rem;}
+    .progress-bar-fill{height:100%;background:linear-gradient(90deg,#c9a96e,#d4a44e);border-radius:1px;transition:width 0.5s cubic-bezier(0.25,0.46,0.45,0.94);}
+
+    /* Form inputs */
+    .form-label{
+      display:block;
+      font-family:'Raleway',sans-serif;
+      font-size:10px;
+      font-weight:500;
+      letter-spacing:0.15em;
+      text-transform:uppercase;
+      color:rgba(201,169,110,0.65);
+      margin-bottom:6px;
+    }
+    .form-input{
+      width:100%;
+      background:rgba(20,20,58,0.5);
+      border:1px solid rgba(201,169,110,0.14);
+      border-radius:6px;
+      padding:10px 14px;
+      font-family:'Raleway',sans-serif;
+      font-size:13px;
+      color:#e8e8f0;
+      transition:border-color 0.3s ease,background 0.3s ease;
+      outline:none;
+      -webkit-appearance:none;
+    }
+    .form-input::placeholder{color:rgba(148,148,181,0.3);}
+    .form-input:focus{border-color:rgba(201,169,110,0.45);background:rgba(20,20,58,0.8);}
+    .form-input:focus::placeholder{color:rgba(148,148,181,0.15);}
+    select.form-input option{background:#0d0d2b;color:#e8e8f0;}
+
+    .form-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+    .form-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+    @media(max-width:520px){.form-grid-2,.form-grid-3{grid-template-columns:1fr;}}
+
+    .btn-primary{
+      display:inline-flex;align-items:center;gap:8px;
+      background:linear-gradient(135deg,rgba(201,169,110,0.15),rgba(201,169,110,0.08));
+      border:1px solid rgba(201,169,110,0.4);
+      color:#c9a96e;
+      font-family:'Raleway',sans-serif;
+      font-size:10px;font-weight:600;
+      letter-spacing:0.2em;text-transform:uppercase;
+      padding:12px 28px;border-radius:6px;cursor:pointer;
+      transition:all 0.3s ease;
+    }
+    .btn-primary:hover{background:rgba(201,169,110,0.2);border-color:rgba(201,169,110,0.7);color:#d4a44e;}
+    .btn-ghost{
+      display:inline-flex;align-items:center;gap:8px;
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.1);
+      color:rgba(232,232,240,0.4);
+      font-family:'Raleway',sans-serif;
+      font-size:10px;font-weight:600;
+      letter-spacing:0.2em;text-transform:uppercase;
+      padding:12px 22px;border-radius:6px;cursor:pointer;
+      transition:all 0.3s ease;
+    }
+    .btn-ghost:hover{border-color:rgba(255,255,255,0.25);color:rgba(232,232,240,0.7);}
+
+    /* Phone input */
+    .phone-wrap{display:flex;gap:8px;}
+    .phone-code-select{
+      width:auto;min-width:90px;
+      background:rgba(20,20,58,0.5);
+      border:1px solid rgba(201,169,110,0.14);
+      border-radius:6px;
+      padding:10px 10px;
+      font-family:'Raleway',sans-serif;
+      font-size:12px;color:#e8e8f0;
+      transition:border-color 0.3s ease;
+      outline:none;-webkit-appearance:none;
+      flex-shrink:0;
+    }
+    .phone-code-select:focus{border-color:rgba(201,169,110,0.45);}
+    .phone-code-select option{background:#0d0d2b;}
+
+    /* Step transitions */
+    .form-step{display:none;}
+    .form-step.active{display:block;animation:stepIn 0.35s cubic-bezier(0.22,1,0.36,1) both;}
+    @keyframes stepIn{from{opacity:0;transform:translateX(18px);}to{opacity:1;transform:translateX(0);}}
+
+    /* Confirmation */
+    .confirm-icon{
+      width:64px;height:64px;border-radius:50%;
+      border:1px solid rgba(201,169,110,0.35);
+      background:rgba(201,169,110,0.08);
+      display:flex;align-items:center;justify-content:center;
+      margin:0 auto 24px;
+    }
+
+    /* ── MOTIVATIONAL SECTION ── */
+    .why-card{
+      background:linear-gradient(145deg,rgba(20,20,58,0.5),rgba(9,9,31,0.85));
+      border:1px solid rgba(201,169,110,0.1);
+      border-radius:12px;
+      padding:2rem;
+      transition:border-color 0.4s ease,transform 0.4s ease;
+    }
+    .why-card:hover{border-color:rgba(201,169,110,0.25);transform:translateY(-3px);}
+
+    /* Error state */
+    .form-input.error{border-color:rgba(220,80,80,0.5);}
+    .field-error{font-size:10px;color:rgba(220,100,100,0.8);margin-top:4px;display:none;}
+    .field-error.show{display:block;}
   </style>
 </head>
 <body class="grain">
@@ -156,9 +237,10 @@
           <a href="team.html" class="nav-link text-navy-100 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Team</a>
           <a href="tracks.html" class="nav-link text-navy-100 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Tracks</a>
           <a href="partners.html" class="nav-link text-white/60 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Partners</a>
+          <a href="schedule.html" class="nav-link text-navy-100 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Schedule</a>
           <a href="contact.html" class="nav-link text-navy-100 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Contact</a>
         </div>
-        <a href="register.html" class="hidden lg:block px-6 py-2.5 border border-gold-400 text-gold-400 text-xs uppercase tracking-[0.2em] font-body bg-gold-500/8">Register</a>
+        <a href="register.html" class="hidden lg:block px-6 py-2.5 text-xs uppercase tracking-[0.2em] font-body font-semibold" style="background:linear-gradient(135deg,#d4a44e,#c9a96e);color:#04060f;letter-spacing:0.18em;transition:opacity 0.25s ease;" onmouseenter="this.style.opacity='0.85'" onmouseleave="this.style.opacity='1'">Register</a>
         <button id="mobileToggle" class="lg:hidden text-navy-100 hover:text-gold-400 transition-colors" aria-label="Menu">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
@@ -176,138 +258,436 @@
     <a href="team.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Team</a>
     <a href="tracks.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Tracks</a>
     <a href="partners.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Partners</a>
+    <a href="schedule.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Schedule</a>
     <a href="contact.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Contact</a>
     <a href="register.html" class="text-gold-400 text-sm font-body uppercase tracking-[0.3em] border border-gold-500/30 px-6 py-2">Register</a>
   </div>
 
-  <!-- ─── HERO: HeroWave Canvas ─────────────────────────────────────────────────── -->
-  <section id="wave-hero">
-    <canvas id="wave-canvas"></canvas>
-    <div class="wave-overlay"></div>
-    <div class="wave-content">
-      <p class="scramble-text text-gold-500/70 text-xs uppercase tracking-[0.35em] font-body mb-5">Join the Forum</p>
-      <h1 class="font-display text-6xl md:text-8xl lg:text-9xl text-white font-light mb-2" style="letter-spacing:-0.03em;line-height:1.0;">
-        Register for
-      </h1>
-      <h2 class="font-display text-5xl md:text-7xl lg:text-8xl font-light italic mb-8" style="letter-spacing:-0.03em;line-height:1.0;background:linear-gradient(135deg,#c9a96e,#e5bc6d,#c9a96e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
-        DMF 2026
-      </h2>
-      <p class="font-body text-white/50 text-xs md:text-sm uppercase tracking-[0.25em] mb-3">Dubai &middot; August 2–6, 2026 &middot; Finance &middot; Law &middot; Engineering &middot; Management</p>
-      <p class="font-body text-white/25 text-xs uppercase tracking-[0.2em] mb-10">Registration details below</p>
+  <!-- ─── HERO: Star Warp Animation ────────────────────────────────────────────── -->
+  <section id="star-hero">
+    <!-- Animated background paths (FloatingPaths port) -->
+    <div id="bgPathsWrap"></div>
 
-      <!-- Countdown -->
-      <div class="flex gap-2 sm:gap-4 md:gap-8 mb-8 justify-center">
-        <div class="reg-cd-card px-3 py-3 sm:px-4 sm:py-4 md:px-6 md:py-5 text-center flex-1 max-w-[80px] md:max-w-[100px] rounded-sm">
-          <span class="font-display text-xl sm:text-2xl md:text-4xl text-gold-400 block font-light" id="rcd-days">--</span>
-          <span class="text-white/30 text-[8px] sm:text-[9px] uppercase tracking-[0.2em] font-body mt-1 block">Days</span>
-        </div>
-        <div class="reg-cd-card px-3 py-3 sm:px-4 sm:py-4 md:px-6 md:py-5 text-center flex-1 max-w-[80px] md:max-w-[100px] rounded-sm">
-          <span class="font-display text-xl sm:text-2xl md:text-4xl text-gold-400 block font-light" id="rcd-hours">--</span>
-          <span class="text-white/30 text-[8px] sm:text-[9px] uppercase tracking-[0.2em] font-body mt-1 block">Hours</span>
-        </div>
-        <div class="reg-cd-card px-3 py-3 sm:px-4 sm:py-4 md:px-6 md:py-5 text-center flex-1 max-w-[80px] md:max-w-[100px] rounded-sm">
-          <span class="font-display text-xl sm:text-2xl md:text-4xl text-gold-400 block font-light" id="rcd-mins">--</span>
-          <span class="text-white/30 text-[8px] sm:text-[9px] uppercase tracking-[0.2em] font-body mt-1 block">Mins</span>
-        </div>
-        <div class="reg-cd-card px-3 py-3 sm:px-4 sm:py-4 md:px-6 md:py-5 text-center flex-1 max-w-[80px] md:max-w-[100px] rounded-sm">
-          <span class="font-display text-xl sm:text-2xl md:text-4xl text-gold-400 block font-light" id="rcd-secs">--</span>
-          <span class="text-white/30 text-[8px] sm:text-[9px] uppercase tracking-[0.2em] font-body mt-1 block">Secs</span>
-        </div>
-      </div>
+    <div class="hero-inner">
+      <p class="font-body hero-meta" style="color:rgba(201,169,110,0.75);font-size:10px;letter-spacing:0.4em;text-transform:uppercase;margin-bottom:2rem;animation-delay:0.2s;">
+        Dubai Meridian Forum 2026
+      </p>
 
-      <a href="contact.html" class="inline-flex items-center gap-3 px-8 py-3 border border-gold-500/40 text-gold-400 text-xs uppercase tracking-[0.2em] font-body hover:bg-gold-500/10 hover:border-gold-400 transition-all duration-300">
-        Express Interest
-        <span>→</span>
+      <!-- Letter-by-letter title — injected by JS -->
+      <a href="#registration" id="heroRegisterBtn" style="pointer-events:all;text-decoration:none;display:inline-block;transition:opacity 0.25s ease;">
+        <h1 id="heroTitle" class="font-display" style="font-weight:300;line-height:0.95;letter-spacing:-0.03em;cursor:pointer;margin:0;"></h1>
       </a>
 
-      <p class="font-arabic text-white/20 text-base mt-8" dir="rtl">التسجيل يفتح قريباً</p>
+      <p class="font-body hero-meta" style="color:rgba(255,255,255,0.45);font-size:10px;letter-spacing:0.25em;text-transform:uppercase;margin-top:2rem;animation-delay:1.8s;">
+        August 2–5, 2026 &nbsp;&middot;&nbsp; Business Bay, Dubai
+      </p>
     </div>
 
-    <!-- Scroll arrow -->
-    <a href="#register-info" class="scroll-bounce absolute bottom-8 left-1/2 text-white/30 hover:text-gold-400 transition-colors duration-300">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"/></svg>
+    <a href="#countdown" class="scroll-bounce" style="position:absolute;bottom:2rem;left:50%;color:rgba(255,255,255,0.2);pointer-events:all;text-decoration:none;">
+      <svg style="width:20px;height:20px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"/></svg>
     </a>
   </section>
 
-  <!-- ─── REGISTRATION INFO ─────────────────────────────────────────────────────── -->
-  <section id="register-info" class="py-20 md:py-32" style="background:#060616;">
-    <div class="max-w-5xl mx-auto px-6 lg:px-12">
-      <div class="fade-up text-center mb-12">
-        <p class="scramble-text text-gold-500/60 text-xs uppercase tracking-[0.3em] font-body mb-4">Registration Details</p>
-        <h2 class="font-display text-4xl md:text-5xl text-white font-light" style="letter-spacing:-0.02em;">
-          Registrations Open <span class="text-gold-400 italic">Soon</span>
+  <!-- ─── COUNTDOWN ─────────────────────────────────────────────────────────────── -->
+  <section id="countdown" style="background:#060616;padding:5rem 1.5rem;border-bottom:1px solid rgba(201,169,110,0.06);">
+    <div class="max-w-4xl mx-auto text-center">
+      <p class="font-body text-gold-500/50 text-xs uppercase tracking-[0.3em] mb-3">Time Until the Forum</p>
+      <h2 class="font-display text-white text-3xl md:text-4xl font-light mb-10" style="letter-spacing:-0.02em;">
+        August 2, 2026 &nbsp;<span class="text-gold-400 italic">Dubai</span>
+      </h2>
+      <div class="flex justify-center gap-3 md:gap-6 mb-10">
+        <div class="cd-card px-5 py-5 md:px-8 md:py-7 text-center rounded-sm" style="min-width:80px;">
+          <span class="font-display text-3xl md:text-5xl text-gold-400 block font-light" id="cd-days">--</span>
+          <span class="font-body text-white/30 text-[9px] uppercase tracking-[0.2em] mt-2 block">Days</span>
+        </div>
+        <div class="cd-card px-5 py-5 md:px-8 md:py-7 text-center rounded-sm" style="min-width:80px;">
+          <span class="font-display text-3xl md:text-5xl text-gold-400 block font-light" id="cd-hours">--</span>
+          <span class="font-body text-white/30 text-[9px] uppercase tracking-[0.2em] mt-2 block">Hours</span>
+        </div>
+        <div class="cd-card px-5 py-5 md:px-8 md:py-7 text-center rounded-sm" style="min-width:80px;">
+          <span class="font-display text-3xl md:text-5xl text-gold-400 block font-light" id="cd-mins">--</span>
+          <span class="font-body text-white/30 text-[9px] uppercase tracking-[0.2em] mt-2 block">Mins</span>
+        </div>
+        <div class="cd-card px-5 py-5 md:px-8 md:py-7 text-center rounded-sm" style="min-width:80px;">
+          <span class="font-display text-3xl md:text-5xl text-gold-400 block font-light" id="cd-secs">--</span>
+          <span class="font-body text-white/30 text-[9px] uppercase tracking-[0.2em] mt-2 block">Secs</span>
+        </div>
+      </div>
+      <p class="font-body text-white/25 text-xs uppercase tracking-[0.2em]">Seats are limited &nbsp;&middot;&nbsp; Register before applications close</p>
+    </div>
+  </section>
+
+  <!-- ─── REGISTRATION FORM ──────────────────────────────────────────────────────── -->
+  <section id="registration" style="background:linear-gradient(180deg,#060616 0%,#050513 100%);padding:6rem 1.5rem;">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-12 fade-up">
+        <p class="font-body text-gold-500/55 text-xs uppercase tracking-[0.3em] mb-4">Applications Open</p>
+        <h2 class="font-display text-white text-4xl md:text-5xl font-light" style="letter-spacing:-0.02em;">
+          Secure Your <span class="text-gold-400 italic">Place</span>
         </h2>
         <div class="gold-line mx-auto mt-6"></div>
       </div>
 
-      <div class="fade-up grid md:grid-cols-3 gap-6 mb-12">
-        <div class="card p-7 rounded-sm text-center">
-          <p class="font-display text-4xl text-gold-400 mb-2">May</p>
-          <p class="font-display text-xl text-white mb-2">1, 2026</p>
-          <p class="font-body text-white/40 text-xs uppercase tracking-wider">Registration Opens</p>
-        </div>
-        <div class="card p-7 rounded-sm text-center">
-          <p class="font-display text-4xl text-gold-400 mb-2">Aug</p>
-          <p class="font-display text-xl text-white mb-2">2–6, 2026</p>
-          <p class="font-body text-white/40 text-xs uppercase tracking-wider">Forum Dates</p>
-        </div>
-        <div class="card p-7 rounded-sm text-center">
-          <p class="font-display text-4xl text-gold-400 mb-2">3</p>
-          <p class="font-display text-xl text-white mb-2">Pass Tiers</p>
-          <p class="font-body text-white/40 text-xs uppercase tracking-wider">Observer · Competitor · Professional</p>
-        </div>
-      </div>
-
-      <div class="fade-up text-center">
-        <p class="font-body text-white/40 text-sm mb-6 max-w-2xl mx-auto leading-relaxed">
-          Registration for Dubai Meridian Forum 2026 opens May 1. In the meantime, express your interest and we will ensure you receive priority notification when applications open.
-        </p>
-        <a href="contact.html" class="inline-flex items-center gap-3 px-8 py-3 border border-gold-500/40 text-gold-400 text-xs uppercase tracking-[0.2em] font-body hover:bg-gold-500/10 hover:border-gold-400 transition-all duration-300">
-          Express Interest
-          <span>→</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Divider -->
-  <div class="w-full h-px bg-gradient-to-r from-transparent via-gold-500/20 to-transparent"></div>
-
-  <!-- ─── HOW IT WORKS CAROUSEL ─────────────────────────────────────────────────── -->
-  <section class="py-20 md:py-32" style="background:#060616;">
-    <div class="max-w-5xl mx-auto px-6 lg:px-12">
-      <div class="fade-up text-center mb-14">
-        <p class="scramble-text text-gold-500/60 text-xs uppercase tracking-[0.3em] font-body mb-4">Registration Guide</p>
-        <h2 class="font-display text-4xl md:text-5xl text-white font-light" style="letter-spacing:-0.02em;">
-          How It <span class="text-gold-400 italic">Works</span>
-        </h2>
-      </div>
-
-      <div class="fade-up">
-        <!-- ── Big card ── -->
-        <div class="fc-card" id="fcCard">
-          <div class="fc-inner">
-            <!-- Text panel -->
-            <div class="fc-text" id="fcText">
-              <!-- JS renders this -->
-            </div>
-            <!-- Visual panel -->
-            <div class="fc-visual" id="fcVisual">
-              <!-- JS renders this -->
+      <div class="form-wrap fade-up">
+        <!-- Left panel -->
+        <div class="form-left-panel">
+          <div style="position:relative;z-index:1;">
+            <img src="5.png" alt="DMF" style="height:38px;opacity:0.7;mix-blend-mode:screen;filter:brightness(1.6) saturate(0.8);margin-bottom:2.5rem;">
+            <div style="height:1px;background:linear-gradient(90deg,rgba(201,169,110,0.25),transparent);margin-bottom:1.5rem;"></div>
+            <h3 class="font-display text-white text-2xl font-light" style="line-height:1.25;margin-bottom:0.4rem;">Dubai Meridian<br>Forum</h3>
+            <p class="font-body text-gold-500/55 text-xs uppercase tracking-[0.2em]" style="margin-bottom:1.5rem;">August 2–5, 2026</p>
+            <p class="font-body text-white/30 text-xs leading-relaxed" style="margin-bottom:0.4rem;">Business Bay, Dubai</p>
+            <p class="font-body text-white/20 text-xs leading-relaxed">Finance · Law · Engineering · Management</p>
+            <div style="margin-top:2rem;padding-top:2rem;border-top:1px solid rgba(201,169,110,0.08);">
+              <p class="font-body text-white/20 text-[10px] leading-relaxed">Questions? Contact us at</p>
+              <a href="mailto:Info@dubaimeridian.com" class="font-body text-gold-500/40 text-[10px] hover:text-gold-400 transition-colors duration-300">Info@dubaimeridian.com</a>
             </div>
           </div>
         </div>
 
-        <!-- ── Pill nav ── -->
-        <nav class="fc-nav" id="fcNav" aria-label="Registration steps">
-          <!-- JS renders pills -->
-        </nav>
+        <!-- Right panel: Form -->
+        <div class="form-right-panel">
+          <!-- Progress -->
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill" id="progressFill" style="width:33%"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;">
+            <p class="font-body text-white/25 text-[10px] uppercase tracking-[0.2em]" id="stepLabel">Step 1 of 3</p>
+            <div style="display:flex;gap:6px;">
+              <div id="dot1" style="width:6px;height:6px;border-radius:50%;background:#c9a96e;transition:background 0.3s ease;"></div>
+              <div id="dot2" style="width:6px;height:6px;border-radius:50%;background:rgba(201,169,110,0.2);transition:background 0.3s ease;"></div>
+              <div id="dot3" style="width:6px;height:6px;border-radius:50%;background:rgba(201,169,110,0.2);transition:background 0.3s ease;"></div>
+            </div>
+          </div>
+
+          <!-- ── STEP 1: Contact Information ── -->
+          <div class="form-step active" id="step1">
+            <h3 class="font-display text-white text-2xl font-light mb-1" style="letter-spacing:-0.01em;">Please enter your</h3>
+            <h3 class="font-display text-gold-400 text-2xl italic font-light mb-6">contact information</h3>
+
+            <div style="display:flex;flex-direction:column;gap:14px;">
+              <div class="form-grid-3">
+                <div>
+                  <label class="form-label">First name <span style="color:#c9a96e;">*</span></label>
+                  <input class="form-input" id="f-first" type="text" placeholder="Alan" autocomplete="given-name">
+                  <p class="field-error" id="err-first">Required</p>
+                </div>
+                <div>
+                  <label class="form-label">Middle name <span style="color:rgba(148,148,181,0.45);font-size:9px;text-transform:none;letter-spacing:0;font-weight:400;">(optional)</span></label>
+                  <input class="form-input" id="f-middle" type="text" placeholder="Benjamin" autocomplete="additional-name">
+                </div>
+                <div>
+                  <label class="form-label">Last name <span style="color:#c9a96e;">*</span></label>
+                  <input class="form-input" id="f-last" type="text" placeholder="Walker" autocomplete="family-name">
+                  <p class="field-error" id="err-last">Required</p>
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <div>
+                  <label class="form-label">Email address <span style="color:#c9a96e;">*</span></label>
+                  <input class="form-input" id="f-email" type="email" placeholder="name@example.com" autocomplete="email">
+                  <p class="field-error" id="err-email">Valid email required</p>
+                </div>
+                <div>
+                  <label class="form-label">Re-enter email address <span style="color:#c9a96e;">*</span></label>
+                  <input class="form-input" id="f-email2" type="email" placeholder="name@example.com">
+                  <p class="field-error" id="err-email2">Emails must match</p>
+                </div>
+              </div>
+
+              <div class="form-grid-3">
+                <div style="grid-column:span 1;">
+                  <label class="form-label">Phone number <span style="color:#c9a96e;">*</span></label>
+                  <div class="phone-wrap">
+                    <select class="phone-code-select" id="f-phonecode">
+                      <option value="+971">🇦🇪 +971</option>
+                      <option value="+1">🇺🇸 +1</option>
+                      <option value="+44">🇬🇧 +44</option>
+                      <option value="+91">🇮🇳 +91</option>
+                      <option value="+92">🇵🇰 +92</option>
+                      <option value="+20">🇪🇬 +20</option>
+                      <option value="+966">🇸🇦 +966</option>
+                      <option value="+974">🇶🇦 +974</option>
+                      <option value="+973">🇧🇭 +973</option>
+                      <option value="+965">🇰🇼 +965</option>
+                      <option value="+968">🇴🇲 +968</option>
+                      <option value="+962">🇯🇴 +962</option>
+                      <option value="+961">🇱🇧 +961</option>
+                      <option value="+249">🇸🇩 +249</option>
+                      <option value="+213">🇩🇿 +213</option>
+                      <option value="+212">🇲🇦 +212</option>
+                      <option value="+216">🇹🇳 +216</option>
+                      <option value="+218">🇱🇾 +218</option>
+                      <option value="+33">🇫🇷 +33</option>
+                      <option value="+49">🇩🇪 +49</option>
+                      <option value="+34">🇪🇸 +34</option>
+                      <option value="+39">🇮🇹 +39</option>
+                      <option value="+31">🇳🇱 +31</option>
+                      <option value="+61">🇦🇺 +61</option>
+                      <option value="+64">🇳🇿 +64</option>
+                      <option value="+81">🇯🇵 +81</option>
+                      <option value="+82">🇰🇷 +82</option>
+                      <option value="+86">🇨🇳 +86</option>
+                      <option value="+65">🇸🇬 +65</option>
+                      <option value="+60">🇲🇾 +60</option>
+                      <option value="+62">🇮🇩 +62</option>
+                      <option value="+63">🇵🇭 +63</option>
+                      <option value="+66">🇹🇭 +66</option>
+                      <option value="+84">🇻🇳 +84</option>
+                      <option value="+880">🇧🇩 +880</option>
+                      <option value="+94">🇱🇰 +94</option>
+                      <option value="+977">🇳🇵 +977</option>
+                      <option value="+7">🇷🇺 +7</option>
+                      <option value="+380">🇺🇦 +380</option>
+                      <option value="+48">🇵🇱 +48</option>
+                      <option value="+55">🇧🇷 +55</option>
+                      <option value="+52">🇲🇽 +52</option>
+                      <option value="+54">🇦🇷 +54</option>
+                      <option value="+27">🇿🇦 +27</option>
+                      <option value="+234">🇳🇬 +234</option>
+                      <option value="+254">🇰🇪 +254</option>
+                      <option value="+233">🇬🇭 +233</option>
+                      <option value="+251">🇪🇹 +251</option>
+                      <option value="+255">🇹🇿 +255</option>
+                    </select>
+                    <input class="form-input" id="f-phone" type="tel" placeholder="050 123 4567" autocomplete="tel" style="flex:1;">
+                  </div>
+                  <p class="field-error" id="err-phone">Required</p>
+                </div>
+                <div>
+                  <label class="form-label">Gender <span style="color:#c9a96e;">*</span></label>
+                  <select class="form-input" id="f-gender">
+                    <option value="">Select</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Non-binary</option>
+                    <option>Prefer not to say</option>
+                  </select>
+                  <p class="field-error" id="err-gender">Required</p>
+                </div>
+                <div>
+                  <label class="form-label">Date of birth <span style="color:#c9a96e;">*</span></label>
+                  <input class="form-input" id="f-dob" type="date" autocomplete="bday">
+                  <p class="field-error" id="err-dob">Required</p>
+                </div>
+              </div>
+            </div>
+
+            <div style="display:flex;justify-content:flex-end;margin-top:2rem;">
+              <button class="btn-primary" onclick="goStep(2)">Proceed <span>→</span></button>
+            </div>
+
+            <p class="font-body text-white/15 text-[10px] mt-4 text-center">
+              Want to register a delegation/team? Contact us at
+              <a href="mailto:Info@dubaimeridian.com" style="color:rgba(201,169,110,0.4);">Info@dubaimeridian.com</a>
+            </p>
+          </div>
+
+          <!-- ── STEP 2: Regional Information ── -->
+          <div class="form-step" id="step2">
+            <h3 class="font-display text-white text-2xl font-light mb-1" style="letter-spacing:-0.01em;">Please enter your</h3>
+            <h3 class="font-display text-gold-400 text-2xl italic font-light mb-6">regional information</h3>
+
+            <div style="display:flex;flex-direction:column;gap:14px;">
+              <div class="form-grid-2">
+                <div>
+                  <label class="form-label">Nationality <span style="color:#c9a96e;">*</span></label>
+                  <select class="form-input" id="f-nationality">
+                    <option value="">Select nationality</option>
+                  </select>
+                  <p class="field-error" id="err-nationality">Required</p>
+                </div>
+                <div>
+                  <label class="form-label">Country of Residency <span style="color:#c9a96e;">*</span></label>
+                  <select class="form-input" id="f-residency">
+                    <option value="">Select country</option>
+                  </select>
+                  <p class="field-error" id="err-residency">Required</p>
+                </div>
+              </div>
+
+              <div>
+                <label class="form-label">Address</label>
+                <input class="form-input" id="f-address" type="text" placeholder="Street address" autocomplete="street-address">
+              </div>
+
+              <div class="form-grid-3">
+                <div>
+                  <label class="form-label">City <span style="color:#c9a96e;">*</span></label>
+                  <input class="form-input" id="f-city" type="text" placeholder="Dubai" autocomplete="address-level2">
+                  <p class="field-error" id="err-city">Required</p>
+                </div>
+                <div>
+                  <label class="form-label">Province / State</label>
+                  <input class="form-input" id="f-state" type="text" placeholder="Dubai" autocomplete="address-level1">
+                </div>
+                <div>
+                  <label class="form-label">Postal / Zip code</label>
+                  <input class="form-input" id="f-postal" type="text" placeholder="00000" autocomplete="postal-code">
+                </div>
+              </div>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;margin-top:2rem;">
+              <button class="btn-ghost" onclick="goStep(1)"><span>←</span> Back</button>
+              <button class="btn-primary" onclick="goStep(3)">Proceed <span>→</span></button>
+            </div>
+
+            <p class="font-body text-white/15 text-[10px] mt-4 text-center">
+              Want to register a delegation/team? Contact us at
+              <a href="mailto:Info@dubaimeridian.com" style="color:rgba(201,169,110,0.4);">Info@dubaimeridian.com</a>
+            </p>
+          </div>
+
+          <!-- ── STEP 3: Additional Questions ── -->
+          <div class="form-step" id="step3">
+            <h3 class="font-display text-white text-2xl font-light mb-1" style="letter-spacing:-0.01em;">Nearly finished —</h3>
+            <h3 class="font-display text-gold-400 text-2xl italic font-light mb-6">just a few more questions</h3>
+
+            <div style="display:flex;flex-direction:column;gap:14px;">
+              <div class="form-grid-2">
+                <div>
+                  <label class="form-label">Name of institution you attend</label>
+                  <input class="form-input" id="f-institution" type="text" placeholder="Emirates Academy">
+                </div>
+                <div>
+                  <label class="form-label">Any disabilities?</label>
+                  <input class="form-input" id="f-disability" type="text" placeholder="We ask so we can assist you better">
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <div>
+                  <label class="form-label">How did you get to know about us?</label>
+                  <input class="form-input" id="f-source" type="text" placeholder="Instagram, friend, school…">
+                </div>
+                <div>
+                  <label class="form-label">Were you provided with a referral code?</label>
+                  <input class="form-input" id="f-referral" type="text" placeholder="Optional">
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <div>
+                  <label class="form-label">Food preference</label>
+                  <select class="form-input" id="f-food">
+                    <option value="No preference">No preference</option>
+                    <option value="Vegetarian">Vegetarian</option>
+                    <option value="Vegan">Vegan</option>
+                    <option value="Halal">Halal</option>
+                    <option value="Kosher">Kosher</option>
+                    <option value="Gluten-free">Gluten-free</option>
+                    <option value="Dairy-free">Dairy-free</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="form-label">T-shirt size</label>
+                  <select class="form-input" id="f-shirt">
+                    <option value="S">Small</option>
+                    <option value="M">Medium</option>
+                    <option value="L">Large</option>
+                    <option value="XL">X-Large</option>
+                    <option value="XXL">XX-Large</option>
+                    <option value="XS">X-Small</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top:1.5rem;">
+              <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;">
+                <input type="checkbox" id="f-privacy" style="margin-top:2px;accent-color:#c9a96e;flex-shrink:0;width:14px;height:14px;">
+                <span class="font-body text-white/40 text-xs leading-relaxed">
+                  I have read and agree to the <a href="privacy.html" target="_blank" style="color:#5aa3f0;text-decoration:underline;text-underline-offset:2px;">Privacy Policy</a>
+                </span>
+              </label>
+              <p class="field-error" id="err-privacy" style="margin-top:4px;">You must agree to the Privacy Policy to proceed</p>
+            </div>
+
+            <div style="display:flex;justify-content:space-between;margin-top:1.5rem;">
+              <button class="btn-ghost" onclick="goStep(2)"><span>←</span> Back</button>
+              <button class="btn-primary" onclick="submitForm()">Submit Application <span>→</span></button>
+            </div>
+
+            <p class="font-body text-white/15 text-[10px] mt-4 text-center">
+              Want to register a delegation/team? Contact us at
+              <a href="mailto:Info@dubaimeridian.com" style="color:rgba(201,169,110,0.4);">Info@dubaimeridian.com</a>
+            </p>
+          </div>
+
+          <!-- ── STEP 4: Confirmation ── -->
+          <div class="form-step" id="step4">
+            <div style="text-align:center;padding:2rem 0;">
+              <div class="confirm-icon">
+                <svg width="28" height="28" fill="none" stroke="#c9a96e" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <h3 class="font-display text-white text-3xl font-light mb-2" style="letter-spacing:-0.02em;">Application Submitted</h3>
+              <p class="font-body text-gold-500/60 text-xs uppercase tracking-[0.2em] mb-6">Thank you for registering</p>
+              <div style="height:1px;background:linear-gradient(90deg,transparent,rgba(201,169,110,0.2),transparent);margin-bottom:1.5rem;"></div>
+              <p class="font-body text-white/40 text-sm leading-relaxed mb-6" style="max-width:360px;margin:0 auto 1.5rem;">
+                We've received your application for <strong class="text-white/60">Dubai Meridian Forum 2026</strong>. You'll receive a confirmation email with your delegate pack and next steps shortly.
+              </p>
+              <div style="background:rgba(201,169,110,0.06);border:1px solid rgba(201,169,110,0.1);border-radius:8px;padding:1.25rem;display:inline-block;text-align:left;min-width:220px;">
+                <p class="font-body text-white/25 text-[10px] uppercase tracking-[0.2em] mb-1">Event Details</p>
+                <p class="font-display text-white text-lg">August 2–5, 2026</p>
+                <p class="font-body text-gold-500/50 text-xs mt-1">Business Bay, Dubai, UAE</p>
+              </div>
+              <div style="margin-top:2rem;">
+                <a href="index.html" class="btn-ghost" style="display:inline-flex;">← Return Home</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- ─── QUOTE ──────────────────────────────────────────────────────────────────── -->
+  <section style="background:#060616;padding:7rem 1.5rem;border-top:1px solid rgba(201,169,110,0.06);">
+    <div class="max-w-5xl mx-auto fade-up">
+      <div style="display:grid;grid-template-columns:1fr 1.6fr;gap:0;border:1px solid rgba(201,169,110,0.1);border-radius:16px;overflow:hidden;background:linear-gradient(145deg,rgba(13,13,43,0.7),rgba(6,6,22,0.9));box-shadow:0 40px 100px rgba(0,0,0,0.5);">
+
+        <!-- Photo -->
+        <div style="position:relative;min-height:480px;overflow:hidden;">
+          <img src="sheikh-mohammed.png" alt="Sheikh Mohammed bin Rashid Al Maktoum"
+               style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;filter:grayscale(15%) brightness(0.88);">
+          <div style="position:absolute;inset:0;background:linear-gradient(to right,transparent 60%,rgba(6,6,22,0.9) 100%),linear-gradient(to top,rgba(6,6,22,0.4) 0%,transparent 40%);"></div>
+        </div>
+
+        <!-- Quote -->
+        <div style="padding:3.5rem 3rem 3rem;display:flex;flex-direction:column;justify-content:center;position:relative;">
+          <div style="position:absolute;top:2.5rem;left:2.5rem;font-family:'Cormorant Garamond',serif;font-size:6rem;line-height:1;color:rgba(201,169,110,0.08);pointer-events:none;user-select:none;">&ldquo;</div>
+
+          <p class="font-body text-gold-500/50 text-[10px] uppercase tracking-[0.3em] mb-6">A word to consider</p>
+
+          <blockquote class="font-display text-white font-light" style="font-size:clamp(1.05rem,1.8vw,1.35rem);line-height:1.75;letter-spacing:0.01em;color:rgba(232,232,240,0.85);position:relative;z-index:1;">
+            With each new day in Africa, a gazelle wakes up knowing he must outrun the fastest lion or perish. At the same time, a lion stirs and stretches, knowing he must outrun the fastest gazelle or starve. It is no different for the human race. Whether you consider yourself a gazelle or a lion, you simply have to run faster than others to survive.
+          </blockquote>
+
+          <div style="height:1px;background:linear-gradient(90deg,rgba(201,169,110,0.25),transparent);margin:2rem 0 1.5rem;"></div>
+
+          <div>
+            <p class="font-display text-gold-400 text-lg font-light" style="letter-spacing:0.01em;">Sheikh Mohammed bin Rashid Al Maktoum</p>
+            <p class="font-body text-white/30 text-xs uppercase tracking-[0.2em] mt-1">Vice President &amp; Prime Minister of the UAE &middot; Ruler of Dubai</p>
+          </div>
+
+          <div style="margin-top:2.5rem;">
+            <a href="#registration" class="btn-primary" style="font-size:9px;padding:11px 24px;">Register Now <span>→</span></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="text-center mt-14 fade-up">
+      <p class="font-arabic text-gold-500/20 text-xl" dir="rtl">دبي ميريديان ٢٠٢٦</p>
+    </div>
+  </section>
+
   <!-- Footer -->
-  <footer class="py-16 border-t border-white/5">
+  <footer class="py-16 border-t border-white/5" style="background:#060616;">
     <div class="max-w-6xl mx-auto px-6 lg:px-12">
       <div class="grid md:grid-cols-3 gap-12">
         <div>
@@ -329,7 +709,7 @@
         <div>
           <p class="text-gold-500/50 text-xs uppercase tracking-[0.2em] font-body mb-4">Contact</p>
           <p class="text-white/30 text-sm font-body leading-relaxed">Aspect Tower, Office No. 2206<br>Zone B, Bay Avenue<br>Business Bay, Dubai</p>
-          <a href="mailto:info@dubaimeridianforum.com" class="text-gold-500/40 text-sm font-body mt-3 inline-block hover:text-gold-400 transition-colors duration-300">info@dubaimeridianforum.com</a>
+          <a href="mailto:Info@dubaimeridian.com" class="text-gold-500/40 text-sm font-body mt-3 inline-block hover:text-gold-400 transition-colors duration-300">Info@dubaimeridian.com</a>
         </div>
       </div>
       <div class="mt-12 pt-8 border-t border-white/5 text-center">
@@ -339,331 +719,254 @@
   </footer>
 
   <script>
-    // ─── Nav scroll ───────────────────────────────────────────────────────────────
-    const nav = document.getElementById('mainNav');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 60) { nav.style.background='rgba(6,6,22,0.96)';nav.style.backdropFilter='blur(20px)';nav.style.borderBottom='1px solid rgba(201,169,110,0.08)'; }
-      else { nav.style.background='transparent';nav.style.backdropFilter='none';nav.style.borderBottom='none'; }
+  // ─── Nav scroll ───────────────────────────────────────────────────────────────
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll',()=>{
+    if(window.scrollY>60){nav.style.background='rgba(6,6,22,0.96)';nav.style.backdropFilter='blur(20px)';nav.style.borderBottom='1px solid rgba(201,169,110,0.08)';}
+    else{nav.style.background='transparent';nav.style.backdropFilter='none';nav.style.borderBottom='none';}
+  });
+  document.getElementById('mobileToggle').addEventListener('click',()=>document.getElementById('mobileMenu').classList.add('open'));
+  document.getElementById('mobileClose').addEventListener('click',()=>document.getElementById('mobileMenu').classList.remove('open'));
+
+  // ─── Scroll reveal ────────────────────────────────────────────────────────────
+  const obs = new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:0.1});
+  document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+
+  // ─── Background Paths (FloatingPaths port — blue navy bg, gold paths) ─────────
+  (function(){
+    const wrap = document.getElementById('bgPathsWrap');
+    const NS = 'http://www.w3.org/2000/svg';
+
+    function buildSVG(position, useGold) {
+      const svg = document.createElementNS(NS, 'svg');
+      svg.setAttribute('viewBox', '0 0 696 316');
+      svg.setAttribute('fill', 'none');
+      svg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
+      svg.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;';
+
+      for (let i = 0; i < 36; i++) {
+        const p = position;
+        const d = `M-${380-i*5*p} -${189+i*6}`
+          + `C-${380-i*5*p} -${189+i*6} -${312-i*5*p} ${216-i*6} ${152-i*5*p} ${343-i*6}`
+          + `C${616-i*5*p} ${470-i*6} ${684-i*5*p} ${875-i*6} ${684-i*5*p} ${875-i*6}`;
+
+        const path = document.createElementNS(NS, 'path');
+        path.setAttribute('d', d);
+        // alternate gold/white for warmth; gold SVG is the mirror pass
+        path.setAttribute('stroke', useGold ? '#c9a96e' : '#8899cc');
+        path.setAttribute('vector-effect', 'non-scaling-stroke');
+        path.setAttribute('stroke-width', useGold ? '0.9' : '0.7');
+        svg.appendChild(path);
+      }
+      return svg;
+    }
+
+    const svg1 = buildSVG(1, false);
+    const svg2 = buildSVG(-1, true);
+    wrap.appendChild(svg1);
+    wrap.appendChild(svg2);
+
+    // Animate after paths land in DOM so getTotalLength() works
+    function animateSVG(svg) {
+      const paths = svg.querySelectorAll('path');
+      paths.forEach((path, i) => {
+        const len = path.getTotalLength();
+        if (!len) return;
+        const dashLen = len * 0.3;
+        const gap = len - dashLen;
+        path.style.strokeDasharray = `${dashLen} ${gap}`;
+        path.style.strokeDashoffset = '0';
+
+        const isGold = path.getAttribute('stroke') === '#c9a96e';
+        const baseOp = isGold ? 0.12 + i * 0.012 : 0.06 + i * 0.009;
+        const peakOp = isGold ? Math.min(0.65, baseOp * 2.8) : Math.min(0.45, baseOp * 2.5);
+        const dur = (20 + Math.random() * 10) * 1000;
+        const startOffset = -(Math.random() * dur);
+
+        path.animate([
+          { strokeDashoffset: '0',          strokeOpacity: baseOp },
+          { strokeDashoffset: `-${len*0.5}`, strokeOpacity: peakOp },
+          { strokeDashoffset: `-${len}`,     strokeOpacity: baseOp },
+        ], { duration: dur, iterations: Infinity, easing: 'linear', delay: startOffset });
+      });
+    }
+
+    // Short delay ensures paths are painted
+    setTimeout(() => { animateSVG(svg1); animateSVG(svg2); }, 80);
+  })();
+
+  // ─── Hero letter-by-letter spring drop-in ────────────────────────────────────
+  (function(){
+    const titleEl = document.getElementById('heroTitle');
+    if (!titleEl) return;
+
+    const WORDS = ['Register', 'Now'];
+    const GRADIENT = 'linear-gradient(135deg,#e8c97a 0%,#ffffff 55%,#d4a44e 100%)';
+    const FS = 'clamp(3.8rem,9vw,7rem)';
+
+    WORDS.forEach((word, wi) => {
+      const wordWrap = document.createElement('span');
+      wordWrap.style.cssText = `display:inline-block;${wi < WORDS.length-1 ? 'margin-right:0.28em;' : ''}`;
+
+      word.split('').forEach((ch, li) => {
+        const span = document.createElement('span');
+        span.textContent = ch;
+        const delay = (wi * 0.12 + li * 0.032 + 0.25).toFixed(3);
+        span.style.cssText = [
+          'display:inline-block',
+          `font-size:${FS}`,
+          'background:' + GRADIENT,
+          '-webkit-background-clip:text',
+          '-webkit-text-fill-color:transparent',
+          'background-clip:text',
+          'animation:letterDrop 0.65s cubic-bezier(0.34,1.56,0.64,1) both',
+          `animation-delay:${delay}s`,
+        ].join(';');
+        wordWrap.appendChild(span);
+      });
+
+      titleEl.appendChild(wordWrap);
     });
-    document.getElementById('mobileToggle').addEventListener('click',()=>document.getElementById('mobileMenu').classList.add('open'));
-    document.getElementById('mobileClose').addEventListener('click',()=>document.getElementById('mobileMenu').classList.remove('open'));
 
-    // ─── Scroll reveal ────────────────────────────────────────────────────────────
-    const obs = new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:0.1});
-    document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
-
-    // ─── HeroWave Canvas (pixel-shader style) ────────────────────────────────────
-    (function() {
-      const canvas = document.getElementById('wave-canvas');
-      const ctx = canvas.getContext('2d');
-      const SCALE = 3;
-      let width, height, imageData, data;
-
-      function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = document.getElementById('wave-hero').clientHeight;
-        width = Math.floor(canvas.width / SCALE);
-        height = Math.floor(canvas.height / SCALE);
-        imageData = ctx.createImageData(width, height);
-        data = imageData.data;
-      }
-      window.addEventListener('resize', resizeCanvas);
-      resizeCanvas();
-
-      const SIN_TABLE = new Float32Array(1024);
-      const COS_TABLE = new Float32Array(1024);
-      for (let i = 0; i < 1024; i++) {
-        const angle = (i / 1024) * Math.PI * 2;
-        SIN_TABLE[i] = Math.sin(angle);
-        COS_TABLE[i] = Math.cos(angle);
-      }
-      const fastSin = x => SIN_TABLE[((((x % (Math.PI*2)) / (Math.PI*2)) * 1024) | 0) & 1023];
-      const fastCos = x => COS_TABLE[((((x % (Math.PI*2)) / (Math.PI*2)) * 1024) | 0) & 1023];
-
-      const startTime = Date.now();
-      function render() {
-        const time = (Date.now() - startTime) * 0.001;
-        for (let y = 0; y < height; y++) {
-          for (let x = 0; x < width; x++) {
-            const u_x = (2 * x - width) / height;
-            const u_y = (2 * y - height) / height;
-            let a = 0, d = 0;
-            for (let i = 0; i < 4; i++) {
-              a += fastCos(i - d + time * 0.5 - a * u_x);
-              d += fastSin(i * u_y + a);
-            }
-            const wave = (fastSin(a) + fastCos(d)) * 0.5;
-            const intensity = 0.3 + 0.4 * wave;
-            const baseVal = 0.08 + 0.12 * fastCos(u_x + u_y + time * 0.3);
-            const blueAccent = 0.15 * fastSin(a * 1.5 + time * 0.2);
-            const purpleAccent = 0.1 * fastCos(d * 2 + time * 0.1);
-            const r = Math.max(0, Math.min(1, baseVal + purpleAccent * 0.8)) * intensity;
-            const g = Math.max(0, Math.min(1, baseVal + blueAccent * 0.6)) * intensity;
-            const b = Math.max(0, Math.min(1, baseVal + blueAccent * 1.2 + purpleAccent * 0.4)) * intensity;
-            const idx = (y * width + x) * 4;
-            data[idx]   = r * 255;
-            data[idx+1] = g * 255;
-            data[idx+2] = b * 255;
-            data[idx+3] = 255;
-          }
-        }
-        ctx.putImageData(imageData, 0, 0);
-        ctx.imageSmoothingEnabled = false;
-        ctx.drawImage(canvas, 0, 0, width, height, 0, 0, canvas.width, canvas.height);
-        requestAnimationFrame(render);
-      }
-      render();
-    })();
-
-    // ─── Countdown ───────────────────────────────────────────────────────────────
-    const forumTarget = new Date('2026-08-01T20:00:00Z');
-    function tickReg() {
-      const diff = forumTarget - new Date();
-      if (diff <= 0) { ['rcd-days','rcd-hours','rcd-mins','rcd-secs'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent='00';}); return; }
-      const d=document.getElementById('rcd-days'),h=document.getElementById('rcd-hours'),m=document.getElementById('rcd-mins'),s=document.getElementById('rcd-secs');
-      if(d)d.textContent=String(Math.floor(diff/86400000)).padStart(2,'0');
-      if(h)h.textContent=String(Math.floor(diff%86400000/3600000)).padStart(2,'0');
-      if(m)m.textContent=String(Math.floor(diff%3600000/60000)).padStart(2,'0');
-      if(s)s.textContent=String(Math.floor(diff%60000/1000)).padStart(2,'0');
+    // Hover dim effect on the whole link
+    const btn = document.getElementById('heroRegisterBtn');
+    if (btn) {
+      btn.addEventListener('mouseenter', () => btn.style.opacity = '0.72');
+      btn.addEventListener('mouseleave', () => btn.style.opacity = '1');
     }
-    tickReg(); setInterval(tickReg, 1000);
+  })();
 
-    // ─── Feature Carousel (FeatureCarousel React → vanilla port) ─────────────────
-    (function() {
-      const STEPS = [
-        {
-          name: 'Step 1',
-          title: 'Choose Your Track',
-          titleGold: 'Track',
-          description: 'Select from Finance, Law, Engineering, or Management. Each track has its own competition stream, workshops, and prize category. Your track determines your committee placement and competition brief.',
-          visual: 'step1'
-        },
-        {
-          name: 'Step 2',
-          title: 'Select Your Pass',
-          titleGold: 'Pass',
-          description: 'Observer Pass for full conference access without competition. Competitor Pass for prize eligibility and competition participation. Professional Pass for VIP access, mentorship, and networking dinners.',
-          visual: 'step2'
-        },
-        {
-          name: 'Step 3',
-          title: 'Complete Registration',
-          titleGold: 'Registration',
-          description: 'Fill in your details — name, institution, nationality, and dietary requirements. Team-based entries require all team members to register individually with the same team name.',
-          visual: 'step3'
-        },
-        {
-          name: 'Step 4',
-          title: 'Confirm & Attend',
-          titleGold: 'Attend',
-          description: 'Receive your confirmation email with your delegate pack, schedule, venue details, and pre-reading materials. Arrive at Business Bay, Dubai on August 2, 2026.',
-          visual: 'step4'
-        }
-      ];
+  // ─── Countdown ───────────────────────────────────────────────────────────────
+  const forumTarget=new Date('2026-08-02T06:00:00Z');
+  function tickCD(){
+    const diff=forumTarget-new Date();
+    const ids=['cd-days','cd-hours','cd-mins','cd-secs'];
+    if(diff<=0){ids.forEach(id=>{const el=document.getElementById(id);if(el)el.textContent='00';});return;}
+    const vals=[
+      Math.floor(diff/86400000),
+      Math.floor(diff%86400000/3600000),
+      Math.floor(diff%3600000/60000),
+      Math.floor(diff%60000/1000)
+    ];
+    ids.forEach((id,i)=>{const el=document.getElementById(id);if(el)el.textContent=String(vals[i]).padStart(2,'0');});
+  }
+  tickCD(); setInterval(tickCD,1000);
 
-      let current = 0;
-      let timer = null;
-      const INTERVAL = 5000;
+  // ─── Countries list ───────────────────────────────────────────────────────────
+  const COUNTRIES=[
+    'Afghanistan','Albania','Algeria','Andorra','Angola','Antigua and Barbuda','Argentina','Armenia','Australia',
+    'Austria','Azerbaijan','Bahamas','Bahrain','Bangladesh','Barbados','Belarus','Belgium','Belize','Benin',
+    'Bhutan','Bolivia','Bosnia and Herzegovina','Botswana','Brazil','Brunei','Bulgaria','Burkina Faso','Burundi',
+    'Cabo Verde','Cambodia','Cameroon','Canada','Central African Republic','Chad','Chile','China','Colombia',
+    'Comoros','Congo (Brazzaville)','Congo (Kinshasa)','Costa Rica','Croatia','Cuba','Cyprus','Czech Republic',
+    'Denmark','Djibouti','Dominica','Dominican Republic','Ecuador','Egypt','El Salvador','Equatorial Guinea',
+    'Eritrea','Estonia','Eswatini','Ethiopia','Fiji','Finland','France','Gabon','Gambia','Georgia','Germany',
+    'Ghana','Greece','Grenada','Guatemala','Guinea','Guinea-Bissau','Guyana','Haiti','Honduras','Hungary',
+    'Iceland','India','Indonesia','Iran','Iraq','Ireland','Israel','Italy','Jamaica','Japan','Jordan',
+    'Kazakhstan','Kenya','Kiribati','Kosovo','Kuwait','Kyrgyzstan','Laos','Latvia','Lebanon','Lesotho',
+    'Liberia','Libya','Liechtenstein','Lithuania','Luxembourg','Madagascar','Malawi','Malaysia','Maldives',
+    'Mali','Malta','Marshall Islands','Mauritania','Mauritius','Mexico','Micronesia','Moldova','Monaco',
+    'Mongolia','Montenegro','Morocco','Mozambique','Myanmar','Namibia','Nauru','Nepal','Netherlands',
+    'New Zealand','Nicaragua','Niger','Nigeria','North Korea','North Macedonia','Norway','Oman','Pakistan',
+    'Palau','Palestine','Panama','Papua New Guinea','Paraguay','Peru','Philippines','Poland','Portugal',
+    'Qatar','Romania','Russia','Rwanda','Saint Kitts and Nevis','Saint Lucia','Saint Vincent and the Grenadines',
+    'Samoa','San Marino','Sao Tome and Principe','Saudi Arabia','Senegal','Serbia','Seychelles','Sierra Leone',
+    'Singapore','Slovakia','Slovenia','Solomon Islands','Somalia','South Africa','South Korea','South Sudan',
+    'Spain','Sri Lanka','Sudan','Suriname','Sweden','Switzerland','Syria','Taiwan','Tajikistan','Tanzania',
+    'Thailand','Timor-Leste','Togo','Tonga','Trinidad and Tobago','Tunisia','Turkey','Turkmenistan','Tuvalu',
+    'Uganda','Ukraine','United Arab Emirates','United Kingdom','United States','Uruguay','Uzbekistan',
+    'Vanuatu','Vatican City','Venezuela','Vietnam','Yemen','Zambia','Zimbabwe'
+  ];
 
-      const card  = document.getElementById('fcCard');
-      const textEl  = document.getElementById('fcText');
-      const visualEl = document.getElementById('fcVisual');
-      const navEl   = document.getElementById('fcNav');
+  ['f-nationality','f-residency'].forEach(id=>{
+    const sel=document.getElementById(id);
+    COUNTRIES.forEach(c=>{
+      const opt=document.createElement('option');
+      opt.value=c; opt.textContent=c;
+      sel.appendChild(opt);
+    });
+  });
 
-      // ── Mouse spotlight ──────────────────────────────────────────────────────
-      card.addEventListener('mousemove', e => {
-        const r = card.getBoundingClientRect();
-        card.style.setProperty('--mx', `${e.clientX - r.left}px`);
-        card.style.setProperty('--my', `${e.clientY - r.top}px`);
-      });
-      card.addEventListener('mouseleave', () => {
-        card.style.setProperty('--mx', '-9999px');
-        card.style.setProperty('--my', '-9999px');
-      });
+  // ─── Form logic ───────────────────────────────────────────────────────────────
+  let currentStep=1;
 
-      // ── Visual HTML per step ─────────────────────────────────────────────────
-      function getVisual(v) {
-        if (v === 'step1') return `
-          <div class="mock-card fc-anim-slide-l" style="width:58%;left:0;top:12%;padding:18px 20px;">
-            <p style="font-family:'Raleway',sans-serif;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(201,169,110,0.5);margin-bottom:10px;">Select Track</p>
-            <div style="display:flex;flex-direction:column;gap:6px;">
-              <div style="padding:9px 12px;background:rgba(201,169,110,0.12);border:1px solid rgba(201,169,110,0.35);border-radius:6px;display:flex;align-items:center;justify-content:space-between;">
-                <span style="font-family:'Cormorant Garamond',serif;font-size:15px;color:#c9a96e;">Finance</span>
-                <span style="width:6px;height:6px;border-radius:50%;background:#c9a96e;"></span>
-              </div>
-              <div style="padding:9px 12px;background:rgba(20,20,58,0.5);border:1px solid rgba(201,169,110,0.08);border-radius:6px;">
-                <span style="font-family:'Cormorant Garamond',serif;font-size:15px;color:rgba(232,232,240,0.4);">Law</span>
-              </div>
-              <div style="padding:9px 12px;background:rgba(20,20,58,0.5);border:1px solid rgba(201,169,110,0.08);border-radius:6px;">
-                <span style="font-family:'Cormorant Garamond',serif;font-size:15px;color:rgba(232,232,240,0.4);">Engineering</span>
-              </div>
-              <div style="padding:9px 12px;background:rgba(20,20,58,0.5);border:1px solid rgba(201,169,110,0.08);border-radius:6px;">
-                <span style="font-family:'Cormorant Garamond',serif;font-size:15px;color:rgba(232,232,240,0.4);">Management</span>
-              </div>
-            </div>
-          </div>
-          <div class="mock-card fc-anim-slide-r" style="width:56%;right:0;top:50%;padding:16px 18px;">
-            <p style="font-family:'Raleway',sans-serif;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(201,169,110,0.4);margin-bottom:8px;">Finance Track</p>
-            <p style="font-family:'Cormorant Garamond',serif;font-size:17px;color:#e8e8f0;margin-bottom:6px;">Capital Markets &amp; Fintech</p>
-            <div style="height:1px;background:rgba(201,169,110,0.1);margin-bottom:8px;"></div>
-            <p style="font-family:'Raleway',sans-serif;font-size:10px;color:rgba(148,148,181,0.6);line-height:1.6;">Workshops · Competition Rounds · Panel Access</p>
-          </div>`;
+  function showStep(n){
+    document.querySelectorAll('.form-step').forEach(el=>el.classList.remove('active'));
+    document.getElementById('step'+n).classList.add('active');
+    const pct=n===4?100:Math.round((n/3)*100);
+    document.getElementById('progressFill').style.width=pct+'%';
+    document.getElementById('stepLabel').textContent=n===4?'Complete':'Step '+n+' of 3';
+    [1,2,3].forEach(i=>{
+      document.getElementById('dot'+i).style.background=
+        i<n?'#c9a96e': i===n&&n<4?'#c9a96e':'rgba(201,169,110,0.2)';
+    });
+    currentStep=n;
+  }
 
-        if (v === 'step2') return `
-          <div class="mock-card fc-anim-fadescale" style="width:70%;left:50%;transform:translateX(-50%);top:5%;padding:18px 20px;">
-            <p style="font-family:'Raleway',sans-serif;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(201,169,110,0.5);margin-bottom:12px;">Select Pass</p>
-            <div style="display:flex;flex-direction:column;gap:7px;">
-              <div style="padding:10px 14px;background:rgba(20,20,58,0.5);border:1px solid rgba(201,169,110,0.08);border-radius:6px;display:flex;justify-content:space-between;align-items:center;">
-                <div>
-                  <p style="font-family:'Raleway',sans-serif;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(232,232,240,0.5);">Observer</p>
-                  <p style="font-family:'Raleway',sans-serif;font-size:9px;color:rgba(148,148,181,0.35);margin-top:2px;">Full conference access</p>
-                </div>
-              </div>
-              <div style="padding:10px 14px;background:rgba(201,169,110,0.1);border:1px solid rgba(201,169,110,0.35);border-radius:6px;display:flex;justify-content:space-between;align-items:center;">
-                <div>
-                  <p style="font-family:'Raleway',sans-serif;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#c9a96e;">Competitor</p>
-                  <p style="font-family:'Raleway',sans-serif;font-size:9px;color:rgba(201,169,110,0.5);margin-top:2px;">Competition + prizes</p>
-                </div>
-                <span style="width:6px;height:6px;border-radius:50%;background:#c9a96e;"></span>
-              </div>
-              <div style="padding:10px 14px;background:rgba(20,20,58,0.5);border:1px solid rgba(201,169,110,0.08);border-radius:6px;">
-                <p style="font-family:'Raleway',sans-serif;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(232,232,240,0.5);">Professional</p>
-                <p style="font-family:'Raleway',sans-serif;font-size:9px;color:rgba(148,148,181,0.35);margin-top:2px;">VIP · Mentorship · Gala</p>
-              </div>
-            </div>
-          </div>
-          <div class="mock-card fc-anim-fadescale-d" style="width:44%;right:4%;bottom:2%;padding:14px 16px;">
-            <p style="font-family:'Raleway',sans-serif;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(201,169,110,0.4);margin-bottom:6px;">Selected</p>
-            <p style="font-family:'Cormorant Garamond',serif;font-size:16px;color:#c9a96e;">Competitor Pass</p>
-          </div>`;
+  function goStep(n){
+    if(n>currentStep && !validateStep(currentStep)) return;
+    showStep(n);
+    document.getElementById('registration').scrollIntoView({behavior:'smooth',block:'start'});
+  }
 
-        if (v === 'step3') return `
-          <div class="mock-card fc-anim-fadescale" style="width:88%;left:6%;top:8%;padding:22px 24px;">
-            <p style="font-family:'Raleway',sans-serif;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(201,169,110,0.5);margin-bottom:16px;">Delegate Registration</p>
-            <div style="display:flex;flex-direction:column;gap:10px;">
-              <div>
-                <div style="height:7px;background:rgba(201,169,110,0.15);border-radius:2px;margin-bottom:6px;width:55%;"></div>
-                <div style="height:30px;background:rgba(20,20,58,0.7);border:1px solid rgba(201,169,110,0.12);border-radius:6px;padding:0 12px;display:flex;align-items:center;">
-                  <span style="font-family:'Raleway',sans-serif;font-size:10px;color:rgba(148,148,181,0.25);">Full name</span>
-                </div>
-              </div>
-              <div>
-                <div style="height:7px;background:rgba(201,169,110,0.15);border-radius:2px;margin-bottom:6px;width:40%;"></div>
-                <div style="height:30px;background:rgba(20,20,58,0.7);border:1px solid rgba(201,169,110,0.12);border-radius:6px;padding:0 12px;display:flex;align-items:center;">
-                  <span style="font-family:'Raleway',sans-serif;font-size:10px;color:rgba(148,148,181,0.25);">University / Institution</span>
-                </div>
-              </div>
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-                <div style="height:30px;background:rgba(20,20,58,0.7);border:1px solid rgba(201,169,110,0.12);border-radius:6px;padding:0 12px;display:flex;align-items:center;">
-                  <span style="font-family:'Raleway',sans-serif;font-size:10px;color:rgba(148,148,181,0.25);">Nationality</span>
-                </div>
-                <div style="height:30px;background:rgba(20,20,58,0.7);border:1px solid rgba(201,169,110,0.12);border-radius:6px;padding:0 12px;display:flex;align-items:center;">
-                  <span style="font-family:'Raleway',sans-serif;font-size:10px;color:rgba(148,148,181,0.25);">Track</span>
-                </div>
-              </div>
-              <div style="height:1px;background:rgba(201,169,110,0.08);margin:4px 0;"></div>
-              <div style="height:32px;background:rgba(201,169,110,0.12);border:1px solid rgba(201,169,110,0.3);border-radius:6px;display:flex;align-items:center;justify-content:center;">
-                <span style="font-family:'Raleway',sans-serif;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:#c9a96e;">Submit Application</span>
-              </div>
-            </div>
-          </div>`;
+  function submitForm(){
+    if(!validateStep(3)) return;
+    showStep(4);
+    document.getElementById('registration').scrollIntoView({behavior:'smooth',block:'start'});
+  }
 
-        if (v === 'step4') return `
-          <div class="mock-card fc-anim-fadescale" style="width:82%;left:50%;transform:translateX(-50%);top:10%;padding:28px 24px;text-align:center;">
-            <div style="width:52px;height:52px;border-radius:50%;border:1px solid rgba(201,169,110,0.35);background:rgba(201,169,110,0.08);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
-              <svg width="22" height="22" fill="none" stroke="#c9a96e" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-            </div>
-            <p style="font-family:'Cormorant Garamond',serif;font-size:22px;color:#e8e8f0;margin-bottom:4px;">Registration Confirmed</p>
-            <p style="font-family:'Raleway',sans-serif;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(201,169,110,0.5);margin-bottom:16px;">Delegate Pack Sent</p>
-            <div style="height:1px;background:rgba(201,169,110,0.1);margin-bottom:14px;"></div>
-            <p style="font-family:'Raleway',sans-serif;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(201,169,110,0.4);">Business Bay, Dubai</p>
-            <p style="font-family:'Cormorant Garamond',serif;font-size:18px;color:rgba(232,232,240,0.5);margin-top:6px;">August 2, 2026</p>
-          </div>`;
+  function setErr(fieldId,errId,show){
+    const f=document.getElementById(fieldId);
+    const e=document.getElementById(errId);
+    if(f) f.classList.toggle('error',show);
+    if(e) e.classList.toggle('show',show);
+    return show;
+  }
 
-        return '';
-      }
-
-      // ── Build title HTML (bold last word in gold italic) ─────────────────────
-      function buildTitle(step) {
-        const words = step.title.split(' ');
-        const last = words.pop();
-        return `${words.join(' ')} <span style="color:#d4a44e;font-style:italic;">${last}</span>`;
-      }
-
-      // ── Render text panel ─────────────────────────────────────────────────────
-      function renderText(idx) {
-        const s = STEPS[idx];
-        textEl.innerHTML = `
-          <p class="fc-anim-label" style="font-family:'Raleway',sans-serif;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(201,169,110,0.55);margin-bottom:14px;">${s.name}</p>
-          <h3 class="fc-anim-title" style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:300;color:#e8e8f0;line-height:1.15;letter-spacing:-0.02em;margin-bottom:18px;">${buildTitle(s)}</h3>
-          <div class="fc-anim-line" style="width:60px;height:1px;background:linear-gradient(90deg,#c9a96e,transparent);margin-bottom:20px;"></div>
-          <p class="fc-anim-desc" style="font-family:'Raleway',sans-serif;font-size:13px;line-height:1.8;color:rgba(232,232,240,0.55);">${s.description}</p>`;
-      }
-
-      // ── Render visual panel ───────────────────────────────────────────────────
-      function renderVisual(idx) {
-        visualEl.innerHTML = getVisual(STEPS[idx].visual);
-      }
-
-      // ── Render pill nav ───────────────────────────────────────────────────────
-      function renderNav(active) {
-        navEl.innerHTML = STEPS.map((s, i) => {
-          const done = i < active;
-          const cls  = i === active ? 'is-active' : done ? 'is-done' : 'is-idle';
-          const numContent = done
-            ? `<svg width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>`
-            : `${i + 1}`;
-          return `<button class="fc-pill ${cls}" data-idx="${i}" aria-label="${s.name}">
-            <span class="fc-pill-num">${numContent}</span>
-            <span>${s.name}</span>
-          </button>`;
-        }).join('');
-
-        navEl.querySelectorAll('.fc-pill').forEach(btn => {
-          btn.addEventListener('click', () => {
-            goTo(parseInt(btn.dataset.idx));
-            resetTimer();
-          });
-        });
-      }
-
-      // ── Transition to step ────────────────────────────────────────────────────
-      function goTo(idx) {
-        current = ((idx % STEPS.length) + STEPS.length) % STEPS.length;
-        renderText(current);
-        renderVisual(current);
-        renderNav(current);
-      }
-
-      // ── Auto-cycle ────────────────────────────────────────────────────────────
-      function resetTimer() {
-        clearTimeout(timer);
-        timer = setTimeout(() => { goTo(current + 1); resetTimer(); }, INTERVAL);
-      }
-
-      // ── Init ──────────────────────────────────────────────────────────────────
-      goTo(0);
-      resetTimer();
-    })();
-
-    // ─── ScrambleText ─────────────────────────────────────────────────────────────
-    class ScrambleText {
-      constructor(el) {
-        this.el=el;this.original=el.textContent;this.chars='_!X$0-+*#';
-        const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){this.animate();io.unobserve(this.el);}});},{threshold:0.3});
-        io.observe(this.el);
-      }
-      animate(){
-        const text=this.original,len=text.length;let frame=0;const total=len*3;
-        const iv=setInterval(()=>{
-          let out='';
-          if(frame<len){for(let i=0;i<=frame;i++)out+=this.chars[Math.floor(Math.random()*this.chars.length)];}
-          else{const rev=frame-len;out=text.slice(0,rev);for(let i=rev;i<len;i++)out+=this.chars[Math.floor(Math.random()*this.chars.length)];}
-          this.el.textContent=out;frame++;if(frame>total){this.el.textContent=text;clearInterval(iv);}
-        },20);
-      }
+  function validateStep(n){
+    let ok=true;
+    if(n===1){
+      if(!document.getElementById('f-first').value.trim())   ok=!setErr('f-first','err-first',true)&&ok;
+      else setErr('f-first','err-first',false);
+      if(!document.getElementById('f-last').value.trim())    ok=!setErr('f-last','err-last',true)&&ok;
+      else setErr('f-last','err-last',false);
+      const em=document.getElementById('f-email').value.trim();
+      const em2=document.getElementById('f-email2').value.trim();
+      if(!/^\S+@\S+\.\S+$/.test(em)){ ok=false; setErr('f-email','err-email',true); }
+      else setErr('f-email','err-email',false);
+      if(em!==em2||!em2){ ok=false; setErr('f-email2','err-email2',true); }
+      else setErr('f-email2','err-email2',false);
+      if(!document.getElementById('f-phone').value.trim())   ok=!setErr('f-phone','err-phone',true)&&ok;
+      else setErr('f-phone','err-phone',false);
+      if(!document.getElementById('f-gender').value)         ok=!setErr('f-gender','err-gender',true)&&ok;
+      else setErr('f-gender','err-gender',false);
+      if(!document.getElementById('f-dob').value)            ok=!setErr('f-dob','err-dob',true)&&ok;
+      else setErr('f-dob','err-dob',false);
     }
-    document.querySelectorAll('.scramble-text').forEach(el=>new ScrambleText(el));
+    if(n===2){
+      if(!document.getElementById('f-nationality').value)    ok=!setErr('f-nationality','err-nationality',true)&&ok;
+      else setErr('f-nationality','err-nationality',false);
+      if(!document.getElementById('f-residency').value)      ok=!setErr('f-residency','err-residency',true)&&ok;
+      else setErr('f-residency','err-residency',false);
+      if(!document.getElementById('f-city').value.trim())    ok=!setErr('f-city','err-city',true)&&ok;
+      else setErr('f-city','err-city',false);
+    }
+    if(n===3){
+      if(!document.getElementById('f-privacy').checked){ ok=false; setErr('f-privacy','err-privacy',true); }
+      else setErr('f-privacy','err-privacy',false);
+    }
+    return ok;
+  }
+
+  // Clear error on input
+  document.querySelectorAll('.form-input').forEach(inp=>{
+    inp.addEventListener('input',()=>{
+      inp.classList.remove('error');
+      const next=inp.nextElementSibling;
+      if(next && next.classList.contains('field-error')) next.classList.remove('show');
+    });
+  });
+
   </script>
 </body>
 </html>

@@ -6,7 +6,7 @@
   <title>Schedule — Dubai Meridian Forum</title>
   <meta property="og:type" content="website">
   <meta property="og:title" content="Schedule — Dubai Meridian Forum">
-  <meta property="og:description" content="A four-day professional forum in Dubai built around Law, Finance, Engineering, and Management.">
+  <meta property="og:description" content="A four-day programme of masterclasses, pitches, and high-level networking. August 2–5, 2026, Business Bay Dubai.">
   <meta property="og:image" content="https://www.dubaimeridian.com/og-thumbnail.png">
   <meta property="og:url" content="https://www.dubaimeridian.com/schedule.html">
   <meta name="twitter:card" content="summary_large_image">
@@ -19,68 +19,140 @@
       theme: {
         extend: {
           colors: {
-            navy: { 50: '#e8e8f0', 100: '#c5c5d9', 200: '#9494b5', 300: '#5e5e88', 400: '#2d2d5e', 500: '#14143a', 600: '#0d0d2b', 700: '#09091f', 800: '#060616', 900: '#03030b' },
-            gold: { 50: '#fdf8ef', 100: '#f9ecd3', 200: '#f0d5a0', 300: '#e5bc6d', 400: '#d4a44e', 500: '#c9a96e', 600: '#a8863a', 700: '#836629', 800: '#5e491d', 900: '#3a2d12' },
+            navy:{ 50:'#e8e8f0',100:'#c5c5d9',200:'#9494b5',300:'#5e5e88',400:'#2d2d5e',500:'#14143a',600:'#0d0d2b',700:'#09091f',800:'#060616',900:'#03030b' },
+            gold:{ 400:'#d4a44e',500:'#c9a96e' },
           },
-          fontFamily: {
-            display: ['"Cormorant Garamond"', 'serif'],
-            body: ['"Raleway"', 'sans-serif'],
-            arabic: ['"Amiri"', 'serif'],
+          fontFamily:{
+            display:['"Cormorant Garamond"','serif'],
+            body:['"Raleway"','sans-serif'],
+            arabic:['"Amiri"','serif'],
           }
         }
       }
     }
   </script>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { background: #060616; color: #e8e8f0; font-family: 'Raleway', sans-serif; }
-    .grain::after {
-      content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none; z-index: 9999; opacity: 0.5;
-    }
-    .nav-link { position: relative; letter-spacing: 0.15em; }
-    .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: #c9a96e; transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-    .nav-link:hover::after { width: 100%; }
-    .gold-line { width: 60px; height: 1px; background: linear-gradient(90deg, #c9a96e, transparent); }
-    .fade-section { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
-    .fade-section.visible { opacity: 1; transform: translateY(0); }
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #060616; }
-    ::-webkit-scrollbar-thumb { background: rgba(201,169,110,0.3); border-radius: 3px; }
-    .mobile-menu { transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-    .mobile-menu.open { transform: translateX(0); }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{background:#060616;color:#e8e8f0;font-family:'Raleway',sans-serif;overflow-x:hidden;}
 
-    /* Day cards */
-    .day-card {
-      background: linear-gradient(145deg, rgba(20, 20, 58, 0.4), rgba(9, 9, 31, 0.6));
-      border: 1px solid rgba(201, 169, 110, 0.08);
+    .grain::after{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:0.5;}
+
+    .nav-link{position:relative;letter-spacing:0.15em;}
+    .nav-link::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:#c9a96e;transition:width 0.4s cubic-bezier(0.25,0.46,0.45,0.94);}
+    .nav-link:hover::after{width:100%;}
+    .fade-up{opacity:0;transform:translateY(40px);transition:opacity 0.8s ease,transform 0.8s ease;}
+    .fade-up.visible{opacity:1;transform:translateY(0);}
+    ::-webkit-scrollbar{width:6px;}
+    ::-webkit-scrollbar-track{background:#060616;}
+    ::-webkit-scrollbar-thumb{background:rgba(201,169,110,0.3);border-radius:3px;}
+    .mobile-menu{transform:translateX(100%);transition:transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);}
+    .mobile-menu.open{transform:translateX(0);}
+
+    /* Day tabs */
+    .day-tabs{display:flex;gap:0;border:1px solid rgba(201,169,110,0.12);border-radius:6px;overflow:hidden;}
+    .day-tab{
+      flex:1;padding:0.75rem 0.5rem;text-align:center;cursor:pointer;
+      font-family:'Raleway',sans-serif;font-size:10px;font-weight:600;
+      letter-spacing:0.15em;text-transform:uppercase;
+      color:rgba(232,232,240,0.3);
+      background:transparent;
+      border:none;outline:none;
+      border-right:1px solid rgba(201,169,110,0.08);
+      transition:background 0.25s ease,color 0.25s ease;
     }
-    .day-header {
-      background: linear-gradient(135deg, rgba(201, 169, 110, 0.08), rgba(201, 169, 110, 0.02));
-      border-bottom: 1px solid rgba(201, 169, 110, 0.1);
+    .day-tab:last-child{border-right:none;}
+    .day-tab:hover{color:rgba(201,169,110,0.7);background:rgba(201,169,110,0.04);}
+    .day-tab.active{background:linear-gradient(135deg,rgba(201,169,110,0.14),rgba(201,169,110,0.06));color:#d4a44e;}
+
+    /* Day panels */
+    .day-panel{display:none;}
+    .day-panel.active{display:block;animation:panelIn 0.35s cubic-bezier(0.22,1,0.36,1) both;}
+    @keyframes panelIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+    /* Timeline */
+    .tl-row{
+      display:grid;
+      grid-template-columns:90px 1fr;
+      gap:0 1.5rem;
+      padding:1.25rem 0;
+      border-bottom:1px solid rgba(255,255,255,0.04);
+      align-items:start;
     }
-    .event-item {
-      border-left: 2px solid rgba(201, 169, 110, 0.1);
-      transition: border-color 0.3s ease;
+    .tl-row:last-child{border-bottom:none;}
+    .tl-time{
+      font-family:'Raleway',sans-serif;
+      font-size:10px;font-weight:500;
+      letter-spacing:0.06em;
+      color:rgba(201,169,110,0.5);
+      padding-top:3px;
+      line-height:1.5;
+      white-space:nowrap;
     }
-    .event-item:hover {
-      border-left-color: rgba(201, 169, 110, 0.5);
+    .tl-break{
+      grid-column:1/-1;
+      text-align:center;
+      font-family:'Raleway',sans-serif;
+      font-size:9px;letter-spacing:0.2em;text-transform:uppercase;
+      color:rgba(201,169,110,0.6);
+      padding:0.75rem 0;
+      background:rgba(201,169,110,0.04);
+      border-top:1px solid rgba(201,169,110,0.1);
+      border-bottom:1px solid rgba(201,169,110,0.1);
+      margin:0 -1.75rem;
+      padding-left:1.75rem;
+      padding-right:1.75rem;
     }
-    .event-tag {
-      font-size: 9px;
-      letter-spacing: 0.1em;
-      padding: 2px 8px;
-      border-radius: 2px;
+    .tl-title{
+      font-family:'Cormorant Garamond',serif;
+      font-size:1.15rem;font-weight:400;
+      color:#e8e8f0;
+      margin-bottom:0.25rem;
+      line-height:1.3;
     }
-    .tag-ceremony { background: rgba(201, 169, 110, 0.12); color: #c9a96e; }
-    .tag-social { background: rgba(120, 80, 200, 0.12); color: #a78bfa; }
-    .tag-workshop { background: rgba(59, 130, 246, 0.12); color: #60a5fa; }
-    .tag-competition { background: rgba(16, 185, 129, 0.12); color: #34d399; }
-    .tag-panel { background: rgba(251, 146, 60, 0.12); color: #fb923c; }
-    .tag-brunch { background: rgba(236, 72, 153, 0.12); color: #f472b6; }
-    .tag-networking { background: rgba(168, 134, 58, 0.12); color: #d4a44e; }
+    .tl-desc{
+      font-family:'Raleway',sans-serif;
+      font-size:11px;
+      color:rgba(148,148,181,0.65);
+      line-height:1.7;
+    }
+
+    /* Tag pills */
+    .tag{display:inline-block;font-family:'Raleway',sans-serif;font-size:8px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:2px 7px;border-radius:2px;margin-bottom:5px;}
+    .tag-ceremony{background:rgba(201,169,110,0.1);color:#c9a96e;}
+    .tag-masterclass{background:rgba(99,152,255,0.1);color:#7ba8ff;}
+    .tag-competition{background:rgba(52,211,153,0.1);color:#34d399;}
+    .tag-panel{background:rgba(251,146,60,0.1);color:#fb923c;}
+    .tag-social{background:rgba(167,139,250,0.1);color:#a78bfa;}
+    .tag-networking{background:rgba(212,164,78,0.1);color:#d4a44e;}
+    .tag-activity{background:rgba(56,189,248,0.1);color:#38bdf8;}
+
+    /* Day header card */
+    .day-header-card{
+      background:linear-gradient(135deg,rgba(20,20,58,0.6),rgba(9,9,31,0.8));
+      border:1px solid rgba(201,169,110,0.1);
+      border-radius:8px;
+      padding:1.75rem 2rem;
+      margin-bottom:1.5rem;
+      display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;
+    }
+    .day-number{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;color:#e8e8f0;line-height:1;}
+    .day-subtitle{font-family:'Raleway',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:rgba(201,169,110,0.6);margin-top:4px;}
+    .day-date{font-family:'Raleway',sans-serif;font-size:10px;letter-spacing:0.15em;color:rgba(255,255,255,0.2);text-transform:uppercase;}
+
+    .tl-wrap{
+      background:linear-gradient(145deg,rgba(13,13,43,0.5),rgba(6,6,22,0.7));
+      border:1px solid rgba(201,169,110,0.07);
+      border-radius:8px;
+      padding:0.5rem 1.75rem;
+    }
+
+    @media(max-width:520px){
+      .tl-row{grid-template-columns:1fr;gap:4px 0;}
+      .tl-time{font-size:9px;}
+      .day-tabs{flex-wrap:wrap;}
+      .day-tab{flex-basis:50%;}
+    }
   </style>
 </head>
 <body class="grain">
@@ -89,8 +161,8 @@
   <nav class="fixed top-0 w-full z-50 transition-all duration-500" id="mainNav">
     <div class="max-w-7xl mx-auto px-6 lg:px-12">
       <div class="flex items-center justify-between h-20">
-        <a href="index.html" class="flex items-center gap-3 group">
-          <img src="5.png" alt="DMF Logo" class="h-10 opacity-90 group-hover:opacity-100 transition-opacity duration-300">
+        <a href="index.html" class="flex items-center group">
+          <img src="5.png" alt="DMF" class="h-14 opacity-90 group-hover:opacity-100 transition-opacity duration-300" style="mix-blend-mode:screen;filter:brightness(1.6) saturate(0.8)">
         </a>
         <div class="hidden lg:flex items-center gap-10">
           <a href="index.html" class="nav-link text-navy-100 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Home</a>
@@ -98,9 +170,10 @@
           <a href="team.html" class="nav-link text-navy-100 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Team</a>
           <a href="tracks.html" class="nav-link text-navy-100 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Tracks</a>
           <a href="partners.html" class="nav-link text-white/60 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Partners</a>
+          <a href="schedule.html" class="nav-link text-navy-100 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Schedule</a>
           <a href="contact.html" class="nav-link text-navy-100 text-xs font-body uppercase tracking-widest hover:text-gold-400 transition-colors duration-300">Contact</a>
         </div>
-        <a href="register.html" class="hidden lg:block px-6 py-2.5 border border-gold-500/40 text-gold-400 text-xs uppercase tracking-[0.2em] font-body hover:bg-gold-500/10 hover:border-gold-400 transition-all duration-400 focus-visible:outline-2 focus-visible:outline-gold-400 focus-visible:outline-offset-2">Register</a>
+        <a href="register.html" class="hidden lg:block px-6 py-2.5 text-xs uppercase tracking-[0.2em] font-body font-semibold" style="background:linear-gradient(135deg,#d4a44e,#c9a96e);color:#04060f;transition:opacity 0.25s ease;" onmouseenter="this.style.opacity='0.85'" onmouseleave="this.style.opacity='1'">Register</a>
         <button id="mobileToggle" class="lg:hidden text-navy-100 hover:text-gold-400 transition-colors" aria-label="Menu">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
@@ -109,417 +182,363 @@
   </nav>
 
   <!-- Mobile Menu -->
-  <div id="mobileMenu" class="mobile-menu fixed inset-0 z-[60] bg-navy-800/98 backdrop-blur-xl flex flex-col items-center justify-center gap-8">
-    <button id="mobileClose" class="absolute top-6 right-6 text-navy-100 hover:text-gold-400 transition-colors" aria-label="Close">
+  <div id="mobileMenu" class="mobile-menu fixed inset-0 z-[60] bg-black/98 backdrop-blur-xl flex flex-col items-center justify-center gap-8">
+    <button id="mobileClose" class="absolute top-6 right-6 text-white/60 hover:text-gold-400 transition-colors" aria-label="Close">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
     </button>
-    <a href="index.html" class="text-navy-100 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Home</a>
-    <a href="about.html" class="text-navy-100 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">About</a>
-    <a href="team.html" class="text-navy-100 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Team</a>
-    <a href="tracks.html" class="text-navy-100 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Tracks</a>
+    <a href="index.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Home</a>
+    <a href="about.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">About</a>
+    <a href="team.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Team</a>
+    <a href="tracks.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Tracks</a>
     <a href="partners.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Partners</a>
-    <a href="contact.html" class="text-navy-100 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Contact</a>
+    <a href="schedule.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Schedule</a>
+    <a href="contact.html" class="text-white/60 text-sm font-body uppercase tracking-[0.3em] hover:text-gold-400 transition-colors">Contact</a>
+    <a href="register.html" class="text-gold-400 text-sm font-body uppercase tracking-[0.3em] border border-gold-500/30 px-6 py-2">Register</a>
   </div>
 
-  <!-- Page Header -->
-  <section class="relative pt-32 pb-20 md:pt-40 md:pb-28">
-    <div class="relative z-10 max-w-6xl mx-auto px-6 lg:px-12">
-      <p class="font-arabic text-gold-500/50 text-base mb-3" dir="rtl">البرنامج</p>
-      <p class="text-gold-500/60 text-xs uppercase tracking-[0.3em] font-body mb-4" id="scramble-programme">Programme</p>
-      <h1 class="font-display text-5xl md:text-6xl lg:text-7xl text-white font-light" style="letter-spacing: -0.03em; line-height: 1.1;">
-        Five-Day <span class="text-gold-400 italic">Schedule</span>
+  <!-- Hero -->
+  <section style="background:#040818;padding:9rem 1.5rem 5rem;border-bottom:1px solid rgba(201,169,110,0.07);">
+    <div class="max-w-4xl mx-auto fade-up">
+      <p class="font-body text-gold-500/55 text-xs uppercase tracking-[0.35em] mb-5">August 2 – 5, 2026 &nbsp;·&nbsp; Business Bay, Dubai</p>
+      <h1 class="font-display text-white font-light" style="font-size:clamp(2.6rem,6vw,4rem);letter-spacing:-0.02em;line-height:1.1;margin-bottom:1rem;">
+        Programme <span class="text-gold-400 italic">Schedule</span>
       </h1>
-      <p class="font-body text-navy-200/60 text-sm mt-6 max-w-xl">A meticulously structured programme balancing academic rigour, competitive intensity, and prestigious social engagements.</p>
-    </div>
-  </section>
-
-  <!-- Legend -->
-  <section class="relative py-6 border-b border-gold-500/10">
-    <div class="max-w-6xl mx-auto px-6 lg:px-12">
-      <div class="flex flex-wrap gap-4 items-center">
-        <span class="text-navy-200/40 text-xs font-body uppercase tracking-wider mr-2">Legend:</span>
-        <span class="event-tag tag-ceremony uppercase font-body">Ceremony</span>
-        <span class="event-tag tag-social uppercase font-body">Social</span>
-        <span class="event-tag tag-workshop uppercase font-body">Workshop</span>
-        <span class="event-tag tag-competition uppercase font-body">Competition</span>
-        <span class="event-tag tag-panel uppercase font-body">Panel</span>
-        <span class="event-tag tag-brunch uppercase font-body">Brunch</span>
-        <span class="event-tag tag-networking uppercase font-body">Networking</span>
-      </div>
+      <div style="width:48px;height:1px;background:linear-gradient(90deg,#c9a96e,transparent);margin-bottom:1.5rem;"></div>
+      <p class="font-body text-white/35 text-sm leading-relaxed" style="max-width:480px;">
+        Four days of structured intensity — from expert masterclasses and competitive pitching to a series of surprises on Day 3, culminating in final presentations and a formal closing ceremony.
+      </p>
     </div>
   </section>
 
   <!-- Schedule -->
-  <section class="relative py-16 md:py-24">
-    <div class="max-w-6xl mx-auto px-6 lg:px-12 space-y-8">
+  <section style="background:#060616;padding:5rem 1.5rem 7rem;">
+    <div class="max-w-4xl mx-auto">
 
-      <!-- DAY 1 -->
-      <div class="fade-section day-card rounded-sm overflow-hidden">
-        <div class="day-header px-8 py-5 flex items-center justify-between">
+      <!-- Day Tabs -->
+      <div class="day-tabs mb-8 fade-up">
+        <button class="day-tab active" onclick="switchDay(1)">
+          <span style="display:block;font-size:14px;font-weight:300;font-family:'Cormorant Garamond',serif;letter-spacing:0;">Day 1</span>
+          <span style="display:block;font-size:8px;margin-top:2px;opacity:0.7;">Aug 2</span>
+        </button>
+        <button class="day-tab" onclick="switchDay(2)">
+          <span style="display:block;font-size:14px;font-weight:300;font-family:'Cormorant Garamond',serif;letter-spacing:0;">Day 2</span>
+          <span style="display:block;font-size:8px;margin-top:2px;opacity:0.7;">Aug 3</span>
+        </button>
+        <button class="day-tab" onclick="switchDay(3)">
+          <span style="display:block;font-size:14px;font-weight:300;font-family:'Cormorant Garamond',serif;letter-spacing:0;">Day 3</span>
+          <span style="display:block;font-size:8px;margin-top:2px;opacity:0.7;">Aug 4</span>
+        </button>
+        <button class="day-tab" onclick="switchDay(4)">
+          <span style="display:block;font-size:14px;font-weight:300;font-family:'Cormorant Garamond',serif;letter-spacing:0;">Day 4</span>
+          <span style="display:block;font-size:8px;margin-top:2px;opacity:0.7;">Aug 5</span>
+        </button>
+      </div>
+
+      <!-- ── DAY 1 ── -->
+      <div class="day-panel active" id="day1">
+        <div class="day-header-card">
           <div>
-            <h3 class="font-display text-2xl text-white">Day 1</h3>
-            <p class="text-navy-200/40 text-xs font-body uppercase tracking-wider mt-1">Opening &amp; Welcome</p>
+            <div class="day-number">Day One</div>
+            <div class="day-subtitle">The Masterclass Bootcamp &amp; Opening Gala</div>
           </div>
-          <p class="font-arabic text-gold-500/30 text-sm hidden md:block" dir="rtl">اليوم الأول</p>
+          <div style="text-align:right;">
+            <div class="day-date">Sunday, 2 August 2026</div>
+            <p class="font-arabic text-gold-500/25 text-sm mt-1" dir="rtl">اليوم الأول</p>
+          </div>
         </div>
-        <div class="px-8 py-6 space-y-0">
-          <div class="event-item pl-5 py-4">
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <p class="font-display text-lg text-white">Opening Ceremony</p>
-                <p class="font-body text-navy-200/50 text-xs mt-1">Welcome address by the DMF Chairman, keynote from an international dignitary, and the formal inauguration of the 2026 Dubai Meridian Forum.</p>
-              </div>
-              <div class="flex items-center gap-3 shrink-0">
-                <span class="event-tag tag-ceremony uppercase font-body">Ceremony</span>
-                <span class="text-navy-200/30 text-xs font-body whitespace-nowrap">09:00 – 11:30</span>
-              </div>
+
+        <div class="tl-wrap">
+          <div class="tl-row">
+            <div class="tl-time">07:00 – 08:00</div>
+            <div>
+              <span class="tag tag-ceremony">Arrival</span>
+              <div class="tl-title">Registration &amp; Arrival</div>
+              <div class="tl-desc">Delegates collect credentials, meet their assigned teams, and take their places in the main hall.</div>
             </div>
           </div>
-          <div class="event-item pl-5 py-4">
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <p class="font-display text-lg text-white">Team Formation &amp; Orientation</p>
-                <p class="font-body text-navy-200/50 text-xs mt-1">Participants are assigned to interdisciplinary teams. Meet your teammates, receive the Meridian Challenge briefing, and begin strategic planning.</p>
-              </div>
-              <div class="flex items-center gap-3 shrink-0">
-                <span class="event-tag tag-competition uppercase font-body">Competition</span>
-                <span class="text-navy-200/30 text-xs font-body whitespace-nowrap">12:00 – 14:30</span>
-              </div>
+
+          <div class="tl-row">
+            <div class="tl-time">08:00 – 09:00</div>
+            <div>
+              <span class="tag tag-ceremony">Ceremony</span>
+              <div class="tl-title">Opening Ceremony</div>
+              <div class="tl-desc">Formal inauguration of the Dubai Meridian Forum 2026, with welcome addresses and key announcements.</div>
             </div>
           </div>
-          <div class="event-item pl-5 py-4">
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <p class="font-display text-lg text-white">Opening Gala Dinner</p>
-                <p class="font-body text-navy-200/50 text-xs mt-1">A black-tie evening reception with curated dining, live entertainment, and introductory networking among participants, judges, and distinguished guests.</p>
-              </div>
-              <div class="flex items-center gap-3 shrink-0">
-                <span class="event-tag tag-social uppercase font-body">Social</span>
-                <span class="text-navy-200/30 text-xs font-body whitespace-nowrap">19:00 – 23:00</span>
-              </div>
+
+          <div class="tl-row">
+            <div class="tl-time">09:00 – 10:00</div>
+            <div>
+              <span class="tag tag-panel">Panel</span>
+              <div class="tl-title">Industry Expert Panel</div>
+              <div class="tl-desc">The judging panel opens a high-level discourse on the state of business, innovation, and industry — setting the tone for the days ahead.</div>
+            </div>
+          </div>
+
+          <div class="tl-break">— Short break —</div>
+
+          <div class="tl-row">
+            <div class="tl-time">10:00 – 16:00</div>
+            <div>
+              <span class="tag tag-masterclass">Masterclass</span>
+              <div class="tl-title">Four Masterclass Modules</div>
+              <div class="tl-desc">An intensive educational programme covering the four core disciplines of the Forum. Taught directly by the judging panel, these sessions equip every delegate with the foundational knowledge required to compete. Details are disclosed on the day.</div>
+            </div>
+          </div>
+
+          <div class="tl-break">— Recess · Delegates prepare for the evening —</div>
+
+          <div class="tl-row">
+            <div class="tl-time">19:30 – 21:30</div>
+            <div>
+              <span class="tag tag-social">Gala</span>
+              <div class="tl-title">The Dubai Meridian Gala Dinner</div>
+              <div class="tl-desc">A formal, catered evening event. All delegates, the judging panel, VIP sponsors, and partner representatives gather for a prestige networking dinner — the first major high-level networking opportunity of the Forum.</div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- DAY 2 -->
-      <div class="fade-section day-card rounded-sm overflow-hidden">
-        <div class="day-header px-8 py-5 flex items-center justify-between">
+      <!-- ── DAY 2 ── -->
+      <div class="day-panel" id="day2">
+        <div class="day-header-card">
           <div>
-            <h3 class="font-display text-2xl text-white">Day 2</h3>
-            <p class="text-navy-200/40 text-xs font-body uppercase tracking-wider mt-1">Workshops &amp; Round 1</p>
+            <div class="day-number">Day Two</div>
+            <div class="day-subtitle">The Gauntlet</div>
           </div>
-          <p class="font-arabic text-gold-500/30 text-sm hidden md:block" dir="rtl">اليوم الثاني</p>
+          <div style="text-align:right;">
+            <div class="day-date">Monday, 3 August 2026</div>
+            <p class="font-arabic text-gold-500/25 text-sm mt-1" dir="rtl">اليوم الثاني</p>
+          </div>
         </div>
-        <div class="px-8 py-6 space-y-0">
-          <div class="event-item pl-5 py-4">
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <p class="font-display text-lg text-white">Morning Brunch</p>
-                <p class="font-body text-navy-200/50 text-xs mt-1">An elegant morning spread with continental and Arabic cuisine. Informal networking over breakfast.</p>
-              </div>
-              <div class="flex items-center gap-3 shrink-0">
-                <span class="event-tag tag-brunch uppercase font-body">Brunch</span>
-                <span class="text-navy-200/30 text-xs font-body whitespace-nowrap">08:00 – 09:30</span>
-              </div>
+
+        <div class="tl-wrap">
+          <div class="tl-row">
+            <div class="tl-time">06:00 – 08:00</div>
+            <div>
+              <span class="tag tag-activity">Activity</span>
+              <div class="tl-title">Morning Group Activity <span style="font-family:'Raleway',sans-serif;font-size:10px;color:rgba(148,148,181,0.45);font-style:italic;">(optional)</span></div>
+              <div class="tl-desc">An early-morning physical activity designed to build team cohesion and energy before a full day of presentations.</div>
             </div>
           </div>
-          <div class="event-item pl-5 py-4">
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <p class="font-display text-lg text-white">Track-Specific Workshops — Session A</p>
-                <p class="font-body text-navy-200/50 text-xs mt-1">Parallel workshops across Finance (Capital Markets & Risk), Law (Regulatory Frameworks), and Engineering (Systems Design & Sustainability).</p>
-              </div>
-              <div class="flex items-center gap-3 shrink-0">
-                <span class="event-tag tag-workshop uppercase font-body">Workshop</span>
-                <span class="text-navy-200/30 text-xs font-body whitespace-nowrap">10:00 – 12:30</span>
-              </div>
+
+          <div class="tl-row">
+            <div class="tl-time">09:30 – 10:00</div>
+            <div>
+              <span class="tag tag-ceremony">Prep</span>
+              <div class="tl-title">Morning Registration &amp; Preparation</div>
+              <div class="tl-desc">Teams settle in, load materials, and complete final preparation before presentations commence.</div>
             </div>
           </div>
-          <div class="event-item pl-5 py-4">
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <p class="font-display text-lg text-white">Meridian Challenge — Round 1</p>
-                <p class="font-body text-navy-200/50 text-xs mt-1">Teams receive their first problem set. Initial analysis, strategy formulation, and preliminary pitch preparation under time pressure.</p>
-              </div>
-              <div class="flex items-center gap-3 shrink-0">
-                <span class="event-tag tag-competition uppercase font-body">Competition</span>
-                <span class="text-navy-200/30 text-xs font-body whitespace-nowrap">14:00 – 17:30</span>
-              </div>
+
+          <div class="tl-row">
+            <div class="tl-time">10:00 – 13:00</div>
+            <div>
+              <span class="tag tag-competition">Competition</span>
+              <div class="tl-title">Presentations — Morning Block</div>
+              <div class="tl-desc">The first group of teams present to the judging panel. Teams not on stage remain active throughout the day.</div>
             </div>
           </div>
-          <div class="event-item pl-5 py-4">
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <p class="font-display text-lg text-white">Industry Leaders Panel</p>
-                <p class="font-body text-navy-200/50 text-xs mt-1">Moderated discussion featuring senior executives from across the three tracks on the theme of interdisciplinary innovation in the Gulf region.</p>
-              </div>
-              <div class="flex items-center gap-3 shrink-0">
-                <span class="event-tag tag-panel uppercase font-body">Panel</span>
-                <span class="text-navy-200/30 text-xs font-body whitespace-nowrap">18:30 – 20:00</span>
-              </div>
+
+          <div class="tl-break">— Lunch break · 13:00 – 14:00 —</div>
+
+          <div class="tl-row">
+            <div class="tl-time">14:00 – 17:00</div>
+            <div>
+              <span class="tag tag-competition">Competition</span>
+              <div class="tl-title">Presentations — Afternoon Block</div>
+              <div class="tl-desc">The remaining teams complete their presentations. All delegates participate in the programme throughout.</div>
+            </div>
+          </div>
+
+          <div class="tl-row">
+            <div class="tl-time">17:00 – 17:45</div>
+            <div>
+              <span class="tag tag-panel">Panel</span>
+              <div class="tl-title">Judges' Address &amp; Observations</div>
+              <div class="tl-desc">The panel addresses the full room, sharing candid observations from the day's presentations. A valuable collective learning moment.</div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- DAY 3 -->
-      <div class="fade-section day-card rounded-sm overflow-hidden">
-        <div class="day-header px-8 py-5 flex items-center justify-between">
+      <!-- ── DAY 3 ── -->
+      <div class="day-panel" id="day3">
+        <div class="day-header-card">
           <div>
-            <h3 class="font-display text-2xl text-white">Day 3</h3>
-            <p class="text-navy-200/40 text-xs font-body uppercase tracking-wider mt-1">Deep Dives &amp; Crisis Round</p>
+            <div class="day-number">Day Three</div>
+            <div class="day-subtitle">The Turning Point</div>
           </div>
-          <p class="font-arabic text-gold-500/30 text-sm hidden md:block" dir="rtl">اليوم الثالث</p>
+          <div style="text-align:right;">
+            <div class="day-date">Tuesday, 4 August 2026</div>
+            <p class="font-arabic text-gold-500/25 text-sm mt-1" dir="rtl">اليوم الثالث</p>
+          </div>
         </div>
-        <div class="px-8 py-6 space-y-0">
-          <div class="event-item pl-5 py-4">
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <p class="font-display text-lg text-white">Executive Brunch</p>
-                <p class="font-body text-navy-200/50 text-xs mt-1">Hosted brunch with invited judges and industry leaders for informal mentorship and conversation.</p>
-              </div>
-              <div class="flex items-center gap-3 shrink-0">
-                <span class="event-tag tag-brunch uppercase font-body">Brunch</span>
-                <span class="text-navy-200/30 text-xs font-body whitespace-nowrap">08:00 – 09:30</span>
-              </div>
+
+        <div class="tl-wrap">
+          <div class="tl-row">
+            <div class="tl-time">09:30 – 10:00</div>
+            <div>
+              <span class="tag tag-ceremony">Prep</span>
+              <div class="tl-title">Morning Registration &amp; Preparation</div>
+              <div class="tl-desc">Doors open. Delegates settle in and prepare for what will be the most demanding day of the Forum.</div>
             </div>
           </div>
-          <div class="event-item pl-5 py-4">
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <p class="font-display text-lg text-white">Track-Specific Workshops — Session B</p>
-                <p class="font-body text-navy-200/50 text-xs mt-1">Advanced sessions: Finance (Fintech & DeFi), Law (IP & Data Privacy), Engineering (AI & Automation). Interactive case-study format.</p>
-              </div>
-              <div class="flex items-center gap-3 shrink-0">
-                <span class="event-tag tag-workshop uppercase font-body">Workshop</span>
-                <span class="text-navy-200/30 text-xs font-body whitespace-nowrap">10:00 – 12:30</span>
-              </div>
+
+          <div class="tl-row">
+            <div class="tl-time">10:00 – 14:00</div>
+            <div>
+              <span class="tag tag-competition">Undisclosed</span>
+              <div class="tl-title">To Be Revealed on the Day</div>
+              <div class="tl-desc">The morning programme on Day 3 is intentionally undisclosed. What happens in this window will be one of the defining moments of the Forum. Come prepared for anything.</div>
             </div>
           </div>
-          <div class="event-item pl-5 py-4">
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <p class="font-display text-lg text-white">Meridian Challenge — Crisis Pivot Round</p>
-                <p class="font-body text-navy-200/50 text-xs mt-1">Teams are hit with an unexpected crisis scenario. They must adapt their solutions in real time, demonstrating agility, leadership, and cross-functional coordination.</p>
-              </div>
-              <div class="flex items-center gap-3 shrink-0">
-                <span class="event-tag tag-competition uppercase font-body">Competition</span>
-                <span class="text-navy-200/30 text-xs font-body whitespace-nowrap">14:00 – 18:00</span>
-              </div>
+
+          <div class="tl-break">— Lunch —</div>
+
+          <div class="tl-row">
+            <div class="tl-time">15:30 – 17:45</div>
+            <div>
+              <span class="tag tag-panel">Panel</span>
+              <div class="tl-title">Expert Panel &amp; Open Discourse</div>
+              <div class="tl-desc">Selected delegates join industry experts and judges on stage for a live, dialogue-based discussion — a dynamic alternative to a traditional defence format.</div>
             </div>
           </div>
-          <div class="event-item pl-5 py-4">
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <p class="font-display text-lg text-white">Judges' Fireside Chat</p>
-                <p class="font-body text-navy-200/50 text-xs mt-1">An intimate evening session where judges share career insights and answer participant questions on leadership, innovation, and the future of their fields.</p>
-              </div>
-              <div class="flex items-center gap-3 shrink-0">
-                <span class="event-tag tag-panel uppercase font-body">Panel</span>
-                <span class="text-navy-200/30 text-xs font-body whitespace-nowrap">19:00 – 20:30</span>
-              </div>
+
+          <div class="tl-row">
+            <div class="tl-time">18:00 – 19:00</div>
+            <div>
+              <span class="tag tag-ceremony">Debrief</span>
+              <div class="tl-title">End-of-Day Address</div>
+              <div class="tl-desc">Judges close the day with a forward-looking address, congratulating delegates and setting expectations for the Final Defense.</div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- DAY 4 -->
-      <div class="fade-section day-card rounded-sm overflow-hidden">
-        <div class="day-header px-8 py-5 flex items-center justify-between">
+      <!-- ── DAY 4 ── -->
+      <div class="day-panel" id="day4">
+        <div class="day-header-card">
           <div>
-            <h3 class="font-display text-2xl text-white">Day 4</h3>
-            <p class="text-navy-200/40 text-xs font-body uppercase tracking-wider mt-1">Final Preparations &amp; Semifinals</p>
+            <div class="day-number">Day Four</div>
+            <div class="day-subtitle">The Final Defense</div>
           </div>
-          <p class="font-arabic text-gold-500/30 text-sm hidden md:block" dir="rtl">اليوم الرابع</p>
+          <div style="text-align:right;">
+            <div class="day-date">Wednesday, 5 August 2026</div>
+            <p class="font-arabic text-gold-500/25 text-sm mt-1" dir="rtl">اليوم الرابع</p>
+          </div>
         </div>
-        <div class="px-8 py-6 space-y-0">
-          <div class="event-item pl-5 py-4">
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <p class="font-display text-lg text-white">Networking Brunch</p>
-                <p class="font-body text-navy-200/50 text-xs mt-1">Final brunch with themed discussion tables focusing on career pathways in finance, law, and engineering.</p>
-              </div>
-              <div class="flex items-center gap-3 shrink-0">
-                <span class="event-tag tag-brunch uppercase font-body">Brunch</span>
-                <span class="text-navy-200/30 text-xs font-body whitespace-nowrap">08:00 – 09:30</span>
-              </div>
+
+        <div class="tl-wrap">
+          <div class="tl-row">
+            <div class="tl-time">09:30 – 10:00</div>
+            <div>
+              <span class="tag tag-ceremony">Prep</span>
+              <div class="tl-title">Morning Registration &amp; Preparation</div>
+              <div class="tl-desc">Final logistics and AV checks. Delegates arrive and prepare for the closing day of competition.</div>
             </div>
           </div>
-          <div class="event-item pl-5 py-4">
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <p class="font-display text-lg text-white">Track-Specific Workshops — Session C</p>
-                <p class="font-body text-navy-200/50 text-xs mt-1">Final workshop round: Finance (ESG & Impact), Law (Cross-Border Litigation), Engineering (Renewable Energy & Smart Cities). Practical application focus.</p>
-              </div>
-              <div class="flex items-center gap-3 shrink-0">
-                <span class="event-tag tag-workshop uppercase font-body">Workshop</span>
-                <span class="text-navy-200/30 text-xs font-body whitespace-nowrap">10:00 – 12:00</span>
-              </div>
+
+          <div class="tl-row">
+            <div class="tl-time">10:00 – 13:00</div>
+            <div>
+              <span class="tag tag-competition">Competition</span>
+              <div class="tl-title">Final Presentations — Part I</div>
+              <div class="tl-desc">Teams deliver their final, polished pitch to the judging panel. The first group presents in the morning session.</div>
             </div>
           </div>
-          <div class="event-item pl-5 py-4">
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <p class="font-display text-lg text-white">Meridian Challenge — Semifinal Presentations</p>
-                <p class="font-body text-navy-200/50 text-xs mt-1">Teams present refined pitches to the full judging panel. Adversarial Q&A, stress-testing of business models, and technical scrutiny determine finalists.</p>
-              </div>
-              <div class="flex items-center gap-3 shrink-0">
-                <span class="event-tag tag-competition uppercase font-body">Competition</span>
-                <span class="text-navy-200/30 text-xs font-body whitespace-nowrap">13:30 – 18:00</span>
-              </div>
+
+          <div class="tl-break">— Lunch break · 13:00 – 14:00 —</div>
+
+          <div class="tl-row">
+            <div class="tl-time">14:00 – 15:30</div>
+            <div>
+              <span class="tag tag-competition">Competition</span>
+              <div class="tl-title">Final Presentations — Part II</div>
+              <div class="tl-desc">The remaining teams complete their final pitches. Upon the last presentation, the competitive programme of the Forum is officially closed.</div>
             </div>
           </div>
-          <div class="event-item pl-5 py-4">
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <p class="font-display text-lg text-white">Finalist Announcement &amp; Evening Reception</p>
-                <p class="font-body text-navy-200/50 text-xs mt-1">Announcement of teams advancing to the Grand Final. Celebratory cocktail reception with live music.</p>
-              </div>
-              <div class="flex items-center gap-3 shrink-0">
-                <span class="event-tag tag-social uppercase font-body">Social</span>
-                <span class="text-navy-200/30 text-xs font-body whitespace-nowrap">19:30 – 22:00</span>
-              </div>
+
+          <div class="tl-row">
+            <div class="tl-time">15:30 – 17:30</div>
+            <div>
+              <span class="tag tag-networking">Networking</span>
+              <div class="tl-title">VIP Networking &amp; Private Meetings</div>
+              <div class="tl-desc">An exclusive networking session with sponsors, investors, and partners. Select delegates access private one-on-one meetings during this window.</div>
+            </div>
+          </div>
+
+          <div class="tl-row">
+            <div class="tl-time">17:30 – 18:30</div>
+            <div>
+              <span class="tag tag-ceremony">Ceremony</span>
+              <div class="tl-title">Closing Ceremony &amp; Announcements</div>
+              <div class="tl-desc">The Chief Organisers formally close the Dubai Meridian Forum 2026. Shortlisted teams are announced on stage. The path forward — for investment, placements, and partnerships — is revealed.</div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- DAY 5 -->
-      <div class="fade-section day-card rounded-sm overflow-hidden">
-        <div class="day-header px-8 py-5 flex items-center justify-between" style="background: linear-gradient(135deg, rgba(201, 169, 110, 0.14), rgba(201, 169, 110, 0.04));">
-          <div>
-            <h3 class="font-display text-2xl text-gold-400">Day 5</h3>
-            <p class="text-gold-500/60 text-xs font-body uppercase tracking-wider mt-1">Grand Final &amp; Closing</p>
-          </div>
-          <p class="font-arabic text-gold-500/40 text-sm hidden md:block" dir="rtl">اليوم الخامس</p>
-        </div>
-        <div class="px-8 py-6 space-y-0">
-          <div class="event-item pl-5 py-4">
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <p class="font-display text-lg text-white">Grand Final — Meridian Challenge</p>
-                <p class="font-body text-navy-200/50 text-xs mt-1">Finalist teams deliver their ultimate presentations before the complete judging panel and a live audience. The defining moment of the forum.</p>
-              </div>
-              <div class="flex items-center gap-3 shrink-0">
-                <span class="event-tag tag-competition uppercase font-body">Competition</span>
-                <span class="text-navy-200/30 text-xs font-body whitespace-nowrap">09:30 – 13:00</span>
-              </div>
-            </div>
-          </div>
-          <div class="event-item pl-5 py-4">
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <p class="font-display text-lg text-white">Awards Ceremony</p>
-                <p class="font-body text-navy-200/50 text-xs mt-1">Formal presentation of the Meridian Award, track-specific honours, and special recognitions. Keynote address by the Chief Judge.</p>
-              </div>
-              <div class="flex items-center gap-3 shrink-0">
-                <span class="event-tag tag-ceremony uppercase font-body">Ceremony</span>
-                <span class="text-navy-200/30 text-xs font-body whitespace-nowrap">15:00 – 17:00</span>
-              </div>
-            </div>
-          </div>
-          <div class="event-item pl-5 py-4">
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <p class="font-display text-lg text-white">Closing Gala &amp; Networking Dinner</p>
-                <p class="font-body text-navy-200/50 text-xs mt-1">The culminating event of DMF 2026 — a prestigious black-tie gala dinner celebrating achievement, forging lasting connections, and closing the forum in style.</p>
-              </div>
-              <div class="flex items-center gap-3 shrink-0">
-                <span class="event-tag tag-social uppercase font-body">Social</span>
-                <span class="text-navy-200/30 text-xs font-body whitespace-nowrap">19:30 – Late</span>
-              </div>
-            </div>
-          </div>
-        </div>
+      <!-- Note -->
+      <div class="fade-up" style="margin-top:2.5rem;padding:1.25rem 1.5rem;background:rgba(201,169,110,0.04);border:1px solid rgba(201,169,110,0.08);border-radius:6px;">
+        <p class="font-body text-white/25 text-xs leading-relaxed">
+          The schedule above reflects the confirmed programme structure. Specific session details, challenge content, and supplementary activities are intentionally withheld and will be disclosed to registered delegates in advance of the event.
+        </p>
       </div>
 
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="relative py-16 border-t border-gold-500/10">
+  <footer class="py-16 border-t border-white/5" style="background:#060616;">
     <div class="max-w-6xl mx-auto px-6 lg:px-12">
       <div class="grid md:grid-cols-3 gap-12">
         <div>
-          <img src="5.png" alt="DMF" class="h-8 opacity-70 mb-4">
-          <p class="font-body text-navy-200/40 text-xs leading-relaxed">Dubai Meridian Forum &copy; 2026.<br>All rights reserved.</p>
-          <p class="font-arabic text-gold-500/30 text-sm mt-3" dir="rtl">منتدى دبي ميريديان</p>
+          <img src="5.png" alt="DMF" class="h-8 opacity-60 mb-4" style="mix-blend-mode:screen;filter:brightness(1.6) saturate(0.8)">
+          <p class="font-body text-white/30 text-xs leading-relaxed">Dubai Meridian Forum &copy; 2026.<br>All rights reserved.</p>
+          <p class="font-arabic text-gold-500/25 text-sm mt-3" dir="rtl">منتدى دبي ميريديان</p>
         </div>
         <div>
-          <p class="text-gold-500/60 text-xs uppercase tracking-[0.2em] font-body mb-4">Navigate</p>
+          <p class="text-gold-500/50 text-xs uppercase tracking-[0.2em] font-body mb-4">Navigate</p>
           <div class="flex flex-col gap-2">
-            <a href="index.html" class="text-navy-200/50 text-sm font-body hover:text-gold-400 transition-colors duration-300">Home</a>
-            <a href="about.html" class="text-navy-200/50 text-sm font-body hover:text-gold-400 transition-colors duration-300">About</a>
-            <a href="team.html" class="text-navy-200/50 text-sm font-body hover:text-gold-400 transition-colors duration-300">Team</a>
-            <a href="tracks.html" class="text-navy-200/50 text-sm font-body hover:text-gold-400 transition-colors duration-300">Tracks</a>
-            <a href="partners.html" class="text-navy-200/50 text-sm font-body hover:text-gold-400 transition-colors duration-300">Partners</a>
-            <a href="register.html" class="text-navy-200/50 text-sm font-body hover:text-gold-400 transition-colors duration-300">Register</a>
-            <a href="contact.html" class="text-navy-200/50 text-sm font-body hover:text-gold-400 transition-colors duration-300">Contact</a>
+            <a href="index.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">Home</a>
+            <a href="about.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">About</a>
+            <a href="team.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">Team</a>
+            <a href="tracks.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">Tracks</a>
+            <a href="register.html" class="text-white/30 text-sm font-body hover:text-gold-400 transition-colors duration-300">Register</a>
           </div>
         </div>
         <div>
-          <p class="text-gold-500/60 text-xs uppercase tracking-[0.2em] font-body mb-4">Contact</p>
-          <p class="text-navy-200/50 text-sm font-body leading-relaxed">Aspect Tower, Office No. 2206<br>Zone B, Bay Avenue<br>Business Bay, Dubai</p>
-          <a href="mailto:info@dubaimeridianforum.com" class="text-gold-500/50 text-sm font-body mt-3 inline-block hover:text-gold-400 transition-colors duration-300">info@dubaimeridianforum.com</a>
+          <p class="text-gold-500/50 text-xs uppercase tracking-[0.2em] font-body mb-4">Contact</p>
+          <p class="text-white/30 text-sm font-body leading-relaxed">Aspect Tower, Office No. 2206<br>Zone B, Bay Avenue<br>Business Bay, Dubai</p>
+          <a href="mailto:Info@dubaimeridian.com" class="text-gold-500/40 text-sm font-body mt-3 inline-block hover:text-gold-400 transition-colors duration-300">Info@dubaimeridian.com</a>
         </div>
       </div>
-      <div class="mt-12 pt-8 border-t border-gold-500/5 text-center">
-        <p class="text-navy-200/30 text-xs font-body tracking-wide">Dubai Meridian Forum &middot; Business Bay, Dubai, UAE</p>
+      <div class="mt-12 pt-8 border-t border-white/5 text-center">
+        <p class="text-white/20 text-xs font-body tracking-wide">Dubai Meridian Forum &middot; Business Bay, Dubai, UAE</p>
       </div>
     </div>
   </footer>
 
   <script>
-    const nav = document.getElementById('mainNav');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 60) { nav.style.background = 'rgba(6,6,22,0.95)'; nav.style.backdropFilter = 'blur(20px)'; nav.style.borderBottom = '1px solid rgba(201,169,110,0.08)'; }
-      else { nav.style.background = 'transparent'; nav.style.backdropFilter = 'none'; nav.style.borderBottom = 'none'; }
-    });
-    document.getElementById('mobileToggle').addEventListener('click', () => document.getElementById('mobileMenu').classList.add('open'));
-    document.getElementById('mobileClose').addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open'));
-    const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
-    document.querySelectorAll('.fade-section').forEach(el => observer.observe(el));
+  // Nav scroll
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll',()=>{
+    if(window.scrollY>60){nav.style.background='rgba(6,6,22,0.96)';nav.style.backdropFilter='blur(20px)';nav.style.borderBottom='1px solid rgba(201,169,110,0.08)';}
+    else{nav.style.background='transparent';nav.style.backdropFilter='none';nav.style.borderBottom='none';}
+  });
+  document.getElementById('mobileToggle').addEventListener('click',()=>document.getElementById('mobileMenu').classList.add('open'));
+  document.getElementById('mobileClose').addEventListener('click',()=>document.getElementById('mobileMenu').classList.remove('open'));
 
-    // ── SpecialText scramble ──────────────────────────────────────────────────────
-    (function(){
-      const CHARS='_!X$0-+*#';
-      function rndChar(prev){let c;do{c=CHARS[Math.floor(Math.random()*CHARS.length)];}while(c===prev);return c;}
-      class SpecialText{
-        constructor(el,{speed=20,once=true}={}){
-          this.el=el;this.text=el.textContent;this.speed=speed;
-          this.iv=null;this.phase='p1';this.step=0;this.done=false;
-          const io=new IntersectionObserver(entries=>{
-            entries.forEach(e=>{if(e.isIntersecting&&!this.done){this._start();if(once)io.unobserve(el);}});
-          },{rootMargin:'-80px'});
-          io.observe(el);
-        }
-        _start(){
-          this.el.textContent='\u00A0'.repeat(this.text.length);
-          this.phase='p1';this.step=0;
-          if(this.iv)clearInterval(this.iv);
-          this.iv=setInterval(()=>this.phase==='p1'?this._p1():this._p2(),this.speed);
-        }
-        _p1(){
-          const max=this.text.length*2,len=Math.min(this.step+1,this.text.length);
-          const c=[];for(let i=0;i<len;i++)c.push(rndChar(c[i-1]));
-          for(let i=len;i<this.text.length;i++)c.push('\u00A0');
-          this.el.textContent=c.join('');
-          if(this.step<max-1){this.step++;}else{this.phase='p2';this.step=0;}
-        }
-        _p2(){
-          const rev=Math.floor(this.step/2),c=[];
-          for(let i=0;i<rev&&i<this.text.length;i++)c.push(this.text[i]);
-          if(rev<this.text.length)c.push(this.step%2===0?'_':rndChar());
-          while(c.length<this.text.length)c.push(rndChar());
-          this.el.textContent=c.join('');
-          if(this.step<this.text.length*2-1){this.step++;}
-          else{this.el.textContent=this.text;clearInterval(this.iv);this.done=true;}
-        }
-      }
-      const el=document.getElementById('scramble-programme');
-      if(el)new SpecialText(el,{speed:22});
-    })();
+  // Scroll reveal
+  const obs = new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:0.08});
+  document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+
+  // Day tabs
+  function switchDay(n) {
+    document.querySelectorAll('.day-tab').forEach((t,i)=>t.classList.toggle('active', i===n-1));
+    document.querySelectorAll('.day-panel').forEach((p,i)=>p.classList.toggle('active', i===n-1));
+  }
   </script>
 </body>
 </html>
