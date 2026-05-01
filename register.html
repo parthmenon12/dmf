@@ -909,12 +909,58 @@
     document.getElementById('registration').scrollIntoView({behavior:'smooth',block:'start'});
   }
 
-  function submitForm(){
-    if(!validateStep(3)) return;
-    showStep(4);
-    document.getElementById('registration').scrollIntoView({behavior:'smooth',block:'start'});
+async function submitForm() {
+  const privacy = document.getElementById('f-privacy');
+  if (!privacy.checked) {
+    document.getElementById('err-privacy').style.display = 'block';
+    return;
   }
+  // includes blank answers to optional questions: theyll appear blank too
+  const payload = {
+    // Step 1
+    first_name:   document.getElementById('f-first').value.trim(),
+    middle_name:  document.getElementById('f-middle').value.trim(),   // optional
+    last_name:    document.getElementById('f-last').value.trim(),
+    email:        document.getElementById('f-email').value.trim(),
+    phone:        document.getElementById('f-phonecode').value + ' ' + document.getElementById('f-phone').value.trim(),
+    gender:       document.getElementById('f-gender').value,
+    date_of_birth: document.getElementById('f-dob').value,
+    // Step 2
+    nationality:  document.getElementById('f-nationality').value,
+    residency:    document.getElementById('f-residency').value,
+    address:      document.getElementById('f-address').value.trim(),  // optional
+    city:         document.getElementById('f-city').value.trim(),
+    state:        document.getElementById('f-state').value.trim(),    // optional
+    postal_code:  document.getElementById('f-postal').value.trim(),   // optional
+    // Step 3
+    institution:  document.getElementById('f-institution').value.trim(), // optional
+    disability:   document.getElementById('f-disability').value.trim(),  // optional
+    source:       document.getElementById('f-source').value.trim(),      // optional
+    referral_code: document.getElementById('f-referral').value.trim(),   // optional
+    food_preference: document.getElementById('f-food').value,
+    tshirt_size:  document.getElementById('f-shirt').value,
+  };
 
+  try {
+    const res = await fetch('https://formspree.io/f/xwvaggjj', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+
+    if (res.ok) {
+      goStep(4); // Show your existing confirmation screen
+    } else {
+      const data = await res.json();
+      alert('Submission error: ' + (data?.errors?.map(e => e.message).join(', ') || 'Please try again.'));
+    }
+  } catch (err) {
+    alert('Network error. Please check your connection and try again.');
+  }
+}
+
+
+  
   function setErr(fieldId,errId,show){
     const f=document.getElementById(fieldId);
     const e=document.getElementById(errId);
