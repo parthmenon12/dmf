@@ -1,0 +1,129 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e4]:
+      - link "DMF" [ref=e5] [cursor=pointer]:
+        - /url: index.html
+        - img "DMF" [ref=e6]
+      - generic [ref=e7]:
+        - link "Home" [ref=e8] [cursor=pointer]:
+          - /url: index.html
+        - link "About" [ref=e9] [cursor=pointer]:
+          - /url: about.html
+        - link "Team" [ref=e10] [cursor=pointer]:
+          - /url: team.html
+        - link "Tracks" [ref=e11] [cursor=pointer]:
+          - /url: tracks.html
+        - link "Partners" [ref=e12] [cursor=pointer]:
+          - /url: partners.html
+        - link "Contact" [ref=e13] [cursor=pointer]:
+          - /url: contact.html
+      - link "Register" [ref=e14] [cursor=pointer]:
+        - /url: register.html
+  - generic [ref=e15]:
+    - button "Close" [ref=e16] [cursor=pointer]:
+      - img [ref=e17]
+    - link "Home" [ref=e19] [cursor=pointer]:
+      - /url: index.html
+    - link "About" [ref=e20] [cursor=pointer]:
+      - /url: about.html
+    - link "Team" [ref=e21] [cursor=pointer]:
+      - /url: team.html
+    - link "Tracks" [ref=e22] [cursor=pointer]:
+      - /url: tracks.html
+    - link "Partners" [ref=e23] [cursor=pointer]:
+      - /url: partners.html
+    - link "Contact" [ref=e24] [cursor=pointer]:
+      - /url: contact.html
+    - link "Register" [ref=e25] [cursor=pointer]:
+      - /url: register.html
+  - generic [ref=e27]:
+    - paragraph [ref=e28]: August 2 – 5, 2026 · Business Bay, Dubai
+    - heading "Programme Schedule" [level=1] [ref=e29]
+    - paragraph [ref=e31]: Four days of structured intensity — from expert masterclasses and competitive pitching to an unexpected live challenge, culminating in final presentations and a formal closing ceremony.
+  - generic [ref=e33]:
+    - generic [ref=e34]:
+      - button "Day 1 Aug 2" [ref=e35] [cursor=pointer]:
+        - generic [ref=e36]: Day 1
+        - generic [ref=e37]: Aug 2
+      - button "Day 2 Aug 3" [ref=e38] [cursor=pointer]:
+        - generic [ref=e39]: Day 2
+        - generic [ref=e40]: Aug 3
+      - button "Day 3 Aug 4" [ref=e41] [cursor=pointer]:
+        - generic [ref=e42]: Day 3
+        - generic [ref=e43]: Aug 4
+      - button "Day 4 Aug 5" [ref=e44] [cursor=pointer]:
+        - generic [ref=e45]: Day 4
+        - generic [ref=e46]: Aug 5
+    - generic [ref=e47]:
+      - generic [ref=e48]:
+        - generic [ref=e49]:
+          - generic [ref=e50]: Day One
+          - generic [ref=e51]: The Masterclass Bootcamp & Opening Gala
+        - generic [ref=e52]:
+          - generic [ref=e53]: Sunday, 2 August 2026
+          - paragraph [ref=e54]: اليوم الأول
+      - generic [ref=e55]:
+        - generic [ref=e56]:
+          - generic [ref=e57]: 07:00 – 08:00
+          - generic [ref=e58]:
+            - generic [ref=e59]: Arrival
+            - generic [ref=e60]: Registration & Arrival
+            - generic [ref=e61]: Delegates collect credentials, meet their assigned teams, and take their places in the main hall.
+        - generic [ref=e62]:
+          - generic [ref=e63]: 08:00 – 09:00
+          - generic [ref=e64]:
+            - generic [ref=e65]: Ceremony
+            - generic [ref=e66]: Opening Ceremony
+            - generic [ref=e67]: Formal inauguration of the Dubai Meridian Forum 2026, with welcome addresses and key announcements.
+        - generic [ref=e68]:
+          - generic [ref=e69]: 09:00 – 10:00
+          - generic [ref=e70]:
+            - generic [ref=e71]: Panel
+            - generic [ref=e72]: Industry Expert Panel
+            - generic [ref=e73]: The judging panel opens a high-level discourse on the state of business, innovation, and industry — setting the tone for the days ahead.
+        - generic [ref=e74]: — Short break —
+        - generic [ref=e75]:
+          - generic [ref=e76]: 10:00 – 16:00
+          - generic [ref=e77]:
+            - generic [ref=e78]: Masterclass
+            - generic [ref=e79]: Four Masterclass Modules
+            - generic [ref=e80]: An intensive educational programme covering the four core disciplines of the Forum. Taught directly by the judging panel, these sessions equip every delegate with the foundational knowledge required to compete. Details are disclosed on the day.
+        - generic [ref=e81]: — Recess · Delegates prepare for the evening —
+        - generic [ref=e82]:
+          - generic [ref=e83]: 19:30 – 21:30
+          - generic [ref=e84]:
+            - generic [ref=e85]: Gala
+            - generic [ref=e86]: The Dubai Meridian Gala Dinner
+            - generic [ref=e87]: A formal, catered evening event. All delegates, the judging panel, VIP sponsors, and partner representatives gather for a prestige networking dinner — the first major high-level networking opportunity of the Forum.
+    - paragraph [ref=e89]: The schedule above reflects the confirmed programme structure. Specific session details, challenge content, and supplementary activities are intentionally withheld and will be disclosed to registered delegates in advance of the event.
+  - contentinfo [ref=e90]:
+    - generic [ref=e91]:
+      - generic [ref=e92]:
+        - generic [ref=e93]:
+          - img "DMF" [ref=e94]
+          - paragraph [ref=e95]:
+            - text: Dubai Meridian Forum © 2026.
+            - text: All rights reserved.
+          - paragraph [ref=e96]: منتدى دبي ميريديان
+        - generic [ref=e97]:
+          - paragraph [ref=e98]: Navigate
+          - generic [ref=e99]:
+            - link "Home" [ref=e100] [cursor=pointer]:
+              - /url: index.html
+            - link "About" [ref=e101] [cursor=pointer]:
+              - /url: about.html
+            - link "Team" [ref=e102] [cursor=pointer]:
+              - /url: team.html
+            - link "Tracks" [ref=e103] [cursor=pointer]:
+              - /url: tracks.html
+            - link "Register" [ref=e104] [cursor=pointer]:
+              - /url: register.html
+        - generic [ref=e105]:
+          - paragraph [ref=e106]: Contact
+          - paragraph [ref=e107]:
+            - text: Aspect Tower, Office No. 2206
+            - text: Zone B, Bay Avenue
+            - text: Business Bay, Dubai
+          - link "Info@dubaimeridian.com" [ref=e108] [cursor=pointer]:
+            - /url: mailto:Info@dubaimeridian.com
+      - paragraph [ref=e110]: Dubai Meridian Forum · Business Bay, Dubai, UAE

@@ -190,7 +190,7 @@
           </div>
           <div class="card p-6 rounded-sm">
             <span class="font-display text-3xl text-gold-400 block mb-1">Dubai</span>
-            <p class="text-white/40 text-xs font-body uppercase tracking-wider">Business Bay, UAE</p>
+            <p class="text-white/40 text-xs font-body uppercase tracking-wider">Jumeirah Beach, UAE</p>
           </div>
           <div class="card p-6 rounded-sm">
             <span class="font-display text-3xl text-gold-400 block mb-1">2026</span>
@@ -198,6 +198,53 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="w-full h-px bg-gradient-to-r from-transparent via-gold-500/20 to-transparent"></div>
+
+  <!-- Venue -->
+  <section class="py-24 md:py-32">
+    <div class="max-w-6xl mx-auto px-6 lg:px-12">
+
+      <!-- Header block -->
+      <div class="fade-up mb-14">
+        <p class="scramble-text text-gold-500/60 text-xs uppercase tracking-[0.3em] font-body mb-6">The Venue</p>
+        <div class="flex items-center justify-between gap-6 mb-3">
+          <h2 class="font-display text-4xl md:text-6xl text-white font-light" style="letter-spacing:-0.02em;line-height:1.08;">
+            Mövenpick Jumeirah<br class="hidden md:block"> Beach Hotel
+          </h2>
+          <img src="images/movenpick-logo.png" alt="Mövenpick" style="max-height:200px;opacity:0.88;flex-shrink:0;">
+        </div>
+        <p class="font-body text-gold-400 text-xs uppercase tracking-[0.3em]">Dubai &nbsp;·&nbsp; JBR</p>
+      </div>
+
+      <!-- Two-column: copy + interior image -->
+      <div class="fade-up grid lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-14">
+        <div>
+          <div class="gold-line mb-8"></div>
+          <p class="font-body text-white/60 leading-[1.8] text-sm mb-5">
+            August in Dubai. Beachfront. A hotel that has hosted heads of state, global summits, and the conversations that move markets. Steps from the Arabian Gulf, the Mövenpick sits at the heart of Jumeirah Beach Residence — one of Dubai's most vibrant waterfront districts.
+          </p>
+          <p class="font-body text-white/60 leading-[1.8] text-sm mb-5">
+            Between sessions, JBR Beach is right outside — white sand, open water, and the kind of energy that only Dubai delivers. Think jet skis, paddleboarding, beach volleyball, and sunsets over the Gulf that you won't forget.
+          </p>
+          <p class="font-body text-white/60 leading-[1.8] text-sm">
+            Inside, the meeting rooms are where it gets serious. Structured debates, cross-disciplinary workshops, live case rooms — the intellectual intensity of the Forum meets purpose-built spaces designed for exactly this kind of high-stakes thinking. The room you compete in matches the stakes of what you're competing for.
+          </p>
+        </div>
+        <div class="rounded-sm overflow-hidden" style="border:1px solid rgba(201,169,110,0.15);aspect-ratio:4/3;">
+          <img src="images/movenpick-hotel.jpg" alt="Mövenpick Jumeirah Beach Hotel interior" class="w-full h-full object-cover" style="display:block;">
+        </div>
+      </div>
+
+      <!-- Full-width meeting room -->
+      <div class="fade-up rounded-sm overflow-hidden" style="border:1px solid rgba(201,169,110,0.15);height:480px;">
+        <img src="images/venue-room.jpg" alt="Conference room at Mövenpick Jumeirah Beach" class="w-full h-full object-cover" style="display:block;">
+      </div>
+      <p class="font-body text-gold-500/40 text-xs italic mt-3 text-center fade-up">Where the competitions are held.</p>
+
     </div>
   </section>
 
@@ -217,53 +264,94 @@
       </div>
 
       <!-- Bento Grid -->
-      <div class="fade-up grid grid-cols-2 md:grid-cols-4 gap-3" style="grid-auto-rows:minmax(140px,auto);">
+      <style>
+        .bento-cell {
+          border-radius: 20px;
+          transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.35s ease, border-color 0.35s ease;
+          position: relative;
+          overflow: hidden;
+        }
+        .bento-cell::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          border-radius: 20px;
+          background: linear-gradient(135deg, rgba(201,169,110,0.06) 0%, transparent 60%);
+          pointer-events: none;
+          z-index: 0;
+        }
+        .bento-cell:hover {
+          transform: translateY(-3px);
+          border-color: rgba(201,169,110,0.28) !important;
+          box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 0 1px rgba(201,169,110,0.1), 0 4px 24px rgba(201,169,110,0.08);
+        }
+        .bento-cell > * { position: relative; z-index: 1; }
+        .bento-hero-glow {
+          position: absolute;
+          width: 220px; height: 220px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(201,169,110,0.12) 0%, transparent 70%);
+          bottom: -60px; right: -60px;
+          pointer-events: none;
+        }
+        .bento-date-cell {
+          border-radius: 20px;
+          background: linear-gradient(90deg, rgba(201,169,110,0.09) 0%, rgba(201,169,110,0.04) 50%, rgba(201,169,110,0.09) 100%);
+          border: 1px solid rgba(201,169,110,0.16);
+          backdrop-filter: blur(8px);
+          transition: border-color 0.35s ease;
+        }
+        .bento-date-cell:hover { border-color: rgba(201,169,110,0.3); }
+      </style>
+
+      <div class="fade-up grid grid-cols-2 md:grid-cols-4 gap-4" style="grid-auto-rows:minmax(148px,auto);">
 
         <!-- Cell 1: Large — Delegates (spans 2 cols, 2 rows) -->
-        <div class="col-span-2 row-span-2 rounded-sm p-7 flex flex-col justify-between" style="background:linear-gradient(145deg,#0e0e2a,#0a0a1e);border:1px solid rgba(201,169,110,0.12);">
+        <div class="bento-cell col-span-2 row-span-2 p-8 flex flex-col justify-between" style="background:linear-gradient(145deg,#10102e 0%,#08081c 100%);border:1px solid rgba(201,169,110,0.14);box-shadow:0 8px 32px rgba(0,0,0,0.35);">
+          <div class="bento-hero-glow"></div>
           <div>
-            <p class="font-body text-[9px] uppercase tracking-[0.3em] text-gold-500/40 mb-4">International Delegates</p>
-            <p class="font-display font-light text-gold-400" style="font-size:clamp(3rem,8vw,5rem);line-height:1;letter-spacing:-0.04em;">~400</p>
+            <p class="font-body text-[9px] uppercase tracking-[0.35em] mb-4" style="color:rgba(201,169,110,0.45);">International Delegates</p>
+            <p class="font-display font-light" style="font-size:clamp(3.2rem,8vw,5.5rem);line-height:1;letter-spacing:-0.04em;background:linear-gradient(135deg,#d4a44e,#c9a96e,#e8c47a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">~400</p>
           </div>
-          <p class="font-body text-white/35 text-xs leading-relaxed mt-4">Students and young professionals across Finance, Law, Engineering, and Management — gathered in Dubai for days of competition, connection, and growth.</p>
+          <p class="font-body text-xs leading-relaxed" style="color:rgba(255,255,255,0.3);max-width:280px;">Students and young professionals across Finance, Law, Engineering, and Management — gathered in Dubai for days of competition, connection, and growth.</p>
         </div>
 
         <!-- Cell 2: Days of Networking -->
-        <div class="col-span-1 row-span-1 rounded-sm p-5 flex flex-col justify-between" style="background:linear-gradient(145deg,#111130,#0c0c22);border:1px solid rgba(201,169,110,0.12);">
-          <p class="font-body text-[9px] uppercase tracking-[0.25em] text-gold-500/40">Days of Networking</p>
-          <p class="font-display text-gold-400 font-light" style="font-size:clamp(2rem,5vw,3.5rem);line-height:1;letter-spacing:-0.03em;">4</p>
+        <div class="bento-cell col-span-1 row-span-1 p-5 flex flex-col justify-between" style="background:linear-gradient(160deg,#121232 0%,#0b0b22 100%);border:1px solid rgba(201,169,110,0.12);box-shadow:0 4px 20px rgba(0,0,0,0.3);">
+          <p class="font-body text-[9px] uppercase tracking-[0.3em]" style="color:rgba(201,169,110,0.4);">Days</p>
+          <p class="font-display font-light" style="font-size:clamp(2.2rem,5vw,3.8rem);line-height:1;letter-spacing:-0.03em;color:#d4a44e;">4</p>
         </div>
 
         <!-- Cell 3: Meridian Challenge -->
-        <div class="col-span-1 row-span-1 rounded-sm p-5 flex flex-col justify-between" style="background:linear-gradient(145deg,#0f0f28,#09091e);border:1px solid rgba(201,169,110,0.12);">
-          <p class="font-body text-[9px] uppercase tracking-[0.25em] text-gold-500/40">The Challenge</p>
-          <p class="font-display text-white/80 text-lg font-light italic leading-tight">Meridian<br>Challenge</p>
+        <div class="bento-cell col-span-1 row-span-1 p-5 flex flex-col justify-between" style="background:linear-gradient(160deg,#0e0e2a 0%,#08081e 100%);border:1px solid rgba(201,169,110,0.12);box-shadow:0 4px 20px rgba(0,0,0,0.3);">
+          <p class="font-body text-[9px] uppercase tracking-[0.3em]" style="color:rgba(201,169,110,0.4);">The Challenge</p>
+          <p class="font-display text-white/75 font-light italic leading-[1.15]" style="font-size:1.1rem;">Meridian<br>Challenge</p>
         </div>
 
         <!-- Cell 4: Four Tracks -->
-        <div class="col-span-1 row-span-1 rounded-sm p-5 flex flex-col justify-between" style="background:linear-gradient(145deg,#0e0e2a,#0a0a1e);border:1px solid rgba(201,169,110,0.12);">
-          <p class="font-body text-[9px] uppercase tracking-[0.25em] text-gold-500/40 mb-3">Four Tracks</p>
-          <ul class="space-y-1">
-            <li class="font-body text-white/60 text-xs flex items-center gap-2"><span class="font-display text-gold-500/40 text-[10px]">I</span> Finance</li>
-            <li class="font-body text-white/60 text-xs flex items-center gap-2"><span class="font-display text-gold-500/40 text-[10px]">II</span> Law</li>
-            <li class="font-body text-white/60 text-xs flex items-center gap-2"><span class="font-display text-gold-500/40 text-[10px]">III</span> Engineering</li>
-            <li class="font-body text-white/60 text-xs flex items-center gap-2"><span class="font-display text-gold-500/40 text-[10px]">IV</span> Management</li>
+        <div class="bento-cell col-span-1 row-span-1 p-5 flex flex-col justify-between" style="background:linear-gradient(160deg,#10102c 0%,#09091e 100%);border:1px solid rgba(201,169,110,0.12);box-shadow:0 4px 20px rgba(0,0,0,0.3);">
+          <p class="font-body text-[9px] uppercase tracking-[0.3em] mb-3" style="color:rgba(201,169,110,0.4);">Four Tracks</p>
+          <ul class="space-y-1.5">
+            <li class="font-body text-white/55 text-xs flex items-center gap-2"><span class="font-display text-[10px]" style="color:rgba(201,169,110,0.35);">I</span> Finance</li>
+            <li class="font-body text-white/55 text-xs flex items-center gap-2"><span class="font-display text-[10px]" style="color:rgba(201,169,110,0.35);">II</span> Law</li>
+            <li class="font-body text-white/55 text-xs flex items-center gap-2"><span class="font-display text-[10px]" style="color:rgba(201,169,110,0.35);">III</span> Engineering</li>
+            <li class="font-body text-white/55 text-xs flex items-center gap-2"><span class="font-display text-[10px]" style="color:rgba(201,169,110,0.35);">IV</span> Management</li>
           </ul>
         </div>
 
-        <!-- Cell 5: Business Bay (spans 1 col, 1 row) -->
-        <div class="col-span-1 row-span-1 rounded-sm p-5 flex flex-col justify-between" style="background:linear-gradient(145deg,#111130,#0c0c22);border:1px solid rgba(201,169,110,0.12);">
-          <p class="font-body text-[9px] uppercase tracking-[0.25em] text-gold-500/40 mb-2">Venue</p>
+        <!-- Cell 5: Venue -->
+        <div class="bento-cell col-span-1 row-span-1 p-5 flex flex-col justify-between" style="background:linear-gradient(160deg,#121232 0%,#0b0b22 100%);border:1px solid rgba(201,169,110,0.12);box-shadow:0 4px 20px rgba(0,0,0,0.3);">
+          <p class="font-body text-[9px] uppercase tracking-[0.3em] mb-2" style="color:rgba(201,169,110,0.4);">Venue</p>
           <div>
-            <p class="font-display text-white text-base font-light">Business Bay</p>
-            <p class="font-body text-white/30 text-[10px] uppercase tracking-wider mt-1">Dubai, United Arab Emirates</p>
+            <p class="font-display text-white font-light" style="font-size:1rem;line-height:1.3;">Mövenpick JBR</p>
+            <p class="font-body text-[10px] uppercase tracking-wider mt-1.5" style="color:rgba(255,255,255,0.25);">Jumeirah Beach, Dubai</p>
           </div>
         </div>
 
-        <!-- Cell 6: Date — full width bottom strip -->
-        <div class="col-span-2 md:col-span-4 rounded-sm px-7 py-4 flex items-center justify-between" style="background:linear-gradient(90deg,rgba(201,169,110,0.08),rgba(201,169,110,0.04));border:1px solid rgba(201,169,110,0.12);">
-          <p class="font-body text-[10px] uppercase tracking-[0.3em] text-gold-500/50">August 2 – 5 · 2026 · Dubai</p>
-          <a href="register.html" class="font-body text-[10px] uppercase tracking-[0.25em] text-gold-400/70 hover:text-gold-400 transition-colors duration-300">Register →</a>
+        <!-- Cell 6: Date strip -->
+        <div class="bento-date-cell col-span-2 md:col-span-4 px-8 py-5 flex items-center justify-between">
+          <p class="font-body text-[10px] uppercase tracking-[0.35em]" style="color:rgba(201,169,110,0.55);">August 2 – 5 &nbsp;·&nbsp; 2026 &nbsp;·&nbsp; Dubai</p>
+          <a href="register.html" class="font-body text-[10px] uppercase tracking-[0.25em] transition-colors duration-300" style="color:rgba(201,169,110,0.6);" onmouseover="this.style.color='#d4a44e'" onmouseout="this.style.color='rgba(201,169,110,0.6)'">Register →</a>
         </div>
 
       </div>
@@ -415,7 +503,7 @@
 
       </div>
 
-      <p class="text-gold-500/40 text-xs uppercase tracking-[0.35em] font-body">Dubai &middot; Business Bay &middot; August 2026</p>
+      <p class="text-gold-500/40 text-xs uppercase tracking-[0.35em] font-body">Dubai &middot; Mövenpick JBR &middot; August 2026</p>
     </div>
   </section>
 
@@ -446,7 +534,7 @@
         </div>
       </div>
       <div class="mt-12 pt-8 border-t border-white/5 text-center">
-        <p class="text-white/20 text-xs font-body tracking-wide">Dubai Meridian Forum &middot; Business Bay, Dubai, UAE</p>
+        <p class="text-white/20 text-xs font-body tracking-wide">Dubai Meridian Forum &middot; Jumeirah Beach, Dubai, UAE</p>
       </div>
     </div>
   </footer>

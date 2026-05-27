@@ -1,0 +1,203 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e4]:
+      - link "DMF" [ref=e5] [cursor=pointer]:
+        - /url: index.html
+        - img "DMF" [ref=e6]
+      - generic [ref=e7]:
+        - link "Home" [ref=e8] [cursor=pointer]:
+          - /url: index.html
+        - link "About" [ref=e9] [cursor=pointer]:
+          - /url: about.html
+        - link "Team" [ref=e10] [cursor=pointer]:
+          - /url: team.html
+        - link "Tracks" [ref=e11] [cursor=pointer]:
+          - /url: tracks.html
+        - link "Partners" [ref=e12] [cursor=pointer]:
+          - /url: partners.html
+        - link "Schedule" [ref=e13] [cursor=pointer]:
+          - /url: schedule.html
+        - link "Contact" [ref=e14] [cursor=pointer]:
+          - /url: contact.html
+      - link "Register" [ref=e15] [cursor=pointer]:
+        - /url: register.html
+  - generic [ref=e16]:
+    - button "Close" [ref=e17] [cursor=pointer]:
+      - img [ref=e18]
+    - link "Home" [ref=e20] [cursor=pointer]:
+      - /url: index.html
+    - link "About" [ref=e21] [cursor=pointer]:
+      - /url: about.html
+    - link "Team" [ref=e22] [cursor=pointer]:
+      - /url: team.html
+    - link "Tracks" [ref=e23] [cursor=pointer]:
+      - /url: tracks.html
+    - link "Partners" [ref=e24] [cursor=pointer]:
+      - /url: partners.html
+    - link "Schedule" [ref=e25] [cursor=pointer]:
+      - /url: schedule.html
+    - link "Contact" [ref=e26] [cursor=pointer]:
+      - /url: contact.html
+    - link "Register" [ref=e27] [cursor=pointer]:
+      - /url: register.html
+  - generic [ref=e28]:
+    - generic [ref=e31]:
+      - paragraph [ref=e32]: منتدى دبي ميريديان
+      - paragraph [ref=e33]: Dubai · 2026
+      - heading "Dubai Meridian" [level=1] [ref=e34]
+      - heading "Forum" [level=2] [ref=e35]
+      - paragraph [ref=e36]: Where Finance, Law, Engineering & Management Converge
+      - link "Registration Opening Soon →" [ref=e37] [cursor=pointer]:
+        - /url: register.html
+        - generic [ref=e38]: Registration Opening Soon
+        - generic [ref=e39]: →
+    - link [ref=e40] [cursor=pointer]:
+      - /url: "#overview"
+      - img [ref=e41]
+  - generic [ref=e43]:
+    - generic [ref=e46]:
+      - generic [ref=e47]:
+        - paragraph [ref=e48]: About the Forum
+        - heading "Redefining Interdisciplinary Excellence" [level=2] [ref=e49]:
+          - text: Redefining
+          - text: Interdisciplinary
+          - text: Excellence
+        - paragraph [ref=e51]: The Dubai Meridian Forum is a premier four-day academic and professional summit that brings together the brightest minds across finance, law, engineering, and management. Set against the backdrop of Dubai's world-class infrastructure, DMF challenges participants to transcend traditional boundaries and forge innovative solutions to real-world crises.
+        - paragraph [ref=e52]: At the heart of DMF lies the Meridian Challenge — an intensive cross-disciplinary pitch competition where diverse teams are formed, tested under pressure, and evaluated by an elite panel of international judges.
+      - generic [ref=e53]:
+        - generic [ref=e54]:
+          - generic [ref=e55]: "4"
+          - paragraph [ref=e56]: Days of networking
+        - generic [ref=e57]:
+          - generic [ref=e58]: "4"
+          - paragraph [ref=e59]: Industry tracks
+        - generic [ref=e60]:
+          - generic [ref=e61]: Dubai
+          - paragraph [ref=e62]: Business Bay, UAE
+        - generic [ref=e63]:
+          - generic [ref=e64]: "2026"
+          - paragraph [ref=e65]: Inaugural Edition
+    - generic [ref=e68]:
+      - generic [ref=e69]:
+        - paragraph [ref=e70]: At a Glance
+        - heading "Dubai Meridian 2026" [level=2] [ref=e71]
+      - generic [ref=e72]:
+        - generic [ref=e73]:
+          - generic [ref=e74]:
+            - paragraph [ref=e75]: International Delegates
+            - paragraph [ref=e76]: ~400
+          - paragraph [ref=e77]: Students and young professionals across Finance, Law, Engineering, and Management — gathered in Dubai for days of competition, connection, and growth.
+        - generic [ref=e78]:
+          - paragraph [ref=e79]: Days of Networking
+          - paragraph [ref=e80]: "4"
+        - generic [ref=e81]:
+          - paragraph [ref=e82]: The Challenge
+          - paragraph [ref=e83]:
+            - text: Meridian
+            - text: Challenge
+        - generic [ref=e84]:
+          - paragraph [ref=e85]: Four Tracks
+          - list [ref=e86]:
+            - listitem [ref=e87]:
+              - generic [ref=e88]: I
+              - text: Finance
+            - listitem [ref=e89]:
+              - generic [ref=e90]: II
+              - text: Law
+            - listitem [ref=e91]:
+              - generic [ref=e92]: III
+              - text: Engineering
+            - listitem [ref=e93]:
+              - generic [ref=e94]: IV
+              - text: Management
+        - generic [ref=e95]:
+          - paragraph [ref=e96]: Venue
+          - generic [ref=e97]:
+            - paragraph [ref=e98]: Business Bay
+            - paragraph [ref=e99]: Dubai, United Arab Emirates
+        - generic [ref=e100]:
+          - paragraph [ref=e101]: August 2 – 5 · 2026 · Dubai
+          - link "Register →" [ref=e102] [cursor=pointer]:
+            - /url: register.html
+    - generic [ref=e105]:
+      - generic [ref=e106]:
+        - paragraph [ref=e107]: Four Disciplines
+        - heading "One Meridian" [level=2] [ref=e108]
+        - paragraph [ref=e109]: Four disciplines. One shared challenge. Teams are forged across finance, law, engineering, and management to create solutions no single field could achieve alone.
+      - generic [ref=e110]:
+        - link "I Finance Capital markets, fintech innovation, risk modelling, and the future of global financial systems. Explore Track →" [ref=e111] [cursor=pointer]:
+          - /url: tracks.html#finance
+          - generic [ref=e112]: I
+          - heading "Finance" [level=3] [ref=e113]
+          - paragraph [ref=e115]: Capital markets, fintech innovation, risk modelling, and the future of global financial systems.
+          - generic [ref=e116]: Explore Track →
+        - link "II Law Regulatory frameworks, international arbitration, intellectual property, and the evolving legal landscape. Explore Track →" [ref=e117] [cursor=pointer]:
+          - /url: tracks.html#law
+          - generic [ref=e118]: II
+          - heading "Law" [level=3] [ref=e119]
+          - paragraph [ref=e121]: Regulatory frameworks, international arbitration, intellectual property, and the evolving legal landscape.
+          - generic [ref=e122]: Explore Track →
+        - link "III Engineering Sustainable infrastructure, AI & automation, systems design, and engineering solutions for tomorrow. Explore Track →" [ref=e123] [cursor=pointer]:
+          - /url: tracks.html#engineering
+          - generic [ref=e124]: III
+          - heading "Engineering" [level=3] [ref=e125]
+          - paragraph [ref=e127]: Sustainable infrastructure, AI & automation, systems design, and engineering solutions for tomorrow.
+          - generic [ref=e128]: Explore Track →
+        - link "IV Management Strategic leadership, organisational behaviour, entrepreneurship, and the future of global business. Explore Track →" [ref=e129] [cursor=pointer]:
+          - /url: tracks.html#management
+          - generic [ref=e130]: IV
+          - heading "Management" [level=3] [ref=e131]
+          - paragraph [ref=e133]: Strategic leadership, organisational behaviour, entrepreneurship, and the future of global business.
+          - generic [ref=e134]: Explore Track →
+    - generic [ref=e137]:
+      - paragraph [ref=e138]: Until the Forum
+      - generic [ref=e139]:
+        - generic [ref=e140]:
+          - generic [ref=e142]: "95"
+          - paragraph [ref=e143]: Days
+        - generic [ref=e144]: ":"
+        - generic [ref=e145]:
+          - generic [ref=e147]: "01"
+          - paragraph [ref=e148]: Hours
+        - generic [ref=e149]: ":"
+        - generic [ref=e150]:
+          - generic [ref=e152]: "23"
+          - paragraph [ref=e153]: Mins
+        - generic [ref=e154]: ":"
+        - generic [ref=e155]:
+          - generic [ref=e157]: "19"
+          - paragraph [ref=e158]: Secs
+      - paragraph [ref=e159]: Dubai · Business Bay · August 2026
+    - contentinfo [ref=e160]:
+      - generic [ref=e161]:
+        - generic [ref=e162]:
+          - generic [ref=e163]:
+            - img "DMF" [ref=e164]
+            - paragraph [ref=e165]:
+              - text: Dubai Meridian Forum © 2026.
+              - text: All rights reserved.
+            - paragraph [ref=e166]: منتدى دبي ميريديان
+          - generic [ref=e167]:
+            - paragraph [ref=e168]: Navigate
+            - generic [ref=e169]:
+              - link "About" [ref=e170] [cursor=pointer]:
+                - /url: about.html
+              - link "Team" [ref=e171] [cursor=pointer]:
+                - /url: team.html
+              - link "Tracks" [ref=e172] [cursor=pointer]:
+                - /url: tracks.html
+              - link "Partners" [ref=e173] [cursor=pointer]:
+                - /url: partners.html
+              - link "Register" [ref=e174] [cursor=pointer]:
+                - /url: register.html
+              - link "Contact" [ref=e175] [cursor=pointer]:
+                - /url: contact.html
+          - generic [ref=e176]:
+            - paragraph [ref=e177]: Contact
+            - paragraph [ref=e178]:
+              - text: Aspect Tower, Office No. 2206
+              - text: Zone B, Bay Avenue
+              - text: Business Bay, Dubai
+            - link "info@dubaimeridianforum.com" [ref=e179] [cursor=pointer]:
+              - /url: mailto:info@dubaimeridianforum.com
+        - paragraph [ref=e181]: Dubai Meridian Forum · Business Bay, Dubai, UAE

@@ -279,7 +279,10 @@
       </a>
 
       <p class="font-body hero-meta" style="color:rgba(255,255,255,0.45);font-size:10px;letter-spacing:0.25em;text-transform:uppercase;margin-top:2rem;animation-delay:1.8s;">
-        August 2–5, 2026 &nbsp;&middot;&nbsp; Business Bay, Dubai
+        August 2–5, 2026 &nbsp;&middot;&nbsp; Jumeirah Beach, Dubai
+      </p>
+      <p class="font-body hero-meta" style="color:#c9a96e;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;margin-top:0.75rem;animation-delay:2.1s;">
+        August 2–6, 2026 &nbsp;&middot;&nbsp; Mövenpick Jumeirah Beach Hotel, Dubai
       </p>
     </div>
 
@@ -336,7 +339,7 @@
             <div style="height:1px;background:linear-gradient(90deg,rgba(201,169,110,0.25),transparent);margin-bottom:1.5rem;"></div>
             <h3 class="font-display text-white text-2xl font-light" style="line-height:1.25;margin-bottom:0.4rem;">Dubai Meridian<br>Forum</h3>
             <p class="font-body text-gold-500/55 text-xs uppercase tracking-[0.2em]" style="margin-bottom:1.5rem;">August 2–5, 2026</p>
-            <p class="font-body text-white/30 text-xs leading-relaxed" style="margin-bottom:0.4rem;">Business Bay, Dubai</p>
+            <p class="font-body text-white/30 text-xs leading-relaxed" style="margin-bottom:0.4rem;">Jumeirah Beach, Dubai</p>
             <p class="font-body text-white/20 text-xs leading-relaxed">Finance · Law · Engineering · Management</p>
             <div style="margin-top:2rem;padding-top:2rem;border-top:1px solid rgba(201,169,110,0.08);">
               <p class="font-body text-white/20 text-[10px] leading-relaxed">Questions? Contact us at</p>
@@ -625,13 +628,14 @@
               <h3 class="font-display text-white text-3xl font-light mb-2" style="letter-spacing:-0.02em;">Application Submitted</h3>
               <p class="font-body text-gold-500/60 text-xs uppercase tracking-[0.2em] mb-6">Thank you for registering</p>
               <div style="height:1px;background:linear-gradient(90deg,transparent,rgba(201,169,110,0.2),transparent);margin-bottom:1.5rem;"></div>
+              <p id="reg-number-display" class="font-body text-gold-400 text-xs uppercase tracking-[0.2em] mb-4" style="display:none;letter-spacing:0.2em;"></p>
               <p class="font-body text-white/40 text-sm leading-relaxed mb-6" style="max-width:360px;margin:0 auto 1.5rem;">
                 We've received your application for <strong class="text-white/60">Dubai Meridian Forum 2026</strong>. You'll receive a confirmation email with your delegate pack and next steps shortly.
               </p>
               <div style="background:rgba(201,169,110,0.06);border:1px solid rgba(201,169,110,0.1);border-radius:8px;padding:1.25rem;display:inline-block;text-align:left;min-width:220px;">
                 <p class="font-body text-white/25 text-[10px] uppercase tracking-[0.2em] mb-1">Event Details</p>
                 <p class="font-display text-white text-lg">August 2–5, 2026</p>
-                <p class="font-body text-gold-500/50 text-xs mt-1">Business Bay, Dubai, UAE</p>
+                <p class="font-body text-gold-500/50 text-xs mt-1">Jumeirah Beach, Dubai, UAE</p>
               </div>
               <div style="margin-top:2rem;">
                 <a href="index.html" class="btn-ghost" style="display:inline-flex;">← Return Home</a>
@@ -640,6 +644,100 @@
           </div>
 
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── VENUE REVEAL ────────────────────────────────────────────────────────────── -->
+  <section style="background:#060616;padding:0 1.5rem 5rem;">
+    <style>
+      .venue-card {
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        height: 460px;
+        border: 1px solid rgba(201,169,110,0.15);
+        box-shadow: 0 32px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(201,169,110,0.06);
+        transition: box-shadow 0.4s ease, border-color 0.4s ease;
+      }
+      .venue-card:hover {
+        border-color: rgba(201,169,110,0.28);
+        box-shadow: 0 40px 100px rgba(0,0,0,0.65), 0 0 40px rgba(201,169,110,0.06);
+      }
+      .venue-fact-pill {
+        background: linear-gradient(145deg, rgba(14,14,40,0.85), rgba(8,8,24,0.9));
+        border: 1px solid rgba(201,169,110,0.12);
+        border-radius: 16px;
+        backdrop-filter: blur(16px);
+        transition: border-color 0.3s ease, transform 0.3s ease;
+        padding: 1.5rem 1.75rem;
+      }
+      .venue-fact-pill:hover {
+        border-color: rgba(201,169,110,0.25);
+        transform: translateY(-2px);
+      }
+    </style>
+
+    <div class="max-w-5xl mx-auto fade-up">
+
+      <!-- Cinematic image card -->
+      <div class="venue-card">
+        <img src="images/movenpick-pool.avif" alt="Mövenpick Jumeirah Beach Hotel Dubai"
+             style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;">
+
+        <!-- Multi-layer gradient overlay -->
+        <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(4,4,24,0.92) 0%, rgba(4,4,24,0.55) 40%, rgba(4,4,24,0.15) 75%, transparent 100%);"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(to right, rgba(4,4,24,0.3) 0%, transparent 50%);"></div>
+
+        <!-- Top-right: logo badge -->
+        <div style="position:absolute;top:1.5rem;right:1.5rem;background:rgba(6,6,22,0.7);backdrop-filter:blur(20px);border:1px solid rgba(201,169,110,0.18);border-radius:12px;padding:0.6rem 1rem;">
+          <img src="images/movenpick-logo.png" alt="Mövenpick" style="height:28px;opacity:0.85;display:block;">
+        </div>
+
+        <!-- Top-left: eyebrow label -->
+        <div style="position:absolute;top:1.5rem;left:1.75rem;">
+          <p style="font-family:'Raleway',sans-serif;font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:rgba(201,169,110,0.7);">The Venue</p>
+        </div>
+
+        <!-- Bottom: venue name block -->
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:2rem 2rem 2rem;">
+          <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+            <div>
+              <h3 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(1.6rem,4vw,2.4rem);letter-spacing:-0.02em;line-height:1.1;color:#fff;margin-bottom:0.4rem;">
+                Mövenpick Jumeirah<br>Beach Hotel
+              </h3>
+              <p style="font-family:'Raleway',sans-serif;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(201,169,110,0.7);">Dubai &nbsp;·&nbsp; JBR &nbsp;·&nbsp; August 2026</p>
+            </div>
+            <a href="#registration" style="font-family:'Raleway',sans-serif;font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(201,169,110,0.75);background:rgba(201,169,110,0.08);border:1px solid rgba(201,169,110,0.2);border-radius:8px;padding:0.6rem 1.2rem;text-decoration:none;transition:all 0.3s ease;white-space:nowrap;"
+               onmouseover="this.style.background='rgba(201,169,110,0.16)';this.style.color='#d4a44e';this.style.borderColor='rgba(201,169,110,0.4)'"
+               onmouseout="this.style.background='rgba(201,169,110,0.08)';this.style.color='rgba(201,169,110,0.75)';this.style.borderColor='rgba(201,169,110,0.2)'">
+              Register Now →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Three venue fact pills -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem;">
+
+        <div class="venue-fact-pill">
+          <p style="font-family:'Raleway',sans-serif;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(201,169,110,0.45);margin-bottom:0.75rem;">Location</p>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:300;color:rgba(255,255,255,0.85);line-height:1.3;margin-bottom:0.4rem;">Jumeirah Beach Residence</p>
+          <p style="font-family:'Raleway',sans-serif;font-size:11px;color:rgba(255,255,255,0.3);line-height:1.6;">Beachfront on the Arabian Gulf. Steps from JBR Walk, white sand beaches, and Dubai's waterfront dining.</p>
+        </div>
+
+        <div class="venue-fact-pill">
+          <p style="font-family:'Raleway',sans-serif;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(201,169,110,0.45);margin-bottom:0.75rem;">Competitions</p>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:300;color:rgba(255,255,255,0.85);line-height:1.3;margin-bottom:0.4rem;">Purpose-Built Meeting Rooms</p>
+          <p style="font-family:'Raleway',sans-serif;font-size:11px;color:rgba(255,255,255,0.3);line-height:1.6;">Structured debates, live case rooms, and cross-disciplinary workshops held in dedicated professional spaces.</p>
+        </div>
+
+        <div class="venue-fact-pill">
+          <p style="font-family:'Raleway',sans-serif;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:rgba(201,169,110,0.45);margin-bottom:0.75rem;">Beyond the Forum</p>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:300;color:rgba(255,255,255,0.85);line-height:1.3;margin-bottom:0.4rem;">Beach, Watersports & More</p>
+          <p style="font-family:'Raleway',sans-serif;font-size:11px;color:rgba(255,255,255,0.3);line-height:1.6;">Jet skis, paddleboarding, beach volleyball, and Gulf sunsets between sessions. This isn't just a conference.</p>
+        </div>
+
       </div>
     </div>
   </section>
@@ -713,7 +811,7 @@
         </div>
       </div>
       <div class="mt-12 pt-8 border-t border-white/5 text-center">
-        <p class="text-white/20 text-xs font-body tracking-wide">Dubai Meridian Forum &middot; Business Bay, Dubai, UAE</p>
+        <p class="text-white/20 text-xs font-body tracking-wide">Dubai Meridian Forum &middot; Jumeirah Beach, Dubai, UAE</p>
       </div>
     </div>
   </footer>
@@ -915,46 +1013,67 @@ async function submitForm() {
     document.getElementById('err-privacy').style.display = 'block';
     return;
   }
-  // includes blank answers to optional questions: theyll appear blank too
+
+  const firstName   = document.getElementById('f-first').value.trim();
+  const middleName  = document.getElementById('f-middle').value.trim();
+  const lastName    = document.getElementById('f-last').value.trim();
+  const email       = document.getElementById('f-email').value.trim();
+  const fullName    = [firstName, middleName, lastName].filter(Boolean).join(' ');
+
   const payload = {
-    // Step 1
-    first_name:   document.getElementById('f-first').value.trim(),
-    middle_name:  document.getElementById('f-middle').value.trim(),   // optional
-    last_name:    document.getElementById('f-last').value.trim(),
-    email:        document.getElementById('f-email').value.trim(),
-    phone:        document.getElementById('f-phonecode').value + ' ' + document.getElementById('f-phone').value.trim(),
-    gender:       document.getElementById('f-gender').value,
-    date_of_birth: document.getElementById('f-dob').value,
-    // Step 2
-    nationality:  document.getElementById('f-nationality').value,
-    residency:    document.getElementById('f-residency').value,
-    address:      document.getElementById('f-address').value.trim(),  // optional
-    city:         document.getElementById('f-city').value.trim(),
-    state:        document.getElementById('f-state').value.trim(),    // optional
-    postal_code:  document.getElementById('f-postal').value.trim(),   // optional
-    // Step 3
-    institution:  document.getElementById('f-institution').value.trim(), // optional
-    disability:   document.getElementById('f-disability').value.trim(),  // optional
-    source:       document.getElementById('f-source').value.trim(),      // optional
-    referral_code: document.getElementById('f-referral').value.trim(),   // optional
+    first_name:      firstName,
+    middle_name:     middleName,
+    last_name:       lastName,
+    email:           email,
+    phone:           document.getElementById('f-phonecode').value + ' ' + document.getElementById('f-phone').value.trim(),
+    gender:          document.getElementById('f-gender').value,
+    date_of_birth:   document.getElementById('f-dob').value,
+    nationality:     document.getElementById('f-nationality').value,
+    residency:       document.getElementById('f-residency').value,
+    address:         document.getElementById('f-address').value.trim(),
+    city:            document.getElementById('f-city').value.trim(),
+    state:           document.getElementById('f-state').value.trim(),
+    postal_code:     document.getElementById('f-postal').value.trim(),
+    institution:     document.getElementById('f-institution').value.trim(),
+    disability:      document.getElementById('f-disability').value.trim(),
+    source:          document.getElementById('f-source').value.trim(),
+    referral_code:   document.getElementById('f-referral').value.trim(),
     food_preference: document.getElementById('f-food').value,
-    tshirt_size:  document.getElementById('f-shirt').value,
+    tshirt_size:     document.getElementById('f-shirt').value,
   };
 
-  try {
-    const res = await fetch('https://formspree.io/f/xwvaggjj', {
+  const [formspreeResult, confirmationResult] = await Promise.allSettled([
+    fetch('https://formspree.io/f/xwvaggjj', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify(payload),
-    });
+    }),
+    fetch('/api/send-confirmation', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: fullName, email }),
+    }),
+  ]);
 
-    if (res.ok) {
-      goStep(4); // Show your existing confirmation screen
+  if (formspreeResult.status === 'fulfilled' && formspreeResult.value.ok) {
+    goStep(4);
+    if (confirmationResult.status === 'fulfilled' && confirmationResult.value.ok) {
+      try {
+        const data = await confirmationResult.value.json();
+        if (data.registration_number) {
+          const el = document.getElementById('reg-number-display');
+          if (el) { el.textContent = 'Your delegate number: ' + data.registration_number; el.style.display = 'block'; }
+        }
+      } catch (e) {
+        console.log('Confirmation response parse error:', e);
+      }
     } else {
-      const data = await res.json();
-      alert('Submission error: ' + (data?.errors?.map(e => e.message).join(', ') || 'Please try again.'));
+      console.log('Confirmation email send failed; registration still captured via Formspree.');
     }
-  } catch (err) {
+  } else if (formspreeResult.status === 'fulfilled') {
+    const data = await formspreeResult.value.json().catch(() => ({}));
+    alert('Submission error: ' + (data?.errors?.map(e => e.message).join(', ') || 'Please try again.'));
+  } else {
     alert('Network error. Please check your connection and try again.');
   }
 }
