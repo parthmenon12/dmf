@@ -29,20 +29,16 @@ Dubai Meridian Forum 2026
 
 dubaimeridian.com
 instagram.com/dubaimeridian
-linkedin.com/company/dubaimeridian`;
-
-function escapeHtml(str) {
-  return str
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#x27;');
-}
+linkedin.com/company/dubai-meridian-forum`;
 
 function titleCaseFirst(str) {
   if (!str) return str;
-  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  // Only normalize uniform-case input ("JANE"/"jane"); preserve intentional
+  // internal capitals like "McDonald" or "O'Brien".
+  const uniform = str === str.toUpperCase() || str === str.toLowerCase();
+  return uniform
+    ? str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
+    : str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 function isValidEmail(email) {
@@ -63,8 +59,19 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ error: 'Invalid request' });
   }
 
-  const sanitizedName = escapeHtml(name.trim());
-  const firstName = titleCaseFirst(sanitizedName.split(/\s+/)[0]);
+  // Basic per-IP rate limiting; fail open if KV is unavailable.
+  const ip = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || 'unknown';
+  try {
+    const hits = await kv.incr(`dmf:rl:${ip}`);
+    if (hits === 1) await kv.expire(`dmf:rl:${ip}`, 600);
+    if (hits > 5) {
+      return res.status(429).json({ error: 'Too many requests. Please try again later.' });
+    }
+  } catch (rlErr) {
+    console.error('Rate-limit check failed (allowing request):', rlErr);
+  }
+
+  const firstName = titleCaseFirst(name.trim().split(/\s+/)[0]);
 
   let registration_number;
   try {

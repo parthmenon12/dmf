@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230a0a1f'/><text x='16' y='23' font-family='Georgia,serif' font-size='21' fill='%23c9a96e' text-anchor='middle'>M</text></svg>">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register — Dubai Meridian Forum</title>
   <meta property="og:type" content="website">
@@ -282,7 +283,7 @@
         August 2–5, 2026 &nbsp;&middot;&nbsp; Jumeirah Beach, Dubai
       </p>
       <p class="font-body hero-meta" style="color:#c9a96e;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;margin-top:0.75rem;animation-delay:2.1s;">
-        August 2–6, 2026 &nbsp;&middot;&nbsp; Mövenpick Jumeirah Beach Hotel, Dubai
+        August 2–5, 2026 &nbsp;&middot;&nbsp; Mövenpick Jumeirah Beach Hotel, Dubai
       </p>
     </div>
 
@@ -343,7 +344,7 @@
             <p class="font-body text-white/20 text-xs leading-relaxed">Finance · Law · Engineering · Management</p>
             <div style="margin-top:2rem;padding-top:2rem;border-top:1px solid rgba(201,169,110,0.08);">
               <p class="font-body text-white/20 text-[10px] leading-relaxed">Questions? Contact us at</p>
-              <a href="mailto:Info@dubaimeridian.com" class="font-body text-gold-500/40 text-[10px] hover:text-gold-400 transition-colors duration-300">Info@dubaimeridian.com</a>
+              <a href="mailto:info@dubaimeridian.com" class="font-body text-gold-500/40 text-[10px] hover:text-gold-400 transition-colors duration-300">info@dubaimeridian.com</a>
             </div>
           </div>
         </div>
@@ -483,7 +484,7 @@
 
             <p class="font-body text-white/15 text-[10px] mt-4 text-center">
               Want to register a delegation/team? Contact us at
-              <a href="mailto:Info@dubaimeridian.com" style="color:rgba(201,169,110,0.4);">Info@dubaimeridian.com</a>
+              <a href="mailto:info@dubaimeridian.com" style="color:rgba(201,169,110,0.4);">info@dubaimeridian.com</a>
             </p>
           </div>
 
@@ -539,7 +540,7 @@
 
             <p class="font-body text-white/15 text-[10px] mt-4 text-center">
               Want to register a delegation/team? Contact us at
-              <a href="mailto:Info@dubaimeridian.com" style="color:rgba(201,169,110,0.4);">Info@dubaimeridian.com</a>
+              <a href="mailto:info@dubaimeridian.com" style="color:rgba(201,169,110,0.4);">info@dubaimeridian.com</a>
             </p>
           </div>
 
@@ -610,12 +611,12 @@
 
             <div style="display:flex;justify-content:space-between;margin-top:1.5rem;">
               <button class="btn-ghost" onclick="goStep(2)"><span>←</span> Back</button>
-              <button class="btn-primary" onclick="submitForm()">Submit Application <span>→</span></button>
+              <button id="submitBtn" class="btn-primary" onclick="submitForm()">Submit Application <span>→</span></button>
             </div>
 
             <p class="font-body text-white/15 text-[10px] mt-4 text-center">
               Want to register a delegation/team? Contact us at
-              <a href="mailto:Info@dubaimeridian.com" style="color:rgba(201,169,110,0.4);">Info@dubaimeridian.com</a>
+              <a href="mailto:info@dubaimeridian.com" style="color:rgba(201,169,110,0.4);">info@dubaimeridian.com</a>
             </p>
           </div>
 
@@ -807,7 +808,7 @@
         <div>
           <p class="text-gold-500/50 text-xs uppercase tracking-[0.2em] font-body mb-4">Contact</p>
           <p class="text-white/30 text-sm font-body leading-relaxed">Aspect Tower, Office No. 2206<br>Zone B, Bay Avenue<br>Business Bay, Dubai</p>
-          <a href="mailto:Info@dubaimeridian.com" class="text-gold-500/40 text-sm font-body mt-3 inline-block hover:text-gold-400 transition-colors duration-300">Info@dubaimeridian.com</a>
+          <a href="mailto:info@dubaimeridian.com" class="text-gold-500/40 text-sm font-body mt-3 inline-block hover:text-gold-400 transition-colors duration-300">info@dubaimeridian.com</a>
         </div>
       </div>
       <div class="mt-12 pt-8 border-t border-white/5 text-center">
@@ -935,7 +936,7 @@
   })();
 
   // ─── Countdown ───────────────────────────────────────────────────────────────
-  const forumTarget=new Date('2026-08-02T06:00:00Z');
+  const forumTarget=new Date('2026-08-01T20:00:00Z'); // midnight UAE (UTC+4) on Aug 2
   function tickCD(){
     const diff=forumTarget-new Date();
     const ids=['cd-days','cd-hours','cd-mins','cd-secs'];
@@ -1014,6 +1015,9 @@ async function submitForm() {
     return;
   }
 
+  const submitBtn = document.getElementById('submitBtn');
+  if (submitBtn) { submitBtn.disabled = true; submitBtn.style.opacity = '0.6'; submitBtn.style.pointerEvents = 'none'; }
+
   const firstName   = document.getElementById('f-first').value.trim();
   const middleName  = document.getElementById('f-middle').value.trim();
   const lastName    = document.getElementById('f-last').value.trim();
@@ -1072,8 +1076,10 @@ async function submitForm() {
     }
   } else if (formspreeResult.status === 'fulfilled') {
     const data = await formspreeResult.value.json().catch(() => ({}));
+    if (submitBtn) { submitBtn.disabled = false; submitBtn.style.opacity = '1'; submitBtn.style.pointerEvents = 'auto'; }
     alert('Submission error: ' + (data?.errors?.map(e => e.message).join(', ') || 'Please try again.'));
   } else {
+    if (submitBtn) { submitBtn.disabled = false; submitBtn.style.opacity = '1'; submitBtn.style.pointerEvents = 'auto'; }
     alert('Network error. Please check your connection and try again.');
   }
 }
